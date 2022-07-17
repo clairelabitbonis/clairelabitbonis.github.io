@@ -15,3 +15,8 @@
         - [ ] Modalités d'évaluation / Administratif
         - [ ] Cours
         - [ ] Practical session
+- [ ] Shortcodes
+    - [ ] OpenCV loop on videocapture ou filenames / read & display
+    - [ ] parse args python
+    - [ ] list all files in dir and subdir
+    - [ ] windows display tree
