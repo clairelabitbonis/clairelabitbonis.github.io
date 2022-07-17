@@ -4,6 +4,7 @@
 - [ ] Teaching
     - [ ] Introduction
     - [ ] Perception 3D
+        - [ ] Workspace configuration
         - [ ] Modalités d'évaluation / Administratif
         - [ ] Segmentation
             - [ ] EN -- remplacer les images et les blocs de code
