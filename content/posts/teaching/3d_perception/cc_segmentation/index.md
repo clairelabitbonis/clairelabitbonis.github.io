@@ -1,6 +1,6 @@
 ---
-title: "3D segmentation and object shape checking based on RGB-D sensor"
-date: 2022-07-16T06:15:45+06:00
+title: "3D segmentation and object shape checking based on RGB-D sensor with CloudCompare"
+date: 2022-07-16
 description: "3D objects quality control."
 summary: "3D objects quality control."
 
@@ -16,7 +16,7 @@ tags: ["Teaching", "3D Perception"]
 
 menu:
   sidebar:
-    name: Segmentation with Cloud Compare
+    name: Segmentation
     identifier: cc-segmentation
     parent: 3d-perception
     weight: 20

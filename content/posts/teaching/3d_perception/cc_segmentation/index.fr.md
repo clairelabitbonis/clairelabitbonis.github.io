@@ -1,6 +1,6 @@
 ---
-title: "Segmentation de nuages de points 3D par capteur à lumière structurée RGB-D"
-date: 2022-07-16T06:15:45+06:00
+title: "Segmentation de nuages de points 3D par capteur à lumière structurée RGB-D avec CloudCompare"
+date: 2022-07-16
 description: "Contrôle qualité d'objets 3D."
 summary: "Contrôle qualité d'objets 3D."
 
@@ -16,7 +16,7 @@ tags: ["teaching", "3D Perception"]
 
 menu:
   sidebar:
-    name: Segmentation avec Cloud Compare
+    name: Segmentation
     identifier: cc-segmentation
     parent: 3d-perception
     weight: 20

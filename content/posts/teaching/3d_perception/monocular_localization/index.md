@@ -1,6 +1,6 @@
 ---
 title: "Monocular localization with iterative PnL"
-date: 2022-07-16T06:15:45+06:00
+date: 2022-07-16
 description: "Iterative estimation of a camera extrinsic parameters."
 summary: "Iterative estimation of a camera extrinsic parameters."
 
@@ -16,7 +16,7 @@ tags: ["Teaching", "3D Perception"]
 
 menu:
   sidebar:
-    name: Monocular localization
+    name: Mono. localization
     identifier: monocular-localization
     parent: 3d-perception
     weight: 20
@@ -79,16 +79,28 @@ We use the pinhole camera model allowing to perform this operation through two s
 
 The change between \\(\mathcal{R\_c}\\) and \\(\mathcal{R\_i}\\) coordinate systems is done thanks to the **intrinsic** camera parameters. These \\((\alpha\_u, \alpha\_v, u\_0, v\_0)\\) coefficients are then stored in a homogeneous transformation matrix \\(K\_{i \leftarrow c}\\) so that we can describe the relation \\(p\_i = K\_{i \leftarrow c}.P\_c\\) as:
 
-$$\begin{bmatrix}u\\\\v\\\\1\end{bmatrix}\_{\mathcal{R}\_i} = s. \begin{bmatrix}\alpha\_u & 0 & u\_0\\\\0 & \alpha
-\_v & v\_0\\\\0 & 0 & 1\end{bmatrix} . \begin{bmatrix}X\\\\Y\\\\Z\end{bmatrix}\_{\mathcal{R
-}\_c}$$
+$$
+\begin{bmatrix}
+u\\\\v\\\\1
+\end{bmatrix}\_{\mathcal{R}\_i} = s. 
+\begin{bmatrix}
+\alpha\_u & 0 & u\_0\\\\
+0 & \alpha\_v & v\_0\\\\
+0 & 0 & 1
+\end{bmatrix} . 
+\begin{bmatrix}
+X\\\\
+Y\\\\
+Z
+\end{bmatrix}\_{\mathcal{R}\_c}
+$$
 
 with:
 
 - \\(p\_i\\) (on the left) the pixel point within the 2D image frame \\(\mathcal{R\_i}\\),
 - \\(P\_c\\) (on the right) the point in centimeters within the 3D camera frame \\(\mathcal{R\_c}\\),
 - \\(s = \frac{1}{Z}\\),
-- \\(\alpha_u = k_x f\\), \\(\alpha_v = k_y f\\) :
+- \\(\alpha_u = k_x f\\), \\(\alpha_v = k_y f\\):
     - \\(k_x = k_y\\) the sensor number of pixels per millimeter along \\(x\\) and \\(y\\) directions -- the equality being true only if the pixels are square,
     - \\(f\\) the focal distance.
 - \\(u_0\\) and \\(v_0\\) the image centers in pixels within \\(\mathcal{R}_i\\).
@@ -115,9 +127,29 @@ With the correct extrinsic parameters \\((\alpha, \beta, \gamma, t\_x, t\_y, t\_
 
 $$ p\_i = K\_{i \leftarrow c} M\_{c\leftarrow o} P\_o$$
 
-$$\begin{bmatrix}u\\\\v\\\\1\end{bmatrix}\_{\mathcal{R}\_i} = s. \begin{bmatrix}\alpha\_u & 0 & u\_0\\\\0 & \alpha
-\_v & v\_0\\\\0 & 0 & 1\end{bmatrix} \bigodot \begin{bmatrix}r\_{11} & r\_{12} & r\_{13} & t\_x\\\\r\_{21} & r\_{22
-} & r\_{23} & t\_y\\\\r\_{31} & r\_{32} & r\_{33} & t\_z\\\\0 & 0 & 0 & 1\end{bmatrix} . \begin{bmatrix}X\\\\Y\\\\Z\\\\1\end{bmatrix}\_{\mathcal{R}\_o}$$
+$$\begin{bmatrix}
+u\\\\
+v\\\\
+1
+\end{bmatrix}\_{\mathcal{R}\_i} = s. 
+\begin{bmatrix}
+\alpha\_u & 0 & u\_0\\\\
+0 & \alpha\_v & v\_0\\\\
+0 & 0 & 1
+\end{bmatrix} \bigodot 
+\begin{bmatrix}
+r\_{11} & r\_{12} & r\_{13} & t\_x\\\\
+r\_{21} & r\_{22} & r\_{23} & t\_y\\\\
+r\_{31} & r\_{32} & r\_{33} & t\_z\\\\
+0 & 0 & 0 & 1
+\end{bmatrix} . 
+\begin{bmatrix}
+X\\\\
+Y\\\\
+Z\\\\
+1
+\end{bmatrix}\_{\mathcal{R}\_o}
+$$
 
 {{< alert type="warning" >}}
 The \\(\bigodot\\) operator is the multiplication between terms after having removed the homogeneous coordinate from \\(M\_{c\leftarrow o} P\_o\\). It is only here so that matrices shapes match.
@@ -128,7 +160,7 @@ The \\(\bigodot\\) operator is the multiplication between terms after having rem
 
 >The instrinsic parameters are known; in order to find the extrinsic parameters, we use a localization method (*i.e.* of parameters estimation) called **Perspective-n-Lines**.
 
-**Extrinsic parameters estimation.**
+### Extrinsic parameters estimation
 
 Our starting point is an initial coarse estimate of \\((\alpha, \beta, \gamma, t\_x, t\_y, t\_z)\\). This initial estimate is more or less accurate depending on our *a priori* knowledge of the scene, the object and the position of the camera.
 
@@ -136,7 +168,7 @@ In our case, the initial parameters have values \\(alpha = -2.1\\), \\(beta = 0.
 
 >This *a priori* knowledge of the environment comes from the fact that one is able, as a human being, to evaluate the distance of the real object from the sensor only by looking at the image. 
 
-**Use of the programme.**
+### Use of the programme
 
 When the script `localisation.py` is launched, two figures open: one represents a real scene captured by the camera, the other represents the virtual model to be transformed and whose system origin is materialised by a red dot. As the objective is to copy the box on which the Pikachu rests on top of the sky-blue cube on the table, you must first select five edges belonging to the real box (by *clicking* the mouse on the edges ends), then select the corresponding edges in the same order on the 3D model (by *clicking* the mouse in the middle of the edges). The number of segments to be selected (by default 5), is fixed from the start in the variable `nb_segments`.
 
@@ -334,13 +366,13 @@ $$
 \end{align}
 $$
 
-The advantage of working with successive increments is that the increment values are so small in relation to the last iteration that the variation of these parameters can be approximated as 0. As a reminder, the error criterion is expressed as follows for each segment \\(j\\) :
+The advantage of working with successive increments is that the increment values are so small in relation to the last iteration that the variation of these parameters can be approximated as 0. As a reminder, the error criterion is expressed as follows for each segment \\(j\\):
 
 $$
 \begin{align}
-F^{j, 1}(X) &= N^j.P\_{o\rightarrow c}^{j, 1} \text{ avec } P\_{o\rightarrow c}^{j, 1} = \big[ R\_{\alpha\beta\gamma
+F^{j, 1}(X) &= N^j.P\_{o\rightarrow c}^{j, 1} \text{ with } P\_{o\rightarrow c}^{j, 1} = \big[ R\_{\alpha\beta\gamma
 } | T \big] . P\_o^{j, 1}\\\\\\
-F^{j, 2}(X) &= N^{j}.P\_{o\rightarrow c}^{j, 2} \text{ avec } P\_{o\rightarrow c}^{j, 2} = \big[ R\_{\alpha\beta\gamma
+F^{j, 2}(X) &= N^{j}.P\_{o\rightarrow c}^{j, 2} \text{ with } P\_{o\rightarrow c}^{j, 2} = \big[ R\_{\alpha\beta\gamma
 } | T \big] . P\_o^{j, 2}
 \end{align}
 $$
@@ -355,7 +387,7 @@ $$\begin{align}
 $$
 
 {{< alert type="info" >}}
-\\(R\_\gamma\\) and \\(R\_\beta\\) disappear from the derivation because for \\(\gamma \approx 0\\) and \\(\beta \approx 0\\), we have :
+\\(R\_\gamma\\) and \\(R\_\beta\\) disappear from the derivation because for \\(\gamma \approx 0\\) and \\(\beta \approx 0\\), we have:
 
 $$
 R_{\gamma \approx 0} = \begin{bmatrix} 
@@ -393,7 +425,7 @@ $$
 \end{align}
 $$
 
-The reasoning is the same for \\(\frac{\partial F^j}{\partial \beta}, \frac{\partial F^j}{\partial \gamma}, \frac{\partial F^j}{\partial t\_x}, \frac{\partial F^j}{\partial t\_y}, \frac{\partial F^j}{\partial t\_z}\\) and we get :
+The reasoning is the same for \\(\frac{\partial F^j}{\partial \beta}, \frac{\partial F^j}{\partial \gamma}, \frac{\partial F^j}{\partial t\_x}, \frac{\partial F^j}{\partial t\_y}, \frac{\partial F^j}{\partial t\_z}\\) and we get:
 
 $$
 \frac{\partial F^j}{\partial \beta} = N^j . \begin{bmatrix}Z^j\\\\\\ 0\\\\\\ -X^j\end{bmatrix}\_o \text{, }
@@ -494,7 +526,7 @@ F^TJ\Delta X &\rightarrow [1\times2n][2n\times 6][6\times 1] \rightarrow [1\time
 \end{align}
 $$
 
-Given that each of these terms is a \\([1\times 1]\\) matrix in the end, we can write \\((\Delta X^T J^T F)^T = \Delta X^T J^T F\\), and thus \\(F^TJ\Delta X = \Delta X^T J^T F$.
+Given that each of these terms is a \\([1\times 1]\\) matrix in the end, we can write \\((\Delta X^T J^T F)^T = \Delta X^T J^T F\\), and thus \\(F^TJ\Delta X = \Delta X^T J^T F\\).
 
 We deduce from this:
 $$

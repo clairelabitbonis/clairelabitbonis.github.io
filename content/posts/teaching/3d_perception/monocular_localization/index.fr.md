@@ -1,6 +1,6 @@
 ---
 title: "Localisation monoculaire par PnL itérative"
-date: 2022-07-16T06:15:45+06:00
+date: 2022-07-16
 description: "Iterative estimation of a camera extrinsic parameters."
 summary: "Iterative estimation of a camera extrinsic parameters."
 
@@ -16,127 +16,102 @@ tags: ["Teaching", "3D Perception"]
 
 menu:
   sidebar:
-    name: Monocular localization
+    name: Localisation mono.
     identifier: monocular-localization
     parent: 3d-perception
     weight: 20
 ---
-+++
-title = "[3D Perception] Monocular localization - Pikachu"
-subtitle = "Iterative estimation of a camera extrinsic parameters."
-
-date = 2016-04-20T00:00:00
-lastmod = 2021-10-13T00:00:00
-draft = false
-math = true
-highlight = true
-highlight_languages = "python"
-comments = true
-
-# Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
-authors = ["Claire Labit-Bonis"]
-
-tags = ["teaching", "perception"]
-summary = "Iterative estimation of a camera extrinsic parameters."
-
-# Featured image
-# To use, add an image named `featured.jpg/png` to your project's folder. 
-[image]
-  # Caption (optional)
-  # caption = "Image credit: [**Unsplash**](https://unsplash.com/photos/CpkOjOcXdUY)"
-
-  # Focal point (optional)
-  # Options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
-  focal_point = ""
-
-  # Show image only in page previews?
-  preview_only = true
-  
-#TODO: expliquer dmatPos*matPos, lambda, détailler le calcul de matrice intrinsic inverse et stockage des segments 
+<!-- #TODO: expliquer dmatPos*matPos, lambda, détailler le calcul de matrice intrinsic inverse et stockage des segments 
 #l1-l2. Pourquoi ne pas utiliser Ni.(P2i-P1i) plutôt que Ni.P1i + Ni.P2i ?
 #Developpement de Taylor ordre 1 pour F(X) courant : tangente à la fonction en ce nouveau point.
 # Transpoint, changer les noms des variables : P_i => P, P_f => P_transformed ?
 # Modifier les matrices modA, App3d, [0,1,2], [0,3,5] etc.
-# Pourquoi err/2N ? Moyenne?
-+++
-{{% alert note %}}
-This exercise consists in filling empty functions, or parts of the `localisation.py` file:
+# Pourquoi err/2N ? Moyenne? -->
 
-- [step 1](#anchor-step-1) : `perspective_projection` and `transform_and_draw_model`, 
-- [step 2](#anchor-step-2) : `calculate_normal_vector` and `calculate_error`
-- [step 3](#anchor-step-3) : `partial_derivatives`,
-- [step 4](#anchor-step-4) : transformation towards a second point of view.
+>Cet exercice consiste à remplir des fonctions ou des morceaux vides dans le fichier `localisation.py` : 
+>- [étape 1](#anchor-step-1) : `perspective_projection` et `transform_and_draw_model`, 
+>- [étape 2](#anchor-step-2) : `calculate_normal_vector` et `calculate_error`
+>- [étape 3](#anchor-step-3) : `partial_derivatives`,
+>- [étape 4](#anchor-step-4) : transformation vers un deuxième point de vue.
+>
+>Chaque fonction et le rôle qu'elle remplit sont décrits dans cet article.
 
-This post describes the role of each function.
-{{% /alert %}}
+{{< alert type="danger" >}}
+Ne vous jetez pas dans le codage des fonctions dès la partie "définition des objectifs", qui n'est qu'une explication théorique globale pour présenter le sujet. Chaque étape et les fonctions qui qui sont propres sont décrites en détail dans les parties correspondantes : [étape 1](#anchor-step-1), [étape 2](#anchor-step-2), [étape 3](#anchor-step-3), [étape 4](#anchor-step-4).
+{{< /alert >}}
 
-{{% alert warning %}}
-Do not dive headfirst into the code ! The first part "goal description" is just a global and theoretical presentation of the subject. Each step and its associated functions are described in details within their respective parts: [step 1](#anchor-step-1), [step 2](#anchor-step-2), [step 3](#anchor-step-3), [step 4](#anchor-step-4).
-{{% /alert %}}
+## Définition des objectifs {#anchor-step-0}
+L'objectif de cet exercice est de trouver la transformation optimale à appliquer à un modèle 3D exprimé en centimètres dans un repère *objet* \\(\mathcal{R\_o} (X,Y,Z)\\) (parfois appelé repère *monde* \\(\mathcal{R\_w}\\)) afin de le dessiner dans une image 2D exprimée en pixels dans un repère *image* \\(\mathcal{R\_i} (u,v)\\). Le modèle 3D a été téléchargé sur [free3d](https://free3d.com) et modifié dans [Blender](https://www.blender.org/) pour les besoins de l'exercice. Ses points et arêtes ont respectivement été exportés *via* un script Python dans les fichiers `pikachu.xyz` et `pikachu.edges`.
 
+{{< img src="images/blender_pikachu.png" align="center" title="Modèle 3D réalisé dans Blender" >}}
+{{< vs 1 >}}
 
-## Goal description {#anchor-step-0}
-This exercise aims at finding the optimal transformation between a 3D model expressed in centimeters in an *object* coordinate system $\mathcal{R\_o} (X,Y,Z)$ (sometimes called *world* coordinate system $\mathcal{R\_w}$) in order to draw it as an overlay in a 2D pixel image defined in its *image* coordinate system $\mathcal{R\_i} (u,v)$. The 3D model was downloaded from [free3d](https://free3d.com) and modified within [Blender](https://www.blender.org/) for the needs of this exercise. Points and edges were respectively exported *via* a Python script to the `pikachu.xyz` and `pikachu.edges` files.
+`pikachu.xyz` contains 134 lines and 3 columns, corresponding to the 134 model points and their three \\(x, y, z\\) coordinates.
 
-![3D model made in Blender](images/blender_pikachu.png "3D model made in Blender")
-`pikachu.xyz` contains 134 lines and 3 columns, corresponding to the 134 model points and their three $x, y, z$ coordinates. 
+`pikachu.edges` contient 246 lignes et 2 colonnes, correspondant aux 246 arêtes du modèle et aux 2 indices de leurs extrémités (la première arête est définie par son premier point à l'indice 2 et par son deuxième point à l'indice 0 dans `pikachu.xyz`).
 
-`pikachu.edges` contains 246 lines and 2 columns, corresponding to the 246 model edges and their 2 ends indices (for instance, the first line in `pikachu.edges` describes the first edge: its first point coordinates are at index 2 in the `pikachu.xyz` file, and its second point is at index 0).
-![Coordinates and edges files](images/edges_xyz.png "Coordinates and edges files")
+{{< img src="images/edges_xyz.png" align="center" title="Fichiers de coordonnées et arêtes" >}}
+{{< vs 1 >}}
 
-By "transformation", we mean scene rotation and translation along the $x$, $y$ and $z$ axes for each point in $\mathcal{R\_o}$.
+Par "transformation", on entend une rotation et une translation de la scène
+sur les axes \\(x\\), \\(y\\) et \\(z\\) des points dans \\(\mathcal{R\_o}\\).
 
-In our case, we want to perform augmented reality by positioning Pikachu's model over the sky-blue cube of the image below, and making it perfectly match with the virtual cube on which it is standing.
+Dans notre cas, on veut augmenter la réalité capturée par la caméra et positionner le modèle de Pikachu sur le cube bleu ciel de l'image ci-dessous, en le faisant parfaitement *matcher* avec le cube virtuel sur lequel il repose.
 
- 
-![Goal to be reached](images/final_objective.png "Goal to be reached")
-<!--![Sélection des segments](images/edge_selection.png "Sélection des segments à comparer")
--->
+{{< img src="images/final_objective.png" align="center" title="Objectif à atteindre" >}}
+{{< vs 1 >}}
 
 <details>
-<summary>**Intrinsic parameters.** <span style="color:red">*DON'T CLICK HERE*</span></summary> 
+<summary><strong>Paramètres intrinsèques. <span style="color:pink">Cliquez pour étendre</span></strong></summary> 
 
-> You clicked... Now you can learn all about intrinsic parameters.
+On utilise le modèle de caméra sténopé qui permet de réaliser cette opération en deux transformations successives :\\(\mathcal{R\_o} \rightarrow \mathcal{R\_c}\\) puis \\(\mathcal{R\_c} \rightarrow \mathcal{R\_i}\\). En plus des repères \\(\mathcal{R\_o}\\) et \\(\mathcal{R\_i}\\), il faut donc aussi considérer le repère caméra \\(\mathcal{R\_c}\\).
 
-We use the pinhole camera model allowing to perform this operation through two successive transformations: $\mathcal{R\_o} \rightarrow \mathcal{R\_c}$ and $\mathcal{R\_c} \rightarrow \mathcal{R\_i}$. Apart from $\mathcal{R\_o}$ and $\mathcal{R\_i}$ coordinate systems, we then must also considerate the camera frame $\mathcal{R\_c}$. 
+>La ressource *[Modélisation et calibrage d'une caméra](http://www.optique-ingenieur.org/fr/cours/OPI_fr_M04_C01/co/Grain_OPI_fr_M04_C01_2.html)* décrit en détail le modèle sténopé et peut aider à la compréhension de l'exercice.
 
-{{% alert note %}}
-The resource *[Modélisation et calibrage d'une caméra](http://www.optique-ingenieur.org/fr/cours/OPI_fr_M04_C01/co/Grain_OPI_fr_M04_C01_2.html)* describes the pinhole camera model in details, and can help understanding the exercise.
-{{% /alert %}}
+{{< img src="images/goal.png" align="center" title="Changements de repères" >}}
+{{< vs 1 >}}
 
-![Coordinate systems transformation](images/goal.png "Coordinate systems transformation")
+> Wikipédia définit le [modèle sténopé](https://en.wikipedia.org/wiki/Pinhole_camera_model) comme décrivant *la relation mathématique entre les coordonnées d'un point dans un espace en trois dimensions et sa projection dans le plan image d'une caméra sténopé i.e. une caméra dont l'ouverture est décrite comme un point et qui n'utilise pas de lentille pour focaliser la lumière*. 
 
-> Wikipedia defines the [pinhole model](https://en.wikipedia.org/wiki/Pinhole_camera_model) as describing *the mathematical relationship between the coordinates of a point in three-dimensional space and its projection onto the image plane of an ideal pinhole camera, where the camera aperture is described as a point and no lenses are used to focus light*. 
+Le passage entre les repères \\(\mathcal{R\_c}\\) anetd \\(\mathcal{R\_i}\\) se fait à l'aide des paramètres **intrinsèques** de la caméra. Ces coefficients \\((\alpha\_u, \alpha\_v, u\_0, v\_0)\\) sont ensuite stockés dans une matrice de passage homogène \\(K\_{i \leftarrow c}\\) de sorte que l'on peut décrire la relation \\(p\_i = K\_{i \leftarrow c}.P\_c\\) comme étant :
 
-The change between $\mathcal{R\_c}$ and $\mathcal{R\_i}$ coordinate systems is done thanks to the **intrinsic** camera parameters. These $(\alpha\_u, \alpha\_v, u\_0, v\_0)$ coefficients are then stored in a homogeneous transformation matrix $K\_{i \leftarrow c}$ so that we can describe the relation $p\_i = K\_{i \leftarrow c}.P\_c$ as:
+$$
+\begin{bmatrix}
+u\\\\v\\\\1
+\end{bmatrix}\_{\mathcal{R}\_i} = s. 
+\begin{bmatrix}
+\alpha\_u & 0 & u\_0\\\\
+0 & \alpha\_v & v\_0\\\\
+0 & 0 & 1
+\end{bmatrix} . 
+\begin{bmatrix}
+X\\\\
+Y\\\\
+Z
+\end{bmatrix}\_{\mathcal{R}\_c}
+$$
 
-$$\begin{bmatrix}u\\\\v\\\\1\end{bmatrix}\_{\mathcal{R}\_i} = s. \begin{bmatrix}\alpha\_u & 0 & u\_0\\\\0 & \alpha
-\_v & v\_0\\\\0 & 0 & 1\end{bmatrix} . \begin{bmatrix}X\\\\Y\\\\Z\end{bmatrix}\_{\mathcal{R
-}\_c}$$
+avec :
 
-with:
+- \\(p\_i\\) (à gauche) le point exprimé en pixels dans le repère 2D image \\(\mathcal{R\_i}\\),
+- \\(P\_c\\) (à droite) le point exprimé en centimètres dans le repère 3D caméra \\(\mathcal{R\_c}\\),
+- \\(s = \frac{1}{Z}\\),
+- \\(\alpha_u = k_x f\\), \\(\alpha_v = k_y f\\) :
+    - \\(k_x = k_y\\) le nombre de pixels par millimètre du capteur dans les directions \\(x\\) et \\(y\\) -- l'égalité n'étant vraie que si les pixels sont carrés,
+    - \\(f\\) la distance focale.
+- \\(u_0\\) et \\(v_0\\) les centres de l'image en pixels dans \\(\mathcal{R}_i\\).
 
-- $p\_i$ (on the left) the pixel point within the 2D image frame $\mathcal{R\_i}$,
-- $P\_c$ (on the right) the point in centimeters within the 3D camera frame $\mathcal{R\_c}$,
-- $s = \frac{1}{Z}$,
-- $\alpha_u = k_x f$, $\alpha_v = k_y f$ :
-    - $k_x = k_y$ the sensor number of pixels per millimeter along $x$ and $y$ directions -- the equality being true only if the pixels are square,
-    - $f$ the focal distance.
-- $u_0$ and $v_0$ the image centers in pixels within $\mathcal{R}_i$.
-
-In our case, the image was captured by a Canon EOS 700D sensor of size $22.3\times14.9 mm$. The image size being $740\times480 px$ and the focal distance $18mm$, we deduce the parameters $\alpha\_u = 579.8664$, $\alpha\_v = 581.166$, $u\_0 = 360$ and $v\_0 = 240$ stored in the `calibration_parameters.txt` file.
+Dans notre cas, l'image a été capturée par un Canon EOS 700D dont la taille du capteur est de \\(22.3\times14.9 mm\\). La taille de l'image étant de \\(720\times480 px\\) et la distance focale de \\(18mm\\), on en déduit les paramètres \\(\alpha\_u = 581.1659\\), \\(\alpha\_v = 579.8657\\), \\(u\_0 = 360\\) et \\(v\_0 = 240\\) qui sont stockés dans le fichier `calibration_parameters.txt`.
 </details>
 
 <details>
-<summary>**Extrinsic parameters.** <span style="color:red">*DON'T CLICK HERE NEITHER*</span></summary> 
+<summary><strong>Paramètres extrinsèques. <span style="color:pink">Cliquez pour étendre</span></strong></summary> 
 
-> Happy extra reading ;)
+Pour atteindre notre objectif de départ, c'est-à-dire afficher dans l'image en pixels notre modèle 3D virtuel, nous devons estimer les coefficients de la transformation \\(\mathcal{R\_o}\rightarrow\mathcal{R\_c}\\) permettant d'établir la relation \\(P\_c=M\_{c\leftarrow o}.P\_o\\), avec :
 
-To reach our goal *i.e.*, display our 3D model in the 2D image in pixels, we have to estimate the $\mathcal{R\_o}\rightarrow\mathcal{R\_c}$ transformation coefficients and establish the relation $P\_c=M\_{c\leftarrow o}.P\_o$, with:
+- \\(M\_{c\leftarrow o}=\big[ R\_{\alpha\beta\gamma} | T \big]\\) la matrice de transformation homogène composée des angles d'Euler et de la translation selon les axes \\(x\\), \\(y\\) et \\(z\\) du repère.
 
-- $M\_{c\leftarrow o}=\big[ R\_{\alpha\beta\gamma} | T \big]$ the homogeneous transformation matrix of the Euler angles and $x$, $y$ and $z$ translation of the coordinate system.
-
-- $R\_{\alpha\beta\gamma}$ the rotation matrix resulting from the successive applications -- and thus the multiplication between them -- of the rotation matrices $R\_\gamma$, $R\_\beta$ and $R\_\alpha$:
+- \\(R\_{\alpha\beta\gamma}\\) la matrice de rotation résultat de l'application successive (et donc de la multiplication entre elles) des matrices de rotation \\(R\_\gamma\\), \\(R\_\beta\\) et \\(R\_\alpha\\) :
 
 $$R\_\alpha = \begin{bmatrix}1 & 0 & 0\\\\0 & \cos \alpha & -\sin \alpha\\\\0 & \sin \alpha & \cos \alpha\end{bmatrix}$$
 
@@ -144,217 +119,249 @@ $$R\_\beta = \begin{bmatrix}\cos \beta & 0 & -\sin \beta\\\\0 & 1 & 0\\\\\sin \b
 
 $$R\_\gamma = \begin{bmatrix}\cos \gamma & -\sin \gamma & 0\\\\\sin \gamma & \cos \gamma & 0\\\\0 & 0 & 1\end{bmatrix}$$
 
-With the correct extrinsic parameters $(\alpha, \beta, \gamma, t\_x, t\_y, t\_z)$, the 3D model in its coordinate system $\mathcal{R\_o}$ can be transformed into $\mathcal{R\_c}$ then $\mathcal{R\_i}$, while respecting the following relationship for each point $P_o$:
+Avec les bons paramètres extrinsèques \\((\alpha, \beta, \gamma, t\_x, t\_y, t\_z)\\), le modèle 3D dans son repère \\(\mathcal{R\_o}\\) pourra être transformé jusqu'à être exprimé dans \\(\mathcal{R\_c}\\) puis dans \\(\mathcal{R\_i}\\), en respectant la relation suivante pour chaque point \\(P_o\\) :
 
 $$ p\_i = K\_{i \leftarrow c} M\_{c\leftarrow o} P\_o$$
 
-$$\begin{bmatrix}u\\\\v\\\\1\end{bmatrix}\_{\mathcal{R}\_i} = s. \begin{bmatrix}\alpha\_u & 0 & u\_0\\\\0 & \alpha
-\_v & v\_0\\\\0 & 0 & 1\end{bmatrix} \bigodot \begin{bmatrix}r\_{11} & r\_{12} & r\_{13} & t\_x\\\\r\_{21} & r\_{22
-} & r\_{23} & t\_y\\\\r\_{31} & r\_{32} & r\_{33} & t\_z\\\\0 & 0 & 0 & 1\end{bmatrix} . \begin{bmatrix}X\\\\Y\\\\Z\\\\1\end{bmatrix}\_{\mathcal{R}\_o}$$
+$$\begin{bmatrix}
+u\\\\
+v\\\\
+1
+\end{bmatrix}\_{\mathcal{R}\_i} = s. 
+\begin{bmatrix}
+\alpha\_u & 0 & u\_0\\\\
+0 & \alpha\_v & v\_0\\\\
+0 & 0 & 1
+\end{bmatrix} \bigodot 
+\begin{bmatrix}
+r\_{11} & r\_{12} & r\_{13} & t\_x\\\\
+r\_{21} & r\_{22} & r\_{23} & t\_y\\\\
+r\_{31} & r\_{32} & r\_{33} & t\_z\\\\
+0 & 0 & 0 & 1
+\end{bmatrix} . 
+\begin{bmatrix}
+X\\\\
+Y\\\\
+Z\\\\
+1
+\end{bmatrix}\_{\mathcal{R}\_o}
+$$
 
-> The $\bigodot$ operator is the multiplication between terms after having removed the homogeneous coordinate from $M\_{c\leftarrow o} P\_o$. It is only here so that matrices shapes match.
-
-{{% alert note %}}
-The instrinsic parameters are known; in order to find the extrinsic parameters, we use a localization method (*i.e.* of parameters estimation) called **Perspective-n-Lines**.
-{{% /alert %}}
+{{< alert type="warning" >}}
+L'opérateur \\(\bigodot\\) indique la multiplication des termes après avoir enlevé la coordonnée homogène de \\(M\_{c\leftarrow o} P\_o\\). Il est simplement là pour que les tailles de matrice soient correctes.
+{{< /alert >}}
 </details>
+</br>
 
-**Extrinsic parameters estimation.**
+>Les paramètres intrinsèques sont connus ; pour trouver les paramètres extrinsèques nous utiliserons une méthode de localisation (*i.e.* d'estimation des paramètres) dite *par recalages successifs*, appelée **Perspective-n-Lignes**.
 
-Our starting point is an initial coarse estimate of $(\alpha, \beta, \gamma, t\_x, t\_y, t\_z)$. This initial estimate is more or less accurate depending on our *a priori* knowledge of the scene, the object and the position of the camera.
+### Estimation des paramètres extrinsèques
 
-In our case, the initial parameters have values $alpha = -2.1$, $beta = 0.7$, $gamma = 2.7$, $t\_x = 3.1$, $t\_y = 1.3$ and $t\_z = 18$, *i.e.,* we know before we even start that the 3D model will have to undergo a rotation of angles $(-2.1, 0.7, 2.7)$ around its three axes, and that it should shift approximately $3cm$ in $x$, $1.5cm$ in $y$ and $18cm$ in $z$. 
+On démarre d'une estimation initiale grossière des paramètres \\((\alpha, \beta, \gamma, t\_x, t\_y, t\_z)\\). Cette estimation initiale est plus ou moins juste en fonction de la connaissance que l'on a *a priori* de la scène, de l'objet, de la position de la caméra.
 
-{{% alert note %}}
-This *a priori* knowledge of the environment comes from the fact that one is able, as a human being, to evaluate the distance of the real object from the sensor only by looking at the image. 
-{{% /alert %}}
+Dans notre cas, les paramètres initiaux ont pour valeurs \\(alpha = -2.1\\), \\(beta = 0.7\\), \\(gamma = 2.7\\), \\(t\_x = 3.1\\), \\(t\_y = 1.3\\) et \\(t\_z = 18\\), c'est-à-dire que l'on sait avant même de commencer que le modèle 3D devra subir une rotation d'angles \\((-2.1, 0.7, 2.7)\\) autour de ses trois axes, et qu'il devra se décaler d'environ \\(3cm\\) en \\(x\\), \\(1.5cm\\) en \\(y\\) and \\(18cm\\) en \\(z\\).
 
-**Use of the programme.**
+>Cette connaissance *a priori* de la scène vient du fait que l'on est capable, en tant qu'humain, d'évaluer la distance de l'objet réel par rapport au capteur seulement en regardant l'image. 
 
-When the script `localisation.py` is launched, two figures open: one represents a real scene captured by the camera, the other represents the virtual model to be transformed and whose system origin is materialised by a red dot. As the objective is to copy the box on which the Pikachu rests on top of the sky-blue cube on the table, you must first select five edges belonging to the real box (by *clicking* the mouse on the edges ends), then select the corresponding edges in the same order on the 3D model (by *clicking* the mouse in the middle of the edges). The number of segments to be selected (by default 5), is fixed from the start in the variable `nb_segments`.
+### Utilisation du programme
 
-![Edge selection in the image and in the 3D model](images/edge_selection.png "Edge selection in the image and in the 3D model")
+Au lancement du script `localisation.py`, deux figures s'ouvrent : l'une représente une scène réelle capturée par la caméra, l'autre représente le modèle virtuel à transformer et dont l'origine du repère est matérialisée par un point rouge. L'objectif étant de venir calquer la boite sur laquelle repose le Pikachu par-dessus le cube bleu ciel posé sur la table, il faut dans un premier temps sélectionner cinq arêtes appartenant à la boite réelle (par *click* souris sur les extrémités des arêtes), puis sélectionner dans le même ordre les arêtes correspondantes sur le modèle 3D (par *click* souris au milieu des arêtes). Le nombre de segments à sélectionner (par défaut 5), est fixé dès le départ dans la variable `nb_segments`.
 
-In this way, it will be possible to calculate the error on the estimation of extrinsic parameters by comparing the distance between the edges selected in the image and those of the transformed model. This error criterion is described at [step 2](#anchor-step-2).
+{{< img src="images/edge_selection.png" align="center" title="Sélection des arêtes dans l'image et dans le modèle 3D" >}}
+{{< vs 1 >}}
 
-## Step 1: Display the pattern in $\mathcal{R_i}$ {#anchor-step-1}
+De cette manière, on pourra calculer l'erreur commise sur l'estimation des paramètres extrinsèques en comparant la distance entre les arêtes sélectionnées dans l'image et celles du modèle transformé. Ce critère d'erreur est décrit à l'[étape 2](#anchor-step-2).
 
-In the main program, the points of the model are stored in `model3d_Ro`, a matrix of size $[246\times6]$ corresponding to the 246 edges of the model, each defined by the 6 coordinates of its two points $P_1(x_1, y_1, z_1)$ and $P_2(x_2, y_2, z_2)$. The transformation matrix $M\_{c\leftarrow o}$ is stored in `extrinsic_matrix` and the intrinsic parameters of the camera are stored in `intrinsic_matrix`.
+## ***Etape 1*** : afficher le modèle dans \\(\mathcal{R_i}\\) {#anchor-step-1}
 
-To visualise the 3D model in the 2D image and get an idea of the accuracy of our estimate, we have to code the `tranform_and_draw_model` function which allows to apply the $K\_{i \leftarrow c} M\_{c\leftarrow o}$ transformation at each point $P\_o$ of a set of edges `edges_Ro`, with an `intrinsic` matrix, and an `extrinsic` matrix to finally display the result in a `fig_axis` figure:
+Dans le programme principal, les points du modèle sont stockés dans `model3d_Ro`, une matrice de taille \\([246\times6]\\) correspondant aux 246 arêtes du modèle, chacune définie par les 6 coordonnées de ses deux points \\(P_1(x_1, y_1, z_1)\\) et \\(P_2(x_2, y_2, z_2)\\). La matrice de transformation \\(M\_{c\leftarrow o}\\) est stockée dans `extrinsic_matrix` et les paramètres intrinsèques de la caméra sont stockés dans `intrinsic_matrix`.
 
-    def transform_and_draw_model(edges_Ro, intrinsic, extrinsic, fig_axis):
-        # ********************************************************************* #
-        # TO BE COMPLETED.                                                      #
-        # FUNCTIONS YOU WILL HAVE TO USE :                                      #
-        #   - perspective_projection                                            #  
-        #   - transform_point_with_matrix                                       #
-        # Input:                                                                #
-        #   edges_Ro : ndarray[Nx6]                                             #
-        #             N = number of edges in the model                          #
-        #             6 = (X1, Y1, Z1, X2, Y2, Z2) the P1 and P2 point          #
-        #                 coordinates for each edge                             #
-        #   intrinsic : ndarray[3x3] - camera intrinsic parameters              #
-        #   extrinsic : ndarray[4x4] - camera extrinsic parameters              #
-        #   fig_axis : figure used for display                                  #
-        # Output:                                                               #
-        #   No return - the function only calculates and displays the           #
-        #   transformed points (u1, v1) and (u2, v2)                            #
-        # ********************************************************************* #
+Pour visualiser le modèle 3D dans l'image 2D et se faire une idée de la justesse de notre estimation, il faut coder la fonction `tranform_and_draw_model` qui permet d'appliquer la transformation \\(K\_{i \leftarrow c} M\_{c\leftarrow o}\\) à chaque point \\(P\_o\\) d'un ensemble d'arêtes' `edges_Ro`, avec une matrice `intrinsic`, et une matrice `extrinsic` pour finalement afficher le résultat dans une figure `fig_axis` :
+
+``` python
+def transform_and_draw_model(edges_Ro, intrinsic, extrinsic, fig_axis):
+    # ********************************************************************* #
+    # A COMPLETER.                                                          #
+    # UTILISER LES FONCTIONS :                                              #
+    #   - perspective_projection                                            #  
+    #   - transform_point_with_matrix                                       #
+    # Input:                                                                #
+    #   edges_Ro : ndarray[Nx6]                                             #
+    #             N = nombre d'aretes dans le modele                        #
+    #             6 = (X1, Y1, Z1, X2, Y2, Z2) les coordonnees des points   #
+    #                 P1 et P2 de chaque arete                              #
+    #   intrinsic : ndarray[3x3] - parametres intrinseques de la camera     #
+    #   extrinsic : ndarray[4x4] - parametres extrinseques de la camera     #
+    #   fig_axis : figure utilisee pour l'affichage                         #
+    # Output:                                                               #
+    #   Pas de retour de fonction, mais calcul et affichage des points      #
+    #   transformes (u1, v1) et (u2, v2)                                    #
+    # ********************************************************************* #
+
+    # Part to replace #
+    u_1 = np.zeros((edges_Ro.shape[0],1))
+    u_2 = np.zeros((edges_Ro.shape[0],1))
+    v_1 = np.zeros((edges_Ro.shape[0],1))
+    v_2 = np.zeros((edges_Ro.shape[0],1))
+    ############### 
     
-        # Part to replace #
-        u_1 = np.zeros((edges_Ro.shape[0],1))
-        u_2 = np.zeros((edges_Ro.shape[0],1))
-        v_1 = np.zeros((edges_Ro.shape[0],1))
-        v_2 = np.zeros((edges_Ro.shape[0],1))
-        ############### 
+    for p in range(edges_Ro.shape[0]):
+        fig_axis.plot([u_1[p], u_2[p]], [v_1[p], v_2[p]], 'k')
+```
+
+L'objectif est de stocker dans les points `[u_1, v_1]` et `[u_2, v_2]` les coordonnées \\((u, v)\\) des points \\(P_1\\) et \\(P_2\\) des arêtes après transformation.
+
+On peut découper cette fonction en deux sous-étapes : 
+
+* la transformation \\(\mathcal{R\_o} \rightarrow \mathcal{R\_c}\\) des points \\(P\_o\\) à l'aide de la fonction `transform_point_with_matrix` fournie dans la librairie `matTools` :
+
+    ```python
+    P_c = matTools.transform_point_with_matrix(extrinsic, P_o)
+    ```
+
+* la projection \\(\mathcal{R\_c} \rightarrow \mathcal{R\_i}\\) des points nouvellement obtenus \\(P\_c\\) à l'aide de la fonction `perspective_projection` qu'il faut compléter :
+
+    ```python
+    def perspective_projection(intrinsic, P_c):
+        # ***************************************************** #
+        # A COMPLETER.                                          #
+        # Fonction utile disponible :                           #
+        #   np.dot                                              #
+        # Input:                                                #
+        #   intrinsic : ndarray[3x3] - parametres intrinseques  #
+        #   P_c : ndarray[Nx3],                                 #
+        #         N = nombre de points à transformer            #
+        #         3 = (X, Y, Z) les coordonnees des points      #
+        # Output:                                               #
+        #   u, v : deux ndarray[N] contenant les                #
+        #          coordonnees Ri des points P_c transformes    #
+        # ***************************************************** #
         
-        for p in range(edges_Ro.shape[0]):
-            fig_axis.plot([u_1[p], u_2[p]], [v_1[p], v_2[p]], 'k')
-
-The objective is to store in the points `[u_1, v_1]` and `[u_2, v_2]` the coordinates $(u, v)$ of the points $P_1$ and $P_2$ of the edges after transformation.
-
-This function can be divided into two sub-steps: 
-
-* the transformation $\mathcal{R\_o} \rightarrow \mathcal{R\_c}$ of the points $P\_o$ using the function `transform_point_with_matrix` provided in the `matTools`  library:
-
-        P_c = matTools.transform_point_with_matrix(extrinsic, P_o)
-
+        u, v = 0, 0 # Part to replace
         
-* the projection $\mathcal{R\_c} \rightarrow \mathcal{R\_i}$ of the newly obtained $P\_c$ points using the function `perspective_projection` which must be completed :
+        return u, v
+    ```
 
-        def perspective_projection(intrinsic, P_c):
-            # ***************************************************** #
-            # TO BE COMPLETED.                                      #
-            # Useful function:                                      #
-            #   np.dot                                              #
-            # Input:                                                #
-            #   intrinsic : ndarray[3x3] - intrinsic parameters     #
-            #   P_c : ndarray[Nx3],                                 #
-            #         N = number of points to transform             #
-            #         3 = (X, Y, Z) the points coordinates          #
-            # Output:                                               #
-            #   u, v : two ndarray[N] containing the Ri coordinates #
-            #          of the transformed Pc points                 #
-            # ***************************************************** #
-            
-            u, v = 0, 0 # Part to replace
-            
-            return u, v
+Une fois `perspective_projection` et `transform_and_draw_model` complétées, le lancement du programme global projette le modèle dans l'image, avec les paramètres extrinsèques définis au départ.
 
-Once `perspective_projection` and `transform_and_draw_model` have been completed, the launch of the overall programme will project the model in the image, with the extrinsic parameters defined at the outset.
+{{< img src="images/first_rough_estimate.png" align="center" title="Première projection du modèle dans l'image" >}}
+{{< vs 1 >}}
 
-![First projection of the model in the image](images/first_rough_estimate.png "First projection of the model in the image")
+>La transformation appliquée à ces points n'est visiblement pas très bonne, le modèle ne *matche* pas la boite comme on le souhaiterait. Pour pouvoir différencier une "mauvaise" estimation des paramètres extrinsèques d'une "bonne", et ainsi pouvoir proposer de manière automatique une nouvelle estimation plus proche de notre objectif, il faut déterminer un critère d'erreur caractérisant la distance à laquelle on se trouve de cet objectif optimal.
 
-> The transformation applied to these points is obviously not very good, the model does not match the box as one would wish. In order to be able to differentiate a "bad" estimate of the extrinsic parameters from a "good" one, and thus be able to automatically propose a new estimate closer to our objective, we must determine an error criterion characterising the distance we are from this optimal objective.
+## ***Etape 2*** : déterminer un critère d'erreur {#anchor-step-2}
 
-## Step 2: Determine an error criterion {#anchor-step-2}
+Le critère d'erreur sert à évaluer la justesse de notre estimation. Plus l'erreur est grande, moins nos paramètres extrinsèques sont bons. Après avoir déterminé ce critère d'erreur, on pourra l'intégrer dans une boucle d'optimisation visant à le minimiser, et donc à avoir des paramètres extrinsèques les meilleurs possibles pour notre objectif d'appariement 2D/3D.
 
-The error criterion is used to assess the accuracy of our estimate. The greater the error, the poorer our extrinsic parameters. Once we have determined this error criterion, we can integrate it into an optimisation loop aimed at minimising it, and thus have the best possible extrinsic parameters for our 2D/3D matching objective.
+A titre d'exemple, la figure ci-dessous illustre cette boucle d'optimisation pour la projection de la boite virtuelle sur le cube réel. A l'itération \\(0\\), les paramètres sont grossiers, l'erreur est grande. En modifiant les paramètres on fera diminuer l'erreur jusqu'à atteindre, dans l'idéal, une erreur nulle et une transformation optimale pour une projection parfaite du modèle 3D dans l'image 2D.
 
-As an example, the figure below illustrates this optimisation loop for the projection of the virtual box on the real cube. At iteration $0$, the parameters are coarse, the error is large. By changing the parameters the error will be reduced until ideally zero error and optimal transformation for a perfect projection of the 3D model into the 2D image is achieved.
+{{< img src="images/extrinsic_optim.gif" align="center" title="Optimisation des paramètres extrinsèques" >}}
+{{< vs 1 >}}
 
-![Optimisation of extrinsic parameters](images/extrinsic_optim.gif "Optimisation of extrinsic parameters")
+Dans le cadre de l'appariement 2D/3D de segments, le critère d'erreur à minimiser correspond au produit scalaire de la normale au plan d'interprétation relatif à l'appariement. En d'autres termes, l'objectif est de transformer les points du modèle de sorte que les segments sélectionnés dans l'image et ceux sélectionnés dans le modèle appartiennent au même plan exprimé dans le repère caméra \\(\mathcal{R\_c}\\).
 
-In 2D/3D segment matching, the error criterion to be minimised is the scalar product of the normal to the interpretation plane for the matching. In other words, the objective is to transform the points of the model so that the segments selected in the image and those selected in the model belong to the same plane expressed in the camera frame $\mathcal{R\_c}$.
+{{< img src="images/interpretation_plan.png" align="center" title="Plan d'interprétation relatif à l'appariement de droites" >}}
+{{< vs 1 >}}
 
-![Interpretation plan relating to line matching](images/interpretation_plan.png "Interpretation plan relating to line matching")
+Comme le montre la figure ci-dessus, on peut définir le *plan d'interprétation* comme étant formé par les segments \\(\mathcal{l\_{i \rightarrow c}^{j,1}}\\) et \\(\mathcal{l\_{i \rightarrow c}^{j,2}}\\). Dans cette notation, \\(j\\) correspond au nombre d'arêtes sélectionnées au lancement du programme (5 par défaut). Pour chaque arête sélectionnée \\(j\\) et exprimée dans le repère *image* \\(\mathcal{R_i}\\), on a donc deux segments \\(l^1\\) et \\(l^2\\). Le segment \\(l^1\\) est composé des deux extrémités \\(P\_{i \rightarrow c}^0\\) et \\(P\_{i \rightarrow c}^1\\) ; le segment \\(l^2\\) est composé des deux extrémités \\(P\_{i \rightarrow c}^1\\) et \\(P\_{i \rightarrow c}^2\\). Chacun des \\(P\_{i \rightarrow c}\\) est un point du repère *image* \\(\mathcal{R\_i}\\) transformé dans le repère *caméra* \\(\mathcal{R\_c}\\). Ils sont connus : ce sont ceux qui ont été sélectionnés par *click* souris.
 
-As shown in the figure above, the *interpretation plane* can be defined as being formed by the segments $\mathcal{l\_{i \rightarrow c}^{j,1}}$ and $\mathcal{l\_{i \rightarrow c}^{j,2}}$. In this notation, $j$ corresponds to the number of edges selected when the program is launched (5 by default). For each selected edge $j$ and expressed in the *image* frame $\mathcal{R_i}$, there are two segments $l^1$ and $l^2$. The $l^1$ segment is composed of the two ends $P\_{i \rightarrow c}^0$ and $P\_{i \rightarrow c}^1$; the $l^2$ segment is composed of the two ends $P\_{i \rightarrow c}^1$ and $P\_{i \rightarrow c}^2$. Each of the $P\_{i \rightarrow c}$ is a point in the *image* frame $\mathcal{R\_i}$ transformed into the *camera* frame $\mathcal{R\_c}$. They are known: they are the ones that have been selected by mouse click.
-
-Once these segments have been calculated, we can calculate the normal to the interpretation plane $N\_c^j$. As a reminder:
+Une fois ces segments calculés, on peut calculer la normale au plan d'interprétation \\(N\_c^j\\). Pour rappel :
 
 $$N = \frac{l^1 \wedge l^2}{||l^1 \wedge l^2||}$$ 
 
-In the segment selection function `utils.select_segments()`, as you make edge selections, the normals are calculated and stored in the `normal_vectors` matrix thanks to the `calculate_normal_vector` function which must be completed in the `localisation.py` file:
+Dans la fonction de sélection des segments `utils.select_segments()`, au fil des sélections d'arêtes, les normales sont calculées et stockées dans la matrice `normal_vectors` grâce à la fonction `calculate_normal_vector` qu'il faut compléter dans le fichier `localisation.py` :
 
-    def calculate_normal_vector(p1_Ri, p2_Ri, intrinsic):
-        # ********************************************************* #
-        # TO BE COMPLETED.                                          #
-        # Useful functions:                                         #
-        #   np.dot, np.cross, np.linalg.norm, np.linalg.inv         #
-        # Input:                                                    #
-        #   p1_Ri : list[3]                                         #
-        #           3 = (u, v, 1) of the first selected point       #
-        #   p2_Ri : list[3]                                         #
-        #           3 = (u, v, 1) of the second selected point      #
-        #   intrinsic : ndarray[3x3] of intrinsic                   #
-        # Output:                                                   #
-        #   normal_vector : ndarray[3] containing the normal to     #
-        #                   L1_c and L2_c segments, deducted from   #
-        #                   the selected image points               #
-        # ********************************************************* #
+```python
+def calculate_normal_vector(p1_Ri, p2_Ri, intrinsic):
+    # ********************************************************* #
+    # A COMPLETER.                                              #
+    # Fonctions utiles disponibles :                            #
+    #   np.dot, np.cross, np.linalg.norm, np.linalg.inv         #
+    # Input:                                                    #
+    #   p1_Ri : list[3]                                         #
+    #           3 = (u, v, 1) du premier point selectionne      #
+    #   p2_Ri : list[3]                                         #
+    #           3 = (u, v, 1) du deuxieme point selectionne     #
+    #   intrinsic : ndarray[3x3] des intrinseques               #
+    # Output:                                                   #
+    #   normal_vector : ndarray[3] contenant la normale aux     #
+    #                   segments L1_c et L2_c deduits des       #
+    #                   points image selectionnes               #
+    # ********************************************************* #
+
+    normal_vector = np.zeros((len(p1_Ri),)) # Part to replace
+
+    return normal_vector
+```
+
+Ensuite, pour chaque segment \\(j \in \[1, ..., 5\]\\), la distance entre le plan lié aux segments image et les points du modèle 3D peut être calculée grâce au produit scalaire des \\(N\_c^j\\) et des \\(P\_{o\rightarrow c}^j\\). Si le produit scalaire est nul, les deux vecteurs sont orthogonaux et le point \\(P\_{o\rightarrow c}^j\\) appartient bien au même plan que \\(P\_{i \rightarrow c}^j\\). Plus le produit scalaire est grand, plus les paramètres extrinsèques s'éloignent de la bonne transformation.
+
+Pour résumer, le critère d'optimisation des paramètres est \\(\sum\_{j=1}^{2n} F^j(X)^2\\) (le carré enlève les valeurs négatives), avec \\(F^j(X) = N^{j \; \text{mod} \; 2}.P\_{o\rightarrow c}^{j \; \text{mod} \; 2, 1|2}\\), selon que l'on se trouve sur le point \\(P^{1}\\) ou \\(P^{2}\\). 
+
+> Dans la somme qui parcourt les points de \\(j\\) à \\(2n\\), \\(j \; \text{mod} \; 2\\) est l'indice du segment pour le point courant. Autrement dit, on cumule les \\((N^i.P^{i, 1})^2\\) et \\((N^i.P^{i, 2})^2\\) pour tous les segments \\(i\\).
+
+{{< alert type="warning" >}}
+Ici, \\(X\\) désigne l'ensemble des paramètres \\((\alpha, \beta, \gamma, t\_x, t\_y, t\_z)\\) et non une coordonnée.
+{{< /alert >}}
+
+On rappelle que chaque \\(P\_{o\rightarrow c} = \big[ R\_{\alpha\beta\gamma} | T \big]. P\_o\\) ; la valeur de l'erreur dépend donc bien de la valeur des paramètres extrinsèques. A chaque passage dans la boucle d'optimisation, changer les poids de ces paramètres aura une influence sur le critère \\(F(X)\\).
+
+La fonction `calculate_error` calcule le critère d'erreur. Elle prend en entrée le nombre `nb_segments` d'arêtes sélectionnées, les `normal_vectors`, et les `segments_Rc` sélectionnés puis transformés par la matrice des paramètres extrinsèques et exprimés dans \\(\mathcal{R_c}\\).
+
+```python
+def calculate_error(nb_segments, normal_vectors, segments_Rc):
+    # ***************************************************************** #
+    # A COMPLETER.                                                      #
+    # Input:                                                            #
+    #   nb_segments : par defaut 5 = nombre de segments selectionnes    #
+    #   normal_vectors : ndarray[Nx3] - normales aux plans              #
+    #                    d'interpretation des segments selectionnes     #
+    #                    N = nombre de segments                         #
+    #                    3 = coordonnees (X,Y,Z) des normales dans Rc   #
+    #   segments_Rc : ndarray[Nx6] = segments selectionnes dans Ro      #
+    #                 et transformes dans Rc                            #
+    #                 N = nombre de segments                            #
+    #                 6 = (X1, Y1, Z1, X2, Y2, Z2) des points P1 et     #
+    #                 P2 des aretes transformees dans Rc                #
+    # Output:                                                           #
+    #   err : float64 - erreur cumulee des distances observe/attendu    #
+    # 
+    # ***************************************************************** #
+    err = 0
+    for p in range(nb_segments):
+        # Part to replace with the error calculation
+        err = err + 0
     
-        normal_vector = np.zeros((len(p1_Ri),)) # Part to replace
-    
-        return normal_vector
+    err = np.sqrt(err / 2 * nb_segments)
+    return err
+```
 
-Then, for each segment $j \in \[1, ..., 5\]$, the distance between the plane linked to the image segments and the points of the 3D model can be calculated using the scalar product of the $N\_c^j$ and the $P\_{o\rightarrow c}^j$. If the scalar product is null, both vectors are orthogonal and the point $P\_{o\rightarrow c}^j$ belongs to the same plane as $P\_{i \rightarrow c}^j$. The larger the scalar product, the further the extrinsic parameters move away from the correct transformation.
+> D'un point de vue mathématique, la somme est écrite pour \\(j\\) allant de \\(1\\) à \\(2n\\), *i.e.* le nombre de points. D'un point de vue implémentation et étant donnée la construction de nos variables, il est plus simple d'exprimer le critère au travers d'une somme parcourant les arêtes : \\(\sum\_{j=1}^{n} F^j(X)\\) with \\(F^{j}(X) = F^{j, 1}(X)^2 + F^{j, 2}(X)^2\\).
+> 
+> Ainsi, \\(F^{j, 1}(X) = N^j.P\_{o\rightarrow c}^{j, 1}\\) et \\(F^{j, 2}(X) = N^j.P\_{o\rightarrow c}^{j, 2}\\). 
 
-To summarize, the parameter optimization criterion is $\sum\_{j=1}^{2n} F^j(X)^2$ (the square removes negative values), with $F^j(X) = N^{j \; \text{mod} \; 2}.P\_
-{o\rightarrow c}^{j \; \text{mod} \; 2, 1|2}$, depending on whether one is on the point $P^{1}$ or $P^{2}$. 
+## ***Etape 3*** : Estimation des paramètres par la méthode des moindres carrés ordinaires {#anchor-step-3}
 
-> In the sum that runs through the points from $j$ to $2n$, $j \; \text{mod} \; 2$ is the segment index for the current point. In other words, we cumulate the $(N^i.P^{i, 1})^2$ and $(N^i.P^{i, 2})^2$ for all $i$ segments.
+<!-- [//]: # (A chaque étape, on cherche un incrément à appliquer à chacun des paramètres $X (\alpha, \beta, \gamma, t\_x, t\_y, t\_z)$. Pour l'exemple, on peut s'intéresser seulement au paramètre $\gamma$ de rotation autour de l'axe $Z$. La procédure peut alors être illustrée par la figure suivante : ![Incréments successifs des paramètres extrinsèques](images/increment_gamma.png) Le point de départ est exprimé dans son repère objet $\mathcal{R\_O}$. A l'itération $k=0$, la transformation effectuée est : $$\begin{bmatrix}X \\\\\\ Y \\\\\\ Z\end{bmatrix}\_{\mathcal{R\_C\_0}}} = \[R\_\gamma . R\_\beta . R\_\alpha | T\_{xyz}\]\_{k=0}\begin{bmatrix}X \\\\\\ Y \\\\\\ Z\end{bmatrix}\_{\mathcal{R\_{O}}}$$ Si l'on appelle $M\_{k=0}$ la matrice des paramètres extrinsèques $\[R\_\gamma . R\_\beta . R\_\alpha | T\_{xyz}\]\_{k=0}$, on aura à l'itération $k=1$ : $$ \begin{bmatrix}X \\\\\\ Y \\\\\\ Z\end{bmatrix}\_{\mathcal{R\_{C\_1}}} = \[R\_{\Delta\gamma} . R\_{\Delta\beta} . R\_{\Delta\alpha} | T\_{\Delta x, \Delta y, \Delta z}\]\_{k=1}. M\_{k=0}.\begin{bmatrix}X \\\\\\ Y \\\\\\ Z \end{bmatrix}\_{\mathcal{R\_{O}}}$$) -->
 
-{{% alert warning %}}
-Here, $X$ designates the set of parameters $(\alpha, \beta, \gamma, t\_x, t\_y, t\_z)$ and not a coordinate.
-{{% /alert %}}
+A chaque itération \\(k\\), on cherche un jeu de paramètres \\(X\_{k}(\alpha, \beta, \gamma, t\_x, t\_y, t\_z)\\) tel que le critère \\(F(X)\\) soit égal au critère pour le jeu de paramètres précédent \\(X_0\\) (avant mise à jour) incrémenté d'un delta pondéré par la jacobienne de la fonction.
 
-Remember that every $P\_{o\rightarrow c} = \big[ R\_{\alpha\beta\gamma} | T \big]. P\_o$ ; the value of the error thus actually depends on the value of the extrinsic parameters. Each time the optimization loop is run, changing the weights of these parameters will influence the $F(X)$ criterion.
-
-The function `calculate_error` calculates the error criterion. It takes as input the number of selected edges `nb_segments`, the `normal_vectors`, and the `Rc_segments` selected and then transformed by the matrix of extrinsic parameters and expressed in $\mathcal{R_c}$.
-
-    def calculate_error(nb_segments, normal_vectors, segments_Rc):
-        # ***************************************************************** #
-        # TO BE COMPLETED.                                                  #
-        # Input:                                                            #
-        #   nb_segments : default 5 = number of selected segments           #
-        #   normal_vectors : ndarray[Nx3] - normal vectors to the           #
-        #                    interpretation plane of selected segments      #
-        #                    N = number of segments                         #
-        #                    3 = (X,Y,Z) normal coordinates in Rc           #
-        #   segments_Rc : ndarray[Nx6] = selected segments in Ro            #
-        #                 and transformed in Rc                             #
-        #                 N = number of segments                            #
-        #                 6 = (X1, Y1, Z1, X2, Y2, Z2) of points P1 and     #
-        #                 P2 of the transformed edges in Rc                 #
-        # Output:                                                           #
-        #   err : float64 - cumulated error of observed vs. expected dist.  #
-        # ***************************************************************** #
-        err = 0
-        for p in range(nb_segments):
-            # Part to replace with the error calculation
-            err = err + 0
-        
-        err = np.sqrt(err / 2 * nb_segments)
-        return err
-
-> From a mathematical point of view, the sum is written for $j$ ranging from $1$ to $2n$, *i.e.,* the number of points. From an implementation point of view and given the construction of our variables, it is simpler to express the criterion through a sum running along the edges: $\sum\_{j=1}^{n} F^j(X)$ with $F^{j}(X) = F^{j, 1}(X)^2 + F^{j, 2}(X)^2$. 
-
-> Thus, $F^{j, 1}(X) = N^j.P\_{o\rightarrow c}^{j, 1}$ and $F^{j, 2}(X) = N^j.P\_{o\rightarrow c}^{j, 2}$. 
-
-## Step 3: Estimation of parameters by ordinary least squares method {#anchor-step-3}
-
-[//]: # (At each step, we look for an increment to apply to each of the parameters $X (\alpha, beta, gamma, t\_x, t\_y, t\_z)$. For the example, we can focus our attention on the parameter $\gamma$ of rotation around the axis $Z$. The procedure can then be illustrated by the following figure: ![Successive increments of extrinsic parameters](images/increment_gamma.png) The starting point is expressed in its object reference system $\mathcal{R\_O}$. At the iteration $k=0$, the transformation performed is: $$\begin{bmatrix}X \\\\\ Y \\\end{bmatrix}\_{\mathcal{R\_C\_0}} = \[R\_\gamma . R\_\beta . R\_\alpha | T\_{xyz}\]\_{k=0}\begin{bmatrix}X \\\\\\ Y \\\\ Z\end{bmatrix}\_{\mathcal{R\_{O}}}$$ If we call $M\_{k=0}$ the matrix of extrinsic parameters $\[R\_\gamma .  R\_{\Delta\beta}. R\_{\Delta\alpha} | T\_{\Delta x, \Delta y, \Delta z}\]\_{k=1}. M\_{k=0}.\begin{bmatrix} X \\\\Delta Y \Delta Z \end{bmatrix}\_{\mathcal{R\_{O}}}$$)
-
-At each iteration $k$, we look for a set of parameters $X\_{k}(\alpha, \beta, \gamma, t\_x, t\_y, t\_z)$ such as the criterion $F(X)$ is equal to the criterion for the previous parameter set $X_0$ (before update) incremented by a delta weighted by the Jacobian of the function. 
-
-We thus seek to solve a system of the form :
+On cherche donc à résoudre un système de la forme :
 
 $$F(X) \approx F(X\_0) + J \Delta X$$
 
-{{% alert note %}}
-The Jacobian $J$ contains on its lines the partial derivatives of the $F$ function for each selected point and according to each of the $X$ parameters. It reflects the trend of the criterion (ascending/descending) and the speed at which it increases or decreases according to the value of each of its parameters.
-{{% /alert %}}
+>La jacobienne \\(J\\) contient sur ses lignes les dérivées partielles de la fonction \\(F\\) pour chaque point sélectionné et selon chacun des paramètres de \\(X\\). Elle traduit la tendance du critère (montant/descendant) et la vitesse à laquelle il augmente ou diminue en fonction de la valeur de chacun de ses paramètres.
 
-Since our objective is to reach a criterion $F(X) = 0$, we translate the problem to be solved by :
+Notre objectif étant d'atteindre un critère \\(F(X) = 0\\), on traduit le problème à résoudre par :
 
-$$\begin{align}
-  0 &= F(X\_0) + J \Delta X\\\\\
-  \llap{\Leftrightarrow \qquad} -F(X\_0) &= J \Delta X
-\end{align}$$
+$$
+\begin{align}
+0 &= F(X\_0) + J \Delta X \\\\\\
+\Leftrightarrow \qquad -F(X\_0) &= J\Delta X
+\end{align}
+$$
 
-The advantage of working with successive increments is that the increment values are so small in relation to the last iteration that the variation of these parameters can be approximated as 0. As a reminder, the error criterion is expressed as follows for each segment $j$ :
+L'intérêt de travailler par incréments successifs est d'avoir des valeurs d'incrément si petites par rapport à la dernière itération qu'on peut approximer la variation de ces paramètres comme étant égale à 0. Pour rappel, le critère d'erreur s'exprime de la manière suivante pour chaque segment \\(j\\) :
 
 $$
 \begin{align}
@@ -364,16 +371,16 @@ F^{j, 2}(X) &= N^{j}.P\_{o\rightarrow c}^{j, 2} \text{ avec } P\_{o\rightarrow c
 } | T \big] . P\_o^{j, 2}
 \end{align}$$
 
-Because of always having $\Delta X \approx 0$, the calculation of the Jacobian matrix is considerably simplified, since the partial derivatives $(\frac{\partial F^j}{\partial \alpha}, \frac{\partial F^j}{\partial \beta}, \frac{\partial F^j}{\partial \gamma}, \frac{\partial F^j}{\partial t\_x}, \frac{\partial F^j}{\partial t\_y}, \frac{\partial F^j}{\partial t\_z})$ are the same at each iteration.
+Du fait de toujours avoir des\\(\Delta X \approx 0\\), le calcul de la matrice jacobienne se retrouve considérablement simplifié, puisque les dérivées partielles \\((\frac{\partial F^j}{\partial \alpha}, \frac{\partial F^j}{\partial \beta}, \frac{\partial F^j}{\partial \gamma}, \frac{\partial F^j}{\partial t\_x}, \frac{\partial F^j}{\partial t\_y}, \frac{\partial F^j}{\partial t\_z})\\) sont les mêmes à chaque itération.
 
-The detail of the derivation is given for the first parameter $\alpha$, the following are to be demonstrated :
+Le détail de la dérivation est donné pour le premier paramètre \\(\alpha\\), les suivants sont à démontrer :
 
 $$\begin{align}
     \frac{\partial F^j}{\partial \alpha} &= N^j . [R\_\gamma . R\_\beta . \frac{\partial R\_\alpha}{\partial \alpha} | T] . P\_o^j\\\\\\
 \end{align}$$
 
-{{% alert note %}}
-$R\_\gamma$ and $R\_\beta$ disappear from the derivation because for $\gamma \approx 0$ and $\beta \approx 0$, we have :
+{{< alert type="info" >}}
+\\(R\_\gamma\\) et \\(R\_\beta\\) disparaissent de la dérivation car pour \\(\gamma \approx 0\\) et \\(\beta \approx 0\\), on a :
 
 $$
 R_{\gamma \approx 0} = \begin{bmatrix} 
@@ -395,10 +402,10 @@ R_{\beta \approx 0} = \begin{bmatrix}
 0 & 0 & 1 \end{bmatrix} = I_3
 $$
 
-$T$ disappears since $t_x$, $t_y$, $t_z \approx 0$.
+\\(T\\) disparaît puisque \\(t_x\\), \\(t_y\\), \\(t_z \approx 0\\).
 
-**Reminder of derivation rules :** $(\text{constant } a)' \rightarrow 0 \text{, } (\sin)' \rightarrow \cos \text{, } (\cos)' \rightarrow -\sin$.
-{{% /alert %}}
+*Rappel de règles de dérivation : \\((\text{constant } a)' \rightarrow 0 \text{, } (\sin)' \rightarrow \cos \text{, } (\cos)' \rightarrow -\sin\\).*
+{{< /alert >}}
 
 $$\begin{align}
     \frac{\partial F^j}{\partial \alpha} &= N^j . \[I_3 . I_3 . \frac{\partial R\_\alpha}{\partial \alpha} | 0\] . 
@@ -409,7 +416,7 @@ $$\begin{align}
     &= N^j . \begin{bmatrix}0\\\\\\ -Z^j\\\\\\ Y^j\end{bmatrix}\_o\\\\\\
 \end{align}$$
 
-The reasoning is the same for $\frac{\partial F^j}{\partial \beta}, \frac{\partial F^j}{\partial \gamma}, \frac{\partial F^j}{\partial t\_x}, \frac{\partial F^j}{\partial t\_y}, \frac{\partial F^j}{\partial t\_z}$ and we get :
+Le raisonnement est le même pour \\(\frac{\partial F^j}{\partial \beta}, \frac{\partial F^j}{\partial \gamma}, \frac{\partial F^j}{\partial t\_x}, \frac{\partial F^j}{\partial t\_y}, \frac{\partial F^j}{\partial t\_z}\\) et on obtient :
 
 $$
 \frac{\partial F^j}{\partial \beta} = N^j . \begin{bmatrix}Z^j\\\\\\ 0\\\\\\ -X^j\end{bmatrix}\_o \text{, }
@@ -421,78 +428,77 @@ $$
 \frac{\partial F^j}{\partial t\_z} = N\_z^j
 $$
 
-Each of these partial derivatives is to be implemented in the `partial_derivatives` function:
+Chacune de ces dérivées partielles est à implémenter dans la fonction `partial_derivatives` :
 
-    def partial_derivatives(normal_vector, P_c):
-        # ********************************************************************* #
-        # TO BE COMPLETED.                                                      #
-        # Input:                                                                #
-        #   normal_vector : ndarray[3] contains the normal of the segment       #
-        #                   to which P_c belongs                                #
-        #   P_c : ndarray[3] the object point transformed to Rc                 #
-        # Output:                                                               #
-        #   partial_derivative : ndarray[6] partial derivative of the criterion #
-        #                        for each extrinsic parameter                   #
-        #   crit_X0 : float64 - criterion value for the current parameters,     #
-        #                       which will be used as initial value before      #
-        #                       the update and recalculation of the error       #
-        # ********************************************************************* #
-        X, Y, Z = P_c[0], P_c[1], P_c[2]
-        partial_derivative = np.zeros((6))
-        
-        # Part to replace #######
-        partial_derivative[0] = 0
-        partial_derivative[1] = 0
-        partial_derivative[2] = 0
-        partial_derivative[3] = 0
-        partial_derivative[4] = 0
-        partial_derivative[5] = 0
-        #########################
+```python
+def partial_derivatives(normal_vector, P_c):
+    # ********************************************************************* #
+    # A COMPLETER.                                                          #
+    # Input:                                                                #
+    #   normal_vector : ndarray[3] contenant la normale pour le segment     #
+    #                   auquel appartient P_c                               #
+    #   P_c : ndarray[3] le point de l'objet transformé dans Rc             #
+    # Output:                                                               #
+    #   partial_derivative : ndarray[6] derivee partielle du critere        #
+    #               d'erreur pour chacun des parametres extrinseques        #
+    #   crit_X0 : float64 - valeur du critere pour les parametres           #
+    #               courants, qui servira de valeur initiale avant          #
+    #               la mise a jour et le recalcul de l'erreur               #
+    # ********************************************************************* #
+    X, Y, Z = P_c[0], P_c[1], P_c[2]
+    partial_derivative = np.zeros((6))
     
-        # ********************************************************************
-        crit_X0 = normal_vector[0] * X + normal_vector[1] * Y + normal_vector[2] * Z
-        return partial_derivative, crit_X0
+    # Variable a remplir
+    partial_derivative[0] = 0
+    partial_derivative[1] = 0
+    partial_derivative[2] = 0
+    partial_derivative[3] = 0
+    partial_derivative[4] = 0
+    partial_derivative[5] = 0
 
-The problem can thus be formalised as :
+    # ********************************************************************
+    crit_X0 = normal_vector[0] * X + normal_vector[1] * Y + normal_vector[2] * Z
+    return partial_derivative, crit_X0
+```
+
+On peut ainsi formaliser le problème comme étant :
 
 $$
-F = J \Delta X \text{ with } F = \begin{bmatrix}-F^1(X\_0) \\\\\\ \vdots \\\\\\ -F^{2n}(X\_0)\end{bmatrix}\_{2n\times 1} 
+F = J \Delta X \text{ avec } F = \begin{bmatrix}-F^1(X\_0) \\\\\\ \vdots \\\\\\ -F^{2n}(X\_0)\end{bmatrix}\_{2n\times 1} 
 $$
 $$
-\text{ and } J = \begin{bmatrix}\frac{\partial F^1}{\partial \alpha} & \frac{\partial F^1}{\partial \beta} & \frac{\partial F^1}{\partial \gamma} & \frac{\partial F^1}{\partial t\_x} & \frac{\partial F^1}{\partial t\_y} & \frac{\partial F^1}{\partial t\_z}\\\\\\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\\\\\ \frac{\partial F^{2n}}{\partial \alpha} & \frac{\partial F^{2n}}{\partial \beta} & \frac{\partial F^{2n}}{\partial \gamma} & \frac{\partial F^{2n}}{\partial t\_x} & \frac{\partial F^{2n}}{\partial t\_y} & \frac{\partial F^{2n}}{\partial t\_z}\end{bmatrix}\_{2n\times 6}
+\text{ et } J = \begin{bmatrix}\frac{\partial F^1}{\partial \alpha} & \frac{\partial F^1}{\partial \beta} & \frac{\partial F^1}{\partial \gamma} & \frac{\partial F^1}{\partial t\_x} & \frac{\partial F^1}{\partial t\_y} & \frac{\partial F^1}{\partial t\_z}\\\\\\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\\\\\ \frac{\partial F^{2n}}{\partial \alpha} & \frac{\partial F^{2n}}{\partial \beta} & \frac{\partial F^{2n}}{\partial \gamma} & \frac{\partial F^{2n}}{\partial t\_x} & \frac{\partial F^{2n}}{\partial t\_y} & \frac{\partial F^{2n}}{\partial t\_z}\end{bmatrix}\_{2n\times 6}
 $$
 $$
-\text{ and } \Delta X = \begin{bmatrix}\Delta \alpha \\\\\\ \vdots \\\\\\ \Delta t_z\end{bmatrix}\_{6 \times 1}
+\text{ et } \Delta X = \begin{bmatrix}\Delta \alpha \\\\\\ \vdots \\\\\\ \Delta t_z\end{bmatrix}\_{6 \times 1}
 $$
 
-{{% alert note %}}
-$2n$ is the number of selected points, $n$ is the number of edges (one edge = two ends).
-{{% /alert %}}
+>\\(2n\\) est le nombre de points sélectionnés, \\(n\\) est le nombre d'arêtes (une arête = deux extrémités).
 
-$F$ is known, $J$ is known, all that remains is to estimate $\Delta X$ so that the equality $F = J \Delta X$ is "as true as possible". This is done by minimising the distance between the two sides of equality:
+\\(F\\) est connue, \\(J\\) est connue, il ne reste plus qu'à estimer \\(\Delta X\\) de sorte que l'égalité \\(F = J \Delta X\\) soit "la plus vraie possible". Pour cela, on souhaite minimiser la distance entre les deux côtés de l'égalité :
 
 $$
 \begin{align}
 \min_{\Delta X} ||F - J\Delta X||^2 & \\\\\\
-\llap{\Leftrightarrow \qquad} \frac{\partial ||F - J\Delta X||^2}{\partial \Delta X} &= 0
+\Leftrightarrow \qquad \frac{\partial ||F - J\Delta X||^2}{\partial \Delta X} &= 0
 \end{align}
 $$
 
-> Indeed, if the derivative of the function to be minimized is 0, then the curve of the function has definitely reached a minimum.
+> En effet, si la dérivée de la fonction à minimiser est 0, alors la courbe de la fonction a bien atteint un minimum.
 
-{{% alert note %}}
-**Reminder of matrices operations:**
+{{< alert type="info" >}}
+*Rappel des opérations sur les matrices :*
 
-$(A+B)^T = A^T + B^T$
+\\((A+B)^T = A^T + B^T\\)
 
-$(AB)^T = B^T A^T$
+\\((AB)^T = B^T A^T\\)
 
-$A\times B \neq B\times A$
+\\(A\times B \neq B\times A\\)
 
-$A^2 = A^T A$
-{{% /alert %}}
+\\(A^2 = A^T A\\)
+{{< /alert >}}
 
-By developing $(F - J \Delta X)^2$, we arrive at :
+En développant \\((F - J \Delta X)^2\\), on arrive à :
 
 $$
 \begin{align}
@@ -502,7 +508,7 @@ $$
 \end{align}
 $$
 
-We use matrices properties to show $F^TJ\Delta X = ((J\Delta X)^T F)^T = (\Delta X^T J^T F)^T$. Let's consider matrices shapes for both sides of this equality:
+On se sert des propriétés matricielles pour montrer que \\(F^TJ\Delta X = ((J\Delta X)^T F)^T = (\Delta X^T J^T F)^T\\). Considérons les tailles de matrices d'un côté et de l'autre de l'équation :
 $$
 \begin{align}
 F^TJ\Delta X &\rightarrow [1\times2n][2n\times 6][6\times 1] \rightarrow [1\times 1]\\\\\\
@@ -510,92 +516,97 @@ F^TJ\Delta X &\rightarrow [1\times2n][2n\times 6][6\times 1] \rightarrow [1\time
 \end{align}
 $$
 
-Given that each of these terms is a $[1\times 1]$ matrix in the end, we can write $(\Delta X^T J^T F)^T = \Delta X^T J^T F$, and thus $F^TJ\Delta X = \Delta X^T J^T F$.
+Etant donné que chacun de ces termes représente une matrice \\([1\times 1]\\), on peut écrire \\((\Delta X^T J^T F)^T = \Delta X^T J^T F\\), et par conséquent \\(F^TJ\Delta X = \Delta X^T J^T F\\).
 
-We deduce from this:
+On en déduit :
 $$
 \begin{align}
 (F - J \Delta X)^2 & = F^TF - 2\Delta X^T J^T F + \Delta X^T J^T J \Delta X\\\\\\
 \end{align}
 $$
 
-{{% alert note %}}
-**Some rules of derivation:**
+{{< alert type="info" >}}
+*Quelques règles de dérivation :*
 
-$\frac{\partial AX}{\partial X} = A^T$, $\frac{\partial X^TA^T}{\partial X} = A^T$, $\frac{\partial X^TAX}{\partial X} = 2AX$.
-{{% /alert %}}
+\\(\frac{\partial AX}{\partial X} = A^T\\), \\(\frac{\partial X^TA^T}{\partial X} = A^T\\), \\(\frac{\partial X^TAX}{\partial X} = 2AX\\).
+{{< /alert >}}
 
 $$
 \begin{align}
 \frac{\partial (F - J \Delta X)^2}{\partial \Delta X} & = -2J^T F + 2 J^T J \Delta X\\\\\\
 &= -J^T F + J^T J \Delta X\\\\\\
-\llap{\Leftrightarrow \qquad} J^T F &= J^T J \Delta X \\\\\\
+\Leftrightarrow \qquad J^T F &= J^T J \Delta X \\\\\\
 (J^TJ)^{-1} J^T F &= \Delta X \\\\\\
 \end{align}
 $$
 
-**In summary:** 
+**En résumé :** 
 
-* minimizing the distance between $F$ and $J\Delta X$ means that $\frac{\partial (F - J \Delta X)^2}{\partial \Delta X} = 0$ 
-* the solution is $\Delta X = (J^TJ)^{-1} J^T F$. 
+* minimiser la distance entre \\(F\\) et \\(J\Delta X\\) revient à dire que \\(\frac{\partial (F - J \Delta X)^2}{\partial \Delta X} = 0\\) 
+* la solution est \\(\Delta X = (J^TJ)^{-1} J^T F\\). 
 
-{{% alert note %}}
-The matrix $J^+ = (J^TJ)^{-1} J^T$ is called the *pseudo-inverse* of $J$.
-{{% /alert %}}
+>La matrice \\(J^+ = (J^TJ)^{-1} J^T\\) s'appelle la *pseudo-inverse* de \\(J\\).
 
+Dans le code Python, on peut ainsi implémenter la mise à jour des paramètres dans la boucle d'optimisation. \\(\Delta X\\) correspond à la variable nommée `delta_solution`. On peut ensuite passer `delta_solution` à la fonction `matTools.construct_matrix_from_vec` qui renvoie une matrice des incréments de \\(X\\) de la même forme que `extrinsic` (la matrice des paramètres extrinsèques).
 
-In the Python code, we can thus implement the parameter update in the optimization loop. $\Delta X$ corresponds to the variable named `delta_solution`. We can then pass `delta_solution` to the function `matTools.construct_matrix_from_vec` which returns a matrix of $X$ increments in the same form as `extrinsic` (the extrinsic parameter matrix).
+On incrémente chacun des éléments de `extrinsic` en la multipliant par `delta_extrinsic`.
 
+```python
+# ********************************************************************* #
+# A COMPLETER.                                                          #
+# delta_solution = ...                                                  #
+# delta_extrinsic = matTools.construct_matrix_from_vec(delta_solution)  #
+# extrinsic = ...                                                       #
+# ********************************************************************* #
+```
 
-Each element of `extrinsic` is incremented by multiplying it by `delta_extrinsic`.
+Une fois la boucle d'optimisation opérationnelle, on peut visualiser la transformation du modèle sans la boite virtuelle en enlevant les 12 premiers points de `model3D_Ro` :
 
-    # ********************************************************************* #
-    # TO BE COMPLETED.                                                      #
-    # delta_solution = ...                                                  #
-    # delta_extrinsic = matTools.construct_matrix_from_vec(delta_solution)  #
-    # extrinsic = ...                                                       #
-    # ********************************************************************* #
+{{< img src="images/final_objective_without_box.png" align="center" title="Transformation du modèle après estimation de la pose caméra" >}}
+{{< vs 1 >}}
 
-Once the optimisation loop is operational, the model transformation can be visualised without the virtual box by removing the first 12 points of `model3D_Ro` :
+## ***Etape 4*** : projection de la pose estimée sur l'image prise d'un point de vue différent {#anchor-step-4}
 
+Une deuxième photo a été capturée d'un point de vue différent, et la matrice de passage entre le premier et le deuxième point de vue est stockée et chargée en début de programme depuis le fichier `.txt` correspondant. Elle permet de re-projeter le modèle dans l'image issue de la deuxième caméra et d'en afficher le résultat :
 
-![Transformation of the model after estimation of the camera pose](images/final_objective_without_box.png "Transformation of the model after estimation of the camera pose")
+```python
+fig5 = plt.figure(5)
+ax5 = fig5.add_subplot(111)
+ax5.set_xlim(0,720)
+ax5.set_ylim(480)
+plt.imshow(image_2)
 
-## Step 4 : projection of the estimated pose on the image taken from a different point of view {#anchor-step-4}
+# A completer avec la matrice de passage du repere Ro vers Rc2, avec les matrices 
+# Ro -> Rc et Rc -> Rc2
+Ro_to_Rc2 = ...
 
-A second photo has been captured from a different point of view, and the passage matrix between the first and second views is stored and loaded at the beginning of the programme from the corresponding `.txt` file. This allows the model to be re-projected into the image from the second camera, and the result to be displayed:
+transform_and_draw_model(model3D_Ro[12:], intrinsic_matrix, Ro_to_Rc2, ax5)
+plt.show(block = False)
+```
 
-    fig5 = plt.figure(5)
-    ax5 = fig5.add_subplot(111)
-    ax5.set_xlim(0.720)
-    ax5.set_ylim(480)
-    plt.imshow(image_2)
+{{< img src="images/left_to_right.png" align="center" title="Projection dans la deuxième image" >}}
+{{< vs 1 >}}
 
-    # To be completed with the passage matrix from Ro to Rc2
-    # Ro -> Rc and Rc -> Rc2
-    Ro_to_Rc2 = ...
+## Bonus pour la fin {#bonus}
 
-    transform_and_draw_model(model3D_Ro[12:], intrinsic_matrix, Ro_to_Rc2, ax5)
-    plt.show(block = False)
-
-![Projection in the second image](images/left_to_right.png "Projection in the second image")
-
-## Bonus for the end {#bonus}
-
-Thanks to the estimated extrinsic parameter matrix, and as long as the origin of the object reference does not change, elements can be added to the 3D scene and projected into the image in an identical way. `model3D_Ro_final` contains the points of a scene with Pikachu and a dinosaur in it.
+Grâce à la matrice des paramètres extrinsèques estimée, et tant que l'origine du repère objet ne change pas, on peut ajouter des éléments à la scène 3D et les projeter dans l'image de manière identique. `model3D_Ro_final` contient les  points d'une scène contenant Pikachu et un dinosaure.
  
-![Adding elements to the 3D scene](images/pika_dino_blender.png "Adding elements to the 3D scene")
+{{< img src="images/pika_dino_blender.png" align="center" title="Ajout d'élements à la scène 3D" >}}
+{{< vs 1 >}}
 
-The last lines of the display part are uncommented to get the final result:
+On décommente les dernières lignes d'affichage pour obtenir le résultat final :
 
-    fig6 = plt.figure(6)
-    ax6, lines = utils.plot_3d_model(model3D_Ro_final, fig6)
+```python
+fig6 = plt.figure(6)
+ax6, lines = utils.plot_3d_model(model3D_Ro_final, fig6)
 
-    fig7 = plt.figure(7)
-    ax7 = fig7.add_subplot(111)
-    ax7.set_xlim(0, 720)
-    plt.imshow(image)
-    transform_and_draw_model(model3D_Ro_final[12:], intrinsic_matrix, extrinsic_matrix, ax7)
-    plt.show(block=True)
+fig7 = plt.figure(7)
+ax7 = fig7.add_subplot(111)
+ax7.set_xlim(0, 720)
+plt.imshow(image)
+transform_and_draw_model(model3D_Ro_final[12:], intrinsic_matrix, extrinsic_matrix, ax7)
+plt.show(block=True)
+```
 
-![New projected scene](images/pika_dino.png "New projected scene")
+{{< img src="images/pika_dino.png" align="center" title="Nouvelle scène projetée" >}}
+{{< vs 1 >}}
