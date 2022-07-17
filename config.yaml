@@ -3,6 +3,8 @@ languageCode: en-us
 title: "Claire Labit-Bonis"
 theme: "toha"
 
+
+
 defaultContentLanguage: en
 # Manage languages
 # For any more details, you can check the official documentation: https://gohugo.io/content-management/multilingual/
@@ -21,13 +23,26 @@ markup:
     endLevel: 6
     ordered: false
 
+  goldmark:
+    renderer:
+      unsafe: true
+
 # Enable global emoji support
 enableEmoji: true
 
 # Site parameters
 params:
+  background: "images/site/background.jpg"
+
+  # The inverted logo will be used in the initial transparent navbar and
+  # the main logo will be used in the non-transparent navbar.
+  logo:
+    main: images/site/main-logo.png
+    inverted: images/site/inverted-logo.png
+    favicon: images/site/favicon.png
+
   # GitHub repo URL of your site
-  gitRepo: https://github.com/clairelabitbonis/clairelabitbonis.gitlab.io
+  gitRepo: https://github.com/clairelabitbonis/clairelabitbonis.github.io
 
   # specify whether you want to write some blog posts or not
   enableBlogPost: true
@@ -38,4 +53,9 @@ params:
   # Provide newsletter configuration. This feature hasn't been implemented yet.
   # Currently, you can just hide it from the footer.
   newsletter:
+    enable: false
+  
+  darkMode:
     enable: true
+    provider: darkreader
+    default: system
