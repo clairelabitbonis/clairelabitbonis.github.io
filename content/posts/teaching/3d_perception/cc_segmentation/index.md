@@ -34,24 +34,26 @@ summary = "3D objects quality control."
 ## Goal description {#anchor-step-0}
 This practical session aims at performing 3D segmentation and shape checking on polyhedral objects, i.e. checking if these objects are correct with respect to a reference geometrical model and/or have defects (holes, residues, etc.). 
 
-![Objects to compare](images/objets_a_comparer.png "Objects to compare")
+{{< img src="images/objets_a_comparer.png" align="center" title="Objects to compare" >}}
+{{< vs 1 >}}
 
 To do this, we must first build this reference model from an RGB-D image of a defect-free object. Then, for any view of an unknown (also called "test") object, we must segment it from the background and compare it with the reference model. This process of checking the shape must be independent of the viewpoint and,
 This shape verification process must be viewpoint independent and therefore requires the registration of each associated point cloud against the reference one.
 
-{{% alert note %}}
+{{< alert type="info" >}}
 We propose to break this objective down into three steps:
 
 - [step 1](#anchor-step-1) : **extract the 3D points** of the objects to be compared (both reference and test objects) by deleting all the points of the scene not belonging to the object. To avoid a redundant process, this step will be performed only on the reference scene contained in `data01.xyz`; this has already been done on the objects to be tested, and stored in the files `data02_object.xyz` and `data03_object.xyz`.
 - [step 2](#anchor-step-2) : **register** the points of each test object to the reference model in order to compare them i.e. align their respective 3D point clouds to the reference coordinate frame.
 - [step 3](#anchor-step-3) : **compare** the control and reference models and conclude on the potential flaws of the control models.
-{{% /alert %}}
+{{< /alert >}}
 
 ## ***Step 1***: 3D model extraction from the reference scene
 
 The first step of the practical session consists in extracting the point cloud of the reference model from the RGB-D scene acquired with a Kinect :
 
-![Reference model extraction](images/extraction_objet.png "Reference model extraction")
+{{< img src="images/extraction_objet.png" align="center" title="Reference model extraction" >}}
+{{< vs 1 >}}
 
 This step aims at tracing a plane surface on the ground plane, and only keeping the center box by calculating the distance of each of its points from this plane, before applying a filtering threshold.
 
@@ -59,45 +61,51 @@ To do this, open CloudCompare (the main program, not the viewer) and import the 
 Using the segmentation tool (**Edit > Segment**, or directly the "scissors" shortcut in the shortcut bar), divide the cloud into three subsets in order to extract the ground plane and a rough area around the box.
 The result is shown in the following figure:
 
-![Division of the scene into three clouds](images/extraction_modele.gif "Division of the scene into three clouds")
+{{< img src="images/extraction_modele.gif" align="center" title="Division of the scene into three clouds" >}}
+{{< vs 1 >}}
 
-{{% alert warning %}}
+{{< alert type="warning" >}}
 In CloudCompare, to work on a point cloud, the corresponding line must be selected in the workspace. You know if the cloud is selected when a yellow box is displayed around it.
 
 Checking the box does not select the cloud, it simply makes it visible/invisible in the display.
-{{% /alert %}}
+{{< /alert >}}
 
 Create a surface fitting the ground plane cloud using the **Tools > Fit > Plane** tool. 
 By selecting the newly created plane and the cloud that contains the box, it is now possible to calculate, for each of the points of this cloud, its distance to the plane using the **Tools > Distances > Cloud/Mesh Distance** tool:
 
-![Plane surface and distance](images/fit_plane_compute_distance.png "Plane surface and distance")
+{{< img src="images/fit_plane_compute_distance.png" align="center" title="Plane surface and distance" >}}
+{{< vs 1 >}}
 
 The distance tool adds a fourth field to each point of the cloud: the newly calculated distance. Using the cloud properties, filter the points with respect to this scalar field to keep only the points belonging to the box :
 
-![Filtering by the distance to the plane](images/filter_by_value.gif "Filtering by the distance to the plane")
+{{< img src="images/filter_by_value.gif" align="center" title="Filtering by the distance to the plane" >}}
+{{< vs 1 >}}
 
 By clicking on *split*, two clouds are created, corresponding to the two sides of the filter:
 
-![Extracted box](images/split.png "Extracted box")
+{{< img src="images/split.png" align="center" title="Extracted box" >}}
+{{< vs 1 >}}
 
 Make sure that the newly created cloud contains about 10,000 points (the number of points is accessible in the properties panel on the left).
 
 Delete the distance scalar field *via* **Edit > Scalar fields > Delete**. Only select the box cloud before saving it in ASCII Cloud format as `data01_segmented.xyz` in your `data` folder.
  
-{{% alert note %}}
+{{< alert type="info" >}}
 As a precaution, save your CloudCompare project: remember to **select all point clouds**, and save the project in CloudCompare format.
-{{% /alert %}}
+{{< /alert >}}
 
 ## ***Step 2***: 3D points registration
 
 If you have opened the complete scenes `data02.xyz` and `data03.xyz` in CloudCompare, you will have noticed that each scene was taken from a slightly different point of view, and that the objects themselves have moved:
 
-![Different views of the scenes](images/points_vue_diff.gif "Different views of the scenes")
+{{< img src="images/points_vue_diff.gif" align="center" title="Different views of the scenes" >}}
+{{< vs 1 >}}
 
 In order to compare the models between them, we propose to overlay them and to calculate their cumulative distance point to point. The smaller this distance, the more the models overlap and resemble each other; the larger it is, the more the models differ.
 The following example shows the superposition of the correct model on the previously extracted reference model:
 
-![ICP applied to the correct model](images/plot_after_icp.png "ICP applied to the correct model")
+{{< img src="images/plot_after_icp.png" align="center" title="ICP applied to the correct model" >}}
+{{< vs 1 >}}
 
 Transforming the points of a model via a rotation/translation matrix to overlay it on another cloud is called *point registration*. 
 The ***Iterative Closest Point*** algorithm allows this registration, and we propose to use it in Python. 
@@ -105,19 +113,71 @@ The code to be modified is only in `qualitycheck.py`, the goal being to apply IC
 
 ### Loading models
 The first part of the code loads the `.xyz` models extracted with CloudCompare, stores the reference model in the `ref` variable and the model to be compared in the `data` variable.
-To run the code on either `data02_object` or `data03_object`, just comment out the corresponding line (22 or 23).
+To run the code on either `data02_object` or `data03_object`, just comment out the corresponding line.
 
-![Loading models](images/chargement_modeles.png "Loading models")
+```python
+# Load pre-processed model point cloud
+print("Extracting MODEL object...")
+model = datatools.load_XYZ_data_to_vec('data/data01_segmented.xyz')
+
+# Load raw data point cloud
+print("Extracting DATA02 object...")
+data02_object = datatools.load_XYZ_data_to_vec('data/data02_object.xyz')
+
+# Load raw data point cloud
+print("Extracting DATA03 object...")
+data03_object = datatools.load_XYZ_data_to_vec('data/data03_object.xyz')
+
+ref = model_object
+data = data02_object
+# data = data03_object
+```
 
 ### ICP call
 
 The second part of the code consists in coding the call to the `icp` function of the `icp` library... 
 
-![ICP call](images/appel_icp.png "ICP call")
+```python
+##########################################################################
+# Run ICP to get data transformation w.r.t the model, final error and execution time
 
-...and store the return of the function in the variables `T`, `errors`, `iterations` and `total_time` as defined by the function definition header in the file `icp.py` :
+#**************** To be completed ****************
+T = np.eye(4,4)
+errors = np.zeros((1,100))
+iterations = 100
+total_time=0
+#*************************************************
 
-![ICP function header](images/icp_header.png "ICP function header")
+# Draw results
+fig = plt.figure(1, figsize=(20, 5))
+ax = fig.add_subplot(131, projection='3d')
+# Draw reference
+datatools.draw_data(ref, title='Reference', ax=ax)
+
+ax = fig.add_subplot(132, projection='3d')
+# Draw original data and reference
+datatools.draw_data_and_ref(data, ref=ref, title='Raw data', ax=ax)
+```
+
+...and store the return of the function in the variables `T`, `errors`, `iterations` and `total_time` as defined by the function definition header in the file `icp.py`:
+
+```python
+def icp(data, ref, init_pose=None, max_iterations=20, tolerance=0.001):
+    '''
+    The Iterative Closest Point method: finds best-fit transform that maps points A on to points B
+    Input:
+        A: Nxm numpy array of source mD points
+        B: Nxm numpy array of destination mD point
+        init_pose: (m+1)x(m+1) homogeneous transformation
+        max_iterations: exit algorithm after max_iterations
+        tolerance: convergence criteria
+    Output:
+        T: final homogeneous transformation that maps A on to B
+        errors: Euclidean distances (errors) for max_iterations iterations in a (max_iterations+1) vector. distances[0] is the initial distance.
+        i: number of iterations to converge
+        total_time : execution time
+    '''
+```
 
 ### Model transformation
 
@@ -126,24 +186,54 @@ As a reminder, the application of a homogeneous matrix to transform a set of poi
 
 $$P_f^{(4 \times N)} = T^{(4 \times 4)} . P_i^{(4 \times N)}$$
 
-In the code, the third part consists in applying the transformation matrix to the model to be compared:
+In the code, the third part consists in applying the transformation matrix to the model to be compared. An example of how to apply a homogeneous transformation to the matrix can be written as follows:
 
-![Model transformation](images/transformation_modele.png "Model transformation")
+```python
+"""
+  EXAMPLE: How to transform a 3D matrix with a rotation on its x-axis:
+"""
+# Construct a homogeneous matrix from the original one
+homogeneous = np.ones((original.shape[0], 4))
+homogeneous[:,:3] = np.copy(original)
 
-{{% alert note %}}
-The `data` variable is an array of size \\(N \times 3\\), \\(N\\) being the number of points of the model and 3 its coordinates \\(X\\), \\(Y\\) and \\(Z\\).
+# Define the rotation matrix
+theta = np.radians(36)
+c, s = np.cos(theta), np.sin(theta)
+rotation_matrix = np.array(((1, 0,  0, 0),
+                             0, c, -s, 0),
+                             0, s,  c, 0),
+                             0, 0,  0, 1)))
+
+# Apply the rotation to the original point cloud
+rotated_matrix = np.dot(rotation_matrix, homogeneous.T).T
+
+# Delete the homogeneous coordinate to get back to the original shape
+rotated_matrix = np.delete(homogeneous, 3, 1)
+```
+
+{{< alert type="info" >}}
+The `original` variable is an array of size \\(N \times 3\\), \\(N\\) being the number of points of the model and 3 its coordinates \\(X\\), \\(Y\\) and \\(Z\\).
 
 You need to add a homogeneous coordinate and apply the necessary transpositions for the matrix multiplication to work.
 Use the example given in the code to perform this step.
-{{% /alert %}}
+{{< /alert >}}
 
 You can then display the result by uncommenting and completing the line `datatools.draw_data...`.
 
 ### Error display
 Uncomment and display the error in the last part of the code, changing the "..." to the corresponding variables:
 
-![Error display](images/affichage_erreur.png "Error display")
-
+```python
+# Display error progress over time
+# **************** To be uncommented and completed ****************
+# fig1 = plt.figure(2, figsize=(20, 3))
+# it = np.arange(0, len(errors), 1)
+# plt.plot(it, ...)
+# plt.ylabel('Residual distance')
+# plt.xlabel('Iterations')
+# plt.title('Total elapsed time :' + str(...) + ' s.')
+# plt.show()
+```
 
 ## ***Step 3***: Models comparison
 
@@ -157,11 +247,13 @@ The ICP algorithm can also be used directly in CloudCompare. Open it and import 
 Select for example the clouds of `data01_segmented` and `data02_object`, use the **Tools > Registration > Fine registration (ICP)** tool. Make sure the reference is `data01` and apply ICP.
 Running it returns the transformation matrix calculated by the algorithm, and applies it to the object.
 
-![ICP in CloudCompare](images/registration_cc.png "ICP in CloudCompare")
+{{< img src="images/registration_cc.png" align="center" title="ICP in CloudCompare" >}}
+{{< vs 1 >}}
 
 We can then, still selecting the two clouds, calculate the distance between the points with **Tools > Distance > Cloud/Cloud Distance**. Make sure that the reference is `data01` and click on OK/Compute/OK.
 Select `data02_object` and display the histogram of its distances to the reference cloud *via* **Edit > Scalar fields > Show histogram**.
 
-![Histogram of point to point distances of data02 vs. data01](images/histogram_dists.png "Histogram of point to point distances of data02 vs. data01")
+{{< img src="images/histogram_dists.png" align="center" title="Histogram of point to point distances of data02 vs. data01" >}}
+{{< vs 1 >}}
 
 Do the same thing with `data03_object` and compare the histograms. How do you interpret them? How can you compare them?

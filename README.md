@@ -6,10 +6,10 @@
     - [ ] Perception 3D
         - [ ] Workspace configuration
         - [ ] Modalités d'évaluation / Administratif
-        - [ ] Segmentation
-            - [ ] EN -- remplacer les images et les blocs de code
-            - [ ] FR
-        - [ ] Localisation
+        - [x] Segmentation
+            - [x] EN -- remplacer les images et les blocs de code
+            - [x] FR
+        - [x] Localisation
             - [x] EN
             - [x] FR
     - [ ] Deep learning for Computer vision
@@ -21,3 +21,5 @@
     - [ ] parse args python
     - [ ] list all files in dir and subdir
     - [ ] windows display tree
+    - [ ] launch.json VSCode
+    - [ ] Venv + config pour tout qui fonctionne (torch, cuda, etc)

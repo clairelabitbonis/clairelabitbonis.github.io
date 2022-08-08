@@ -25,71 +25,79 @@ menu:
 ## Définition des objectifs {#anchor-step-0}
 Ce TP vise à effectuer une segmentation 3D et un contrôle de forme sur des objets polyédriques, c'est-à-dire à vérifier si ces objets sont corrects par rapport à un modèle géométrique de référence et/ou présentent des défauts (trous, résidus, etc.).
 
-![Objets à comparer](images/objets_a_comparer.png "Objets à comparer")
+{{< img src="images/objets_a_comparer.png" align="center" title="Objets à comparer" >}}
+{{< vs 1 >}}
 
 Pour cela, il faut au préalable construire ce modèle de référence à partir d'une image RGB-D d'un objet sans défaut. Ensuite, pour toute vue d'un objet inconnu (dit "de test"), nous devons le segmenter à partir de l'arrière-plan et le comparer avec le modèle de référence. Ce processus de vérification de la forme doit être indépendant du point de vue et,
 exige donc l'enregistrement de chaque nuage de points associé par rapport à celui de référence.
 
-{{% alert note %}}
+{{< alert type="info" >}}
 Nous proposons de décomposer cet objectif en trois étapes :
 
 - [étape 1](#anchor-step-1) : **extraire les points 3D** des objets à comparer (à la fois objets de référence et de test) en supprimant tous les points de la scène n'appartenant pas à l'objet. Pour éviter un processus redondant, cette étape sera à réaliser seulement sur la scène de référence contenue dans `data01.xyz` ; cela a déjà été réalisé sur les objets à contrôler, et stocké dans les fichiers `data02_object.xyz` et `data03_object.xyz`.
 - [étape 2](#anchor-step-2) : **enregistrer** les points de chaque objet de test vers le modèle de référence afin de les comparer *i.e.* aligner leurs nuages de points 3D respectifs sur le repère de coordonnées de référence.
 - [étape 3](#anchor-step-3) : **comparer** les modèles de contrôle et de référence et conclure sur les potentiels défauts des modèles de contrôle.
-{{% /alert %}}
+{{< /alert >}}
 
 ## ***Etape 1*** : extraction du modèle 3D de la scène de référence
 
 La première étape du TP consiste à extraire le nuage de points du modèle de référence à partir de la scène RGB-D acquise avec une Kinect :
 
-![Extraction du modèle de référence](images/extraction_objet.png "Extraction du modèle de référence")
+{{< img src="images/extraction_objet.png" align="center" title="Extraction du modèle de référence" >}}
+{{< vs 1 >}}
 
 Cette étape vise à calquer une surface plane sur le plan du sol, et à ne garder que la boite du centre en calculant la distance de chacun de ses points par rapport à ce plan et en y appliquant un seuil de filtrage.
 
 
 Pour cela, ouvrez CloudCompare (le logiciel principal, pas le viewer) et importez les points de la scène `data01.xyz`. Sélectionnez le nuage en cliquant dessus dans le *workspace*.
 A l'aide de l'outil de segmentation (**Edit > Segment**, ou bien directement le raccourci "ciseaux" dans la barre des raccourcis), divisez le nuage en trois sous-ensembles afin d'en extraire le plan du sol et une zone grossière autour de la boite.
- Le résultat obtenu est illustré par la figure suivante :
+Le résultat obtenu est illustré par la figure suivante :
 
-![Division de la scène en trois nuages](images/extraction_modele.gif "Division de la scène en trois nuages")
+{{< img src="images/extraction_modele.gif" align="center" title="Division de la scène en trois nuages" >}}
+{{< vs 1 >}}
 
-{{% alert warning %}}
+{{< alert type="warning" >}}
 Dans CloudCompare, pour travailler sur un nuage de points, il faut que la ligne lui correspondant soit sélectionnée dans le *workspace*. Vous savez si le nuage est sélectionné lorsqu'une boite jaune s'affiche autour.
 
 Le fait de cocher la case ne sélectionne pas le nuage, elle le rend simplement visible/invisible dans l'affichage.
-{{% /alert %}}
+{{< /alert >}}
 
 Créez une surface calquée sur le nuage du plan du sol à l'aide de l'outil **Tools > Fit > Plane**. 
 En sélectionnant le plan nouvellement créé et le nuage qui contient la boite, il est maintenant possible de calculer, pour chacun des points de ce nuage, sa distance au plan à l'aide de l'outil **Tools > Distances > Cloud/Mesh Distance** :
 
-![Surface au plan et distance](images/fit_plane_compute_distance.png "Surface au plan et distance")
+{{< img src="images/fit_plane_compute_distance.png" align="center" title="Surface au plan et distance" >}}
+{{< vs 1 >}}
 
 L'outil de distance ajoute un quatrième champ à chacun des points du nuage : la distance nouvellement calculée. En allant dans les propriétés du nuage, filtrez les points par rapport à ce champ scalaire pour ne garder que les points appartenant à la boite :
 
-![Filtrage par la distance au plan](images/filter_by_value.gif "Filtrage par la distance au plan")
+{{< img src="images/filter_by_value.gif" align="center" title="Filtrage par la distance au plan" >}}
+{{< vs 1 >}}
 
 En cliquant sur *split*, deux nuages sont créés, correspondant aux deux côtés du filtrage :
 
-![Boite extraite](images/split.png "Boite extraite")
+{{< img src="images/split.png" align="center" title="Boite extraite" >}}
+{{< vs 1 >}}
 
 Assurez-vous que le nuage nouvellement créé contient environ 10,000 points (le nombre de points est accessible dans le panneau des propriétés sur la gauche).
 
 Supprimez le champ scalaire de la distance *via* **Edit > Scalar fields > Delete**. Sélectionnez seulement le nuage de la boite avant de l'enregistrer au format ASCII Cloud sous le nom `data01_segmented.xyz` dans le dossier `data` du TP. 
 
-{{% alert note %}}
+{{< alert type="info" >}}
 Par précaution, sauvegardez votre projet CloudCompare : pensez à **sélectionner tous les nuages de points**, et à sauvegarder le projet au format CloudCompare.
-{{% /alert %}}
+{{< /alert >}}
 
 ## ***Etape 2*** : enregistrement des points 3D
 
 Si vous avez ouvert les scènes complètes `data02.xyz` et `data03.xyz` dans CloudCompare, vous aurez remarqué que chaque scène a été prise d'un point de vue légèrement différent, et que les objets eux-mêmes ont bougé :
 
-![Points de vue différents des scènes](images/points_vue_diff.gif "Points de vue différents des scènes")
+{{< img src="images/points_vue_diff.gif" align="center" title="Points de vue différents des scènes" >}}
+{{< vs 1 >}}
 
 Pour pouvoir comparer les modèles entre eux, on propose de les superposer et de calculer leur distance cumulée point à point. Plus cette distance est faible, plus les modèles se superposent et se ressemblent ; plus elle est grande, plus les modèles diffèrent.
 L'exemple suivant montre la superposition du modèle correct sur le modèle de référence précédemment extrait :
 
-![Application d'ICP au modèle correct](images/plot_after_icp.png "Application d'ICP au modèle correct")
+{{< img src="images/plot_after_icp.png" align="center" title="Application d'ICP au modèle correct" >}}
+{{< vs 1 >}}
 
 Le fait de transformer les points d'un modèle via une matrice de rotation/translation pour venir le superposer sur un autre nuage s'appelle *l'enregistrement des points*. 
 L'algorithme ***Iterative Closest Point*** permet cet enregistrement, et nous proposons de l'utiliser en Python. 
@@ -97,19 +105,71 @@ Le code à modifier se situe uniquement dans `qualitycheck.py`, l'objectif étan
 
 ### Chargement des modèles
 La première partie du code charge les modèles `.xyz` extraits avec CloudCompare, stocke le modèle de référence dans la variable `ref` et le modèle à comparer dans la variable `data`.
-Pour exécuter le code soit sur `data02_object`, soit sur `data03_object`, il suffit de commenter la ligne correspondante (22 ou 23).
+Pour exécuter le code soit sur `data02_object`, soit sur `data03_object`, il suffit de commenter la ligne correspondante.
 
-![Chargement des modèles](images/chargement_modeles.png "Chargement des modèles")
+```python
+# Load pre-processed model point cloud
+print("Extracting MODEL object...")
+model = datatools.load_XYZ_data_to_vec('data/data01_segmented.xyz')
+
+# Load raw data point cloud
+print("Extracting DATA02 object...")
+data02_object = datatools.load_XYZ_data_to_vec('data/data02_object.xyz')
+
+# Load raw data point cloud
+print("Extracting DATA03 object...")
+data03_object = datatools.load_XYZ_data_to_vec('data/data03_object.xyz')
+
+ref = model_object
+data = data02_object
+# data = data03_object
+```
 
 ### Appel à ICP
 
 La deuxième partie du code consiste à coder l'appel à la fonction `icp` de la librairie `icp`... 
 
-![Appel à ICP](images/appel_icp.png "Appel à ICP")
+```python
+##########################################################################
+# Run ICP to get data transformation w.r.t the model, final error and execution time
+
+#**************** To be completed ****************
+T = np.eye(4,4)
+errors = np.zeros((1,100))
+iterations = 100
+total_time=0
+#*************************************************
+
+# Draw results
+fig = plt.figure(1, figsize=(20, 5))
+ax = fig.add_subplot(131, projection='3d')
+# Draw reference
+datatools.draw_data(ref, title='Reference', ax=ax)
+
+ax = fig.add_subplot(132, projection='3d')
+# Draw original data and reference
+datatools.draw_data_and_ref(data, ref=ref, title='Raw data', ax=ax)
+```
 
 ...et à stocker le retour de la fonction dans les variables `T`, `errors`, `iterations` et `total_time` comme défini par l'en-tête de définition de la fonction dans le fichier `icp.py` :
 
-![Définition de la fonction ICP](images/icp_header.png "Définition de la fonction ICP")
+```python
+def icp(data, ref, init_pose=None, max_iterations=20, tolerance=0.001):
+    '''
+    The Iterative Closest Point method: finds best-fit transform that maps points A on to points B
+    Input:
+        A: Nxm numpy array of source mD points
+        B: Nxm numpy array of destination mD point
+        init_pose: (m+1)x(m+1) homogeneous transformation
+        max_iterations: exit algorithm after max_iterations
+        tolerance: convergence criteria
+    Output:
+        T: final homogeneous transformation that maps A on to B
+        errors: Euclidean distances (errors) for max_iterations iterations in a (max_iterations+1) vector. distances[0] is the initial distance.
+        i: number of iterations to converge
+        total_time : execution time
+    '''
+```
 
 ### Transformation du modèle 
 
@@ -118,24 +178,54 @@ Pour rappel, l'application d'une matrice homogène pour transformer un ensemble 
 
 $$P_f^{(4 \times N)} = T^{(4 \times 4)} . P_i^{(4 \times N)}$$
 
-Dans le code, la troisième partie consiste donc à appliquer la matrice de transformation au modèle à comparer :
+Dans le code, la troisième partie consiste donc à appliquer la matrice de transformation au modèle à comparer. Un exemple de l'application d'une matrice de rotation homogène à une autre matrice est donné ci-après :
 
-![Transformation du modèle](images/transformation_modele.png "Transformation du modèle")
+```python
+"""
+  EXAMPLE: How to transform a 3D matrix with a rotation on its x-axis:
+"""
+# Construct a homogeneous matrix from the original one
+homogeneous = np.ones((original.shape[0], 4))
+homogeneous[:,:3] = np.copy(original)
 
-{{% alert note %}}
-La variable `data` est un tableau de taille \\(N \times 3\\), \\(N\\) étant le nombre de points du modèle et 3 ses coordonnées \\(X\\), \\(Y\\) et \\(Z\\).
+# Define the rotation matrix
+theta = np.radians(36)
+c, s = np.cos(theta), np.sin(theta)
+rotation_matrix = np.array(((1, 0,  0, 0),
+                             0, c, -s, 0),
+                             0, s,  c, 0),
+                             0, 0,  0, 1)))
+
+# Apply the rotation to the original point cloud
+rotated_matrix = np.dot(rotation_matrix, homogeneous.T).T
+
+# Delete the homogeneous coordinate to get back to the original shape
+rotated_matrix = np.delete(homogeneous, 3, 1)
+```
+
+{{< alert type="info" >}}
+La variable `original` est un tableau de taille \\(N \times 3\\), \\(N\\) étant le nombre de points du modèle et 3 ses coordonnées \\(X\\), \\(Y\\) et \\(Z\\).
 
 Il faut veiller à lui ajouter une coordonnée homogène et appliquer les transposées nécessaires pour que la multiplication de matrices fonctionne.
 Aidez-vous de l'exemple donné dans le code pour réaliser cette étape.
-{{% /alert %}}
+{{< /alert >}}
 
 Vous pouvez ensuite afficher le résultat en décommentant et complétant la ligne `datatools.draw_data...`.
 
 ### Affichage de l'erreur
 Décommentez et affichez l'erreur dans la dernière partie du code, en changeant les "..." par les variables correspondantes :
 
-![Affichage de l'erreur](images/affichage_erreur.png "Affichage de l'erreur")
-
+```python
+# Display error progress over time
+# **************** To be uncommented and completed ****************
+# fig1 = plt.figure(2, figsize=(20, 3))
+# it = np.arange(0, len(errors), 1)
+# plt.plot(it, ...)
+# plt.ylabel('Residual distance')
+# plt.xlabel('Iterations')
+# plt.title('Total elapsed time :' + str(...) + ' s.')
+# plt.show()
+```
 
 ## ***Etape 3*** : comparaison des modèles
 
@@ -149,11 +239,13 @@ L'algorithme ICP peut également être utilisé directement dans CloudCompare. O
 Sélectionnez par exemple les nuages de `data01_segmented` et `data02_object`, utilisez l'outil **Tools > Registration > Fine registration (ICP)**. Assurez-vous que la référence est bien `data01` et appliquez ICP.
 Son exécution vous renvoie la matrice de transformation calculée par l'algorithme, et l'applique à l'objet.
 
-![ICP dans CloudCompare](images/registration_cc.png "ICP dans CloudCompare")
+{{< img src="images/registration_cc.png" align="center" title="ICP dans CloudCompare" >}}
+{{< vs 1 >}}
 
 On peut ainsi, toujours en sélectionnant les deux nuages, calculer la distance entre les points avec **Tools > Distance > Cloud/Cloud Distance**. Assurez-vous que la référence est bien `data01` et cliquez sur OK/Compute/OK.
 Sélectionnez `data02_object` et affichez l'histogramme de ses distances au nuage de référence *via* **Edit > Scalar fields > Show histogram**.
 
-![Histogramme des distances point à point de data02 vs. data01](images/histogram_dists.png "Histogramme des distances point à point de data02 vs. data01")
+{{< img src="images/histogram_dists.png" align="center" title="Histogramme des distances point à point de data02 vs. data01" >}}
+{{< vs 1 >}}
 
 Faites la même chose avec `data03_object` et comparez les histogrammes. Comment les interprétez-vous ? Comment pouvez-vous les comparer ?
