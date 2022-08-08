@@ -1,46 +1,61 @@
-/* This is empty CSS file intended to be overwritten by user's custom CSS file */
 
-/* ============= Device specific fixes ======= */
-
-/* Large screens such as TV */
-@media only screen and (min-width: 1824px) {
+.initial-navbar .navbar-brand {
+  color: #f9fafc;
+  font-weight: 600;
 }
 
-/* Extra large devices (large desktops, 1200px and up) */
-
-@media (max-width: 1400px) {
+.initial-navbar li a {
+  color: #000000;
 }
 
-@media (max-width: 1200px) {
-}
 
-/* IPad Pro */
-@media (max-width: 1024px) {
-}
+/*************************************************
+ *  Alerts
+ **************************************************/
 
-/*  Large devices (desktops, 992px and up) */
-
-@media (max-width: 992px) {
-}
-
-/* Medium devices (tablets, 768px and up) */
-
-@media only screen and (max-width: 768px) {
-}
-
-/* Small devices (landscape phones, 576px and up) */
-
-@media only screen and (max-width: 576px) {
-}
-
-/* iPhoneX, iPhone 6,7,8 */
-@media only screen and (max-width: 375px) {
-}
-
-/* Galaxy S5, Moto G4 */
-@media only screen and (max-width: 360px) {
-}
-
-/* iPhone 5 or before */
-@media only screen and (max-width: 320px) {
-}
+ div.alert p {
+    position: relative;
+    display: block;
+    font-size: 1rem;
+    margin-left: 2rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  div.alert p:first-child::before {
+    position: absolute;
+    top: -0.5rem;
+    left: -2rem;
+    font-size: 1.5rem;
+    color: #209cee;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    content: '\f05a';
+    width: 1.5rem;
+    text-align: center;
+  }
+  
+  div.alert-warning p:first-child::before {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #ff3860;
+    content: '\f071';
+  }
+  
+  div.alert a {
+    color: currentColor;
+    text-decoration: none;
+    border-bottom: solid 1px currentColor;
+  }
+  
+  .alert-note {
+    color: #12537e;
+    background-color: #f6fbfe;
+    border-color: #209cee;
+  }
+  
+  .alert-warning {
+    color: #cd0930;
+    background-color: #fff5f7;
+    border-color: #ff3860;
+  }
