@@ -7,6 +7,7 @@
     - [ ] Withu
     - [ ] PGE
     - [ ] Get'N'Read
+- [x] Publications
 - [ ] Skills
 - [ ] Teaching
     - [ ] Introduction

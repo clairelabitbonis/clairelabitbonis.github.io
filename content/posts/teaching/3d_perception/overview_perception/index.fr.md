@@ -1,5 +1,5 @@
 ---
-title: "Logistique"
+title: "Aperçu général"
 date: 2022-07-16
 description: "Détails administratifs, méthodes d'évaluation, configuration de l'espace de travail, etc."
 summary: "Détails administratifs, méthodes d'évaluation, configuration de l'espace de travail, etc."
@@ -16,8 +16,8 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: Logistique
-    identifier: logistics
-    parent: teaching
-    weight: 20
+    name: Aperçu général
+    identifier: overview-perception
+    parent: 3d-perception
+    weight: 10
 ---

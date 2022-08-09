@@ -1,5 +1,5 @@
 ---
-title: "Logistics"
+title: "3D Perception - Overview"
 date: 2022-07-16
 description: "Administrative details, evaluation methods, workspace configuration, etc."
 summary: "Administrative details, evaluation methods, workspace configuration, etc."
@@ -16,8 +16,8 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: Logistics
-    identifier: logistics
-    parent: teaching
-    weight: 20
+    name: Overview
+    identifier: overview-perception
+    parent: 3d-perception
+    weight: 10
 ---

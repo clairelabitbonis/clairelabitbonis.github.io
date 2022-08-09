@@ -19,7 +19,7 @@ menu:
     name: Mono. localization
     identifier: monocular-localization
     parent: 3d-perception
-    weight: 20
+    weight: 30
 ---
 
   
