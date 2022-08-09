@@ -1,6 +1,13 @@
 # clairelabitbonis.github.io
 
 # TODO
+- [ ] Education
+- [ ] Experiences
+- [ ] Projects
+    - [ ] Withu
+    - [ ] PGE
+    - [ ] Get'N'Read
+- [ ] Skills
 - [ ] Teaching
     - [ ] Introduction
     - [ ] Perception 3D
@@ -23,3 +30,4 @@
     - [ ] windows display tree
     - [ ] launch.json VSCode
     - [ ] Venv + config pour tout qui fonctionne (torch, cuda, etc)
+    - [ ] Git delete submodule

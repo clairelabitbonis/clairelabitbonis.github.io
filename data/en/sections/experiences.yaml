@@ -2,7 +2,7 @@
 section:
   name: Experiences
   id: experiences
-  enable: true
+  enable: false
   weight: 3
   showOnNavbar: true
   # Can optionally hide the title in sections
@@ -24,7 +24,7 @@ experiences:
     start: Mar 2017
     end: Jun 2021
     responsibilities:
-    - Blabla
+    - This thesis focused on the study and adaptation of deep learning methods to the processing of video streams embedded in special vehicles such as city buses, through specific applications such as passenger counting. 
   - designation: Engineer
     start: Sep 2016
     end: Mar 2017
@@ -36,6 +36,17 @@ experiences:
     responsibilities:
     - Blabla
 
+- company:
+    name: Université Toulouse III - Paul Sabatier
+    url: "https://www.univ-tlse3.fr/"
+    location: Toulouse, France
+    # company overview
+    overview: 
+  positions:
+  - designation: Teaching assistant
+    start: Sep 2016
+    responsibilities:
+    - blabla
 
 # # Your experiences
 # experiences:
