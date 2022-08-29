@@ -1,5 +1,5 @@
 ---
-title: "Overview"
+title: "[DLCV] Overview"
 date: 2022-07-16
 description: "Administrative details, evaluation methods, workspace configuration, etc."
 summary: "Administrative details, evaluation methods, workspace configuration, etc."
@@ -17,7 +17,7 @@ tags: ["Teaching"]
 menu:
   sidebar:
     name: Overview
-    identifier: overview-deeplearning
-    parent: deep-learning-cv
+    identifier: dlcv-overview
+    parent: dlcv
     weight: 10
 ---

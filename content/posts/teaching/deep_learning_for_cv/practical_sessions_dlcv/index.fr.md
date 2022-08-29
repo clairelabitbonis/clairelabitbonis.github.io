@@ -1,5 +1,5 @@
 ---
-title: "Practical sessions"
+title: "[DLCV] Travaux pratiques"
 date: 2022-07-16
 description: ""
 summary: ""
@@ -16,8 +16,8 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: Practical sessions
-    identifier: practical-sessions-dlcv
-    parent: deep-learning-cv
+    name: Travaux pratiques
+    identifier: dlcv-practical-sessions
+    parent: dlcv
     weight: 30
 ---

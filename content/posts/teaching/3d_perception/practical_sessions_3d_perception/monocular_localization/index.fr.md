@@ -1,5 +1,5 @@
 ---
-title: "Localisation monoculaire par PnL itérative"
+title: "[3DP] Localisation monoculaire par PnL itérative"
 date: 2022-07-16
 description: "Iterative estimation of a camera extrinsic parameters."
 summary: "Iterative estimation of a camera extrinsic parameters."
@@ -18,7 +18,7 @@ menu:
   sidebar:
     name: Localisation mono.
     identifier: monocular-localization
-    parent: 3d-perception
+    parent: 3d-perception-practical-sessions
     weight: 30
 ---
 <!-- #TODO: expliquer dmatPos*matPos, lambda, détailler le calcul de matrice intrinsic inverse et stockage des segments 

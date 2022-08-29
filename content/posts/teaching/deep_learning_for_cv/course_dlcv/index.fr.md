@@ -1,5 +1,5 @@
 ---
-title: "Course"
+title: "[DLCV] Cours"
 date: 2022-07-16
 description: ""
 summary: ""
@@ -16,8 +16,8 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: Course
-    identifier: course-dlcv
-    parent: deep-learning-cv
+    name: Cours
+    identifier: dlcv-course
+    parent: dlcv
     weight: 20
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Aperçu général"
+title: "[3DP] Aperçu général"
 date: 2022-07-16
 description: "Détails administratifs, méthodes d'évaluation, configuration de l'espace de travail, etc."
 summary: "Détails administratifs, méthodes d'évaluation, configuration de l'espace de travail, etc."
@@ -17,7 +17,7 @@ tags: ["Teaching"]
 menu:
   sidebar:
     name: Aperçu général
-    identifier: overview-perception
+    identifier: overview-3d-perception
     parent: 3d-perception
     weight: 10
 ---

@@ -1,5 +1,5 @@
 ---
-title: "3D Perception - Overview"
+title: "[3DP] Overview"
 date: 2022-07-16
 description: "Administrative details, evaluation methods, workspace configuration, etc."
 summary: "Administrative details, evaluation methods, workspace configuration, etc."
@@ -17,7 +17,7 @@ tags: ["Teaching"]
 menu:
   sidebar:
     name: Overview
-    identifier: overview-perception
+    identifier: overview-3d-perception
     parent: 3d-perception
     weight: 10
 ---

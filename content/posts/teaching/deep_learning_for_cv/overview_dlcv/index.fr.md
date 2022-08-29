@@ -1,5 +1,5 @@
 ---
-title: "Aperçu général"
+title: "[DLCV] Aperçu général"
 date: 2022-07-16
 description: "Détails administratifs, méthodes d'évaluation, configuration de l'espace de travail, etc."
 summary: "Détails administratifs, méthodes d'évaluation, configuration de l'espace de travail, etc."
@@ -17,7 +17,7 @@ tags: ["Teaching"]
 menu:
   sidebar:
     name: Aperçu général
-    identifier: overview-dlcv
-    parent: deep-learning-cv
+    identifier: dlcv-overview
+    parent: dlcv
     weight: 10
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Monocular localization with iterative PnL"
+title: "[3DP] Monocular localization with iterative PnL"
 date: 2022-07-16
 description: "Iterative estimation of a camera extrinsic parameters."
 summary: "Iterative estimation of a camera extrinsic parameters."
@@ -18,7 +18,7 @@ menu:
   sidebar:
     name: Mono. localization
     identifier: monocular-localization
-    parent: 3d-perception
+    parent: 3d-perception-practical-sessions
     weight: 30
 ---
 
