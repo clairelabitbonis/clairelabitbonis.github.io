@@ -1,6 +1,6 @@
 ---
 title: "[3DP] Segmentation de nuages de points 3D par capteur à lumière structurée RGB-D avec CloudCompare"
-date: 2022-07-16
+date: 2022-07-16T08:06:25+06:00
 description: "Contrôle qualité d'objets 3D."
 summary: "Contrôle qualité d'objets 3D."
 

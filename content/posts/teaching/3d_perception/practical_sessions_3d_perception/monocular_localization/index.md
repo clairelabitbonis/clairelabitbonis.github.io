@@ -1,6 +1,6 @@
 ---
 title: "[3DP] Monocular localization with iterative PnL"
-date: 2022-07-16
+date: 2022-07-16T08:06:25+06:00
 description: "Iterative estimation of a camera extrinsic parameters."
 summary: "Iterative estimation of a camera extrinsic parameters."
 
