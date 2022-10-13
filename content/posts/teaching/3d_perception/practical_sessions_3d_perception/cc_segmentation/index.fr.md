@@ -21,6 +21,8 @@ menu:
     parent: 3d-perception-practical-sessions
     weight: 20
 ---
+## Téléchargement des fichiers
+Les fichiers du TP peuvent être téléchargés sur votre page de cours dans Moodle, ou *via* [ce lien](files/files.zip).
 
 ## Définition des objectifs {#anchor-step-0}
 Ce TP vise à effectuer une segmentation 3D et un contrôle de forme sur des objets polyédriques, c'est-à-dire à vérifier si ces objets sont corrects par rapport à un modèle géométrique de référence et/ou présentent des défauts (trous, résidus, etc.).

@@ -40,6 +40,9 @@ menu:
 Ne vous jetez pas dans le codage des fonctions dès la partie "définition des objectifs", qui n'est qu'une explication théorique globale pour présenter le sujet. Chaque étape et les fonctions qui qui sont propres sont décrites en détail dans les parties correspondantes : [étape 1](#anchor-step-1), [étape 2](#anchor-step-2), [étape 3](#anchor-step-3), [étape 4](#anchor-step-4).
 {{< /alert >}}
 
+## Téléchargement des fichiers
+Les fichiers du TP peuvent être téléchargés sur votre page de cours dans Moodle, ou *via* [ce lien](files/files.zip).
+
 ## Définition des objectifs {#anchor-step-0}
 L'objectif de cet exercice est de trouver la transformation optimale à appliquer à un modèle 3D exprimé en centimètres dans un repère *objet* \\(\mathcal{R\_o} (X,Y,Z)\\) (parfois appelé repère *monde* \\(\mathcal{R\_w}\\)) afin de le dessiner dans une image 2D exprimée en pixels dans un repère *image* \\(\mathcal{R\_i} (u,v)\\). Le modèle 3D a été téléchargé sur [free3d](https://free3d.com) et modifié dans [Blender](https://www.blender.org/) pour les besoins de l'exercice. Ses points et arêtes ont respectivement été exportés *via* un script Python dans les fichiers `pikachu.xyz` et `pikachu.edges`.
 

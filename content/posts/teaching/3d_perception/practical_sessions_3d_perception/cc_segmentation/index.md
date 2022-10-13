@@ -31,6 +31,9 @@ summary = "3D objects quality control."
 
 +++ -->
 
+## Contents download
+Practical session files can be downloaded through your course on Moodle, or at [this link](files/files.zip).
+
 ## Goal description {#anchor-step-0}
 This practical session aims at performing 3D segmentation and shape checking on polyhedral objects, i.e. checking if these objects are correct with respect to a reference geometrical model and/or have defects (holes, residues, etc.). 
 
