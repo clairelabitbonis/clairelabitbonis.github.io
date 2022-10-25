@@ -1,0 +1,18 @@
+# some information about you
+name: "Claire Labit-Bonis"
+nickname: "Claire"
+# greeting message before your name. it will default to "Hi! I am" if not provided
+greeting: "Bonjour, je suis"
+image: "images/author/claire.png"
+# give your some contact information. they will be used in the footer
+contactInfo:
+  email: "clairelabitbonis@gmail.com"
+  #phone: "+33779822801"
+
+# some summary about what you do
+summary:
+  - Je suis ingénieure en I.A. et vision par ordinateur
+  - Je suis enseignante
+  - J'adore découvrir de nouvelles choses
+  - Je travaille sur l'apprentissage automatique
+  - J'aime travailler sur des projets amusants

@@ -59,3 +59,8 @@
     background-color: #fff5f7;
     border-color: #ff3860;
   }
+
+table th,
+td {
+  padding: 1rem;
+}

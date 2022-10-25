@@ -19,7 +19,7 @@ menu:
     name: Segmentation
     identifier: cc-segmentation
     parent: 3d-perception-practical-sessions
-    weight: 20
+    weight: 10
 ---
 
 <!-- +++

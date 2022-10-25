@@ -1,0 +1,168 @@
+# section information
+section:
+  name: Publications
+  id: publications
+  enable: true
+  weight: 5
+  showOnNavbar: true
+  # Can optionally hide the title in sections
+  # hideTitle: true
+
+
+# filter buttons
+buttons:
+- name: All
+  filter: "all"
+- name: "Computer Vision"
+  filter: "computervision"
+- name: "Multi-Object Tracking"
+  filter: "mot"
+- name: "Visual Object Tracking"
+  fitler: "vot"
+- name: "Deep Learning"
+  filter: "deeplearning"
+- name: "Siamese Networks"
+  filter: "siamesenetworks"
+- name: "Passenger Counting"
+  filter: "passengercounting"
+- name: "Similarity Learning"
+  filter: "similaritylearning"
+- name: "Cross-correlation"
+  filter: "crosscorrelation"
+- name: "Telepresence"
+  fitler: "telepresence"
+- name: "Prototyping"
+  filter: "prototyping"
+
+
+# your publications
+
+publications:
+- title: Intercorrélation basée apprentissage profond pour le suivi multi-cibles
+  publishedIn: 
+    name: Reconnaissance des Formes, Image, Apprentissage et Perception (RFIAP’22)
+    date: July 2022
+    url: https://caprfiap2022.sciencesconf.org/
+  authors:
+  - name: Pierre Marigo
+  - name: Jérôme Thomas
+    url: 
+  - name: Claire Labit-Bonis
+    url: .
+  - name: Frédéric Lerasle
+    url: https://homepages.laas.fr/lerasle/
+  paper:
+    summary: Tracking multiple moving targets in a video stream requires localizing and re-identifying them in varied and sometimes cluttered scenes. We present a tracking-by-detection method with multi-hypothesis visual pose estimation based on deep learning cross-correlation. In addition to a single all-in-one neural network for target detection and tracking, we also put forward a strategy for managing trajectories by characterizing their states. We demonstrate the quality of our approach and the gains made by comparing ourselves to the literature on the MOT17 benchmark through a quantitative and qualitative analysis.
+    pdf: /pdf/sections/publications/intercorrelation-basee-apprentissage.pdf
+  categories: ["computervision", "deeplearning", "mot", "crosscorrelation"]
+  tags: ["Computer Vision", "Deep Learning", "Multi-Object Tracking", "Cross-correlation"]
+- title: Visual and automatic bus passenger counting based on a deep tracking-by-detection system
+  publishedIn: 
+    name: HAL LAAS - Open archives
+    date: July 2021
+    url: https://hal.laas.fr/
+  authors:
+  - name: Claire Labit-Bonis
+    url: .
+  - name: Jérôme Thomas
+    url: 
+  - name: Frédéric Lerasle
+    url: https://homepages.laas.fr/lerasle/
+  paper:
+    summary: In this paper, we address the industrial constraints of automatic passenger counting in city buses through a deep architecture able to deal with images taken from low cost 2D cameras placed above the doorstep, from a zenithal point of view. The challenge is then to handle highly variable scenes due to passengers appearance (hair color, hats, height), bus population density at rush hour and changes in scene illumination. The scientific breakthrough related to deep learning applied to computer vision as well as the system embedding requirements for this task motivate us to integrate in this context a lightweight convolutional multiobject tracker which was especially designed for embedded applications and performed well on the MOT Challenge. We here evaluate it in an industrial context on our large scale in-situ dataset, labelled for detection, multi-target tracking and counting, and present a complete and embedded counting system meeting the requirements of our application.
+    pdf: /pdf/sections/publications/visual-bus-passenger.pdf
+  categories: ["computervision", "deeplearning", "mot", "passengercounting"]
+  tags: ["Computer Vision", "Deep Learning", "Multi-Object Tracking", "Passenger Counting"]
+- title: Compact and siamese multi-object tracking-by-detection applied to on-board passenger counting in city buses
+  publishedIn: 
+    name: PhD thesis supervised by Frédéric Lerasle and Jérôme Thomas, defended at the University of Toulouse 3
+    date: Jun, 21 - 2021
+  authors:
+  - name: Claire Labit-Bonis
+    url: .
+  paper:
+    summary: In this thesis, we answer the industrial constraints of passenger counting in city buses through a deep architecture able to deal with images taken from low cost 2D sensors placed above the doorstep, from a zenithal point of view. The challenge is then to handle highly variable scenes due to passenger appearance (hair color, hats, height), bus population density at rush hour and changes in scene illumination. The scientific breakthrough related to deep learning applied to computer vision as well as the system embedding requirements motivate us to propose a unified and lightweight convolutional architecture in the context of multi-object tracking-by-detection for trajectory reconstruction. We evaluate our approach compared to the literature on a public reference dataset, the MOT Challenge, but also in an industrial context on our large \textit{in-situ} database, labeled for detection, multi-target tracking and counting. We show state-of-the-art results on the public database both in tracking accuracy and speed execution, but also present a complete and embedded counting system respecting the industrial constraints defined by the specifications.
+    url: http://www.theses.fr/2021TOU30070
+  categories: ["computervision", "deeplearning", "mot", "siamesenetworks", "passengercounting"]
+  tags: ["Computer Vision", "Deep Learning", "Multi-Object Tracking", "Siamese Networks", "Passenger Counting"]
+- title: Compact and discriminative multi-object tracking with siamese CNNs
+  publishedIn: 
+    name: IEEE International Conference on Pattern Recognition (ICPR’2020)
+    date: January 2021
+    url: https://www.micc.unifi.it/icpr2020
+  authors:
+  - name: Claire Labit-Bonis
+    url: .
+  - name: Jérôme Thomas
+    url: 
+  - name: Frédéric Lerasle
+    url: https://homepages.laas.fr/lerasle/
+  paper:
+    summary: Following the tracking-by-detection paradigm, multiple object tracking deals with challenging scenarios, occlusions or even missing detections; the priority is often given to quality measures instead of speed, and a good trade-off between the two is hard to achieve. Based on recent work, we propose a fast, lightweight tracker able to predict targets position and reidentify them at once, when it is usually done with two sequential steps. To do so, we combine a bounding box regressor with a target-oriented appearance learner in a newly designed and unified architecture. This way, our tracker can infer the targets’ image pose but also provide us with a confidence level about target identity. Most of the time, it is also common to filter out the detector outputs with a preprocessing step, throwing away precious information about what has been seen in the image. We propose a tracks management strategy able to balance efficiently between detection and tracking outputs and their associated likelihoods. Simply put, we spotlight a full siamese based single object tracker able to predict both position and appearance features at once with a lightweight and all-in-one architecture, within a balanced overall multi-target management strategy. We demonstrate the efficiency and speed of our system w.r.t the literature on the well-known MOT17 challenge benchmark, and bring to the fore qualitative evaluations as well as state-of-the-art quantitative results.
+    pdf: /pdf/sections/publications/reg-and-reid.pdf
+    slides: /pdf/sections/publications/reg-and-reid_slides.pdf
+  categories: ["computervision", "deeplearning", "mot", "vot", siamesenetworks]
+  tags: ["Computer Vision", "Deep Learning", "Multi-Object Tracking", "Visual Object Tracking", "Siamese Networks"]
+
+- title: Fast tracking-by-detection of bus passengers with Siamese CNNs
+  publishedIn: 
+    name: IEEE Advanced Video Signal-based Surveillance (AVSS’19)
+    date: September 2019
+    url: http://www.cs.albany.edu/AVSS2019/
+  authors:
+  - name: Claire Labit-Bonis
+    url: .
+  - name: Jérôme Thomas
+    url: 
+  - name: Frédéric Lerasle
+    url: https://homepages.laas.fr/lerasle/
+  paper:
+    summary: Knowing the exact number of passengers among the citybus fleets allows public transport operators to optimally distribute their vehicles into the traffic. However, interpreting overcrowded scenarios, at rush hour, with day/night illumination changes can be tricky. Based on the visual tracking-by-detection paradigm, we benefit from video stream information provided by cameras placed above doors to infer people trajectories and deduce the number of enterings/leavings at every bus stop. In this way a person detector estimates the location of the passengers in each image, a tracker matches detections between successive frames based on different cues such as appearance or motion, and infers trajectories over time. This paper proposes a fast and embeddable framework that performs person detection using relevant state-of-the-art CNN detectors, and couple the best one (in our applicative context) with a newly designed Siamese network for real-time tracking/data association purposes. Evaluations on our own large scale in-situ dataset are very promising in terms of performances and real-time constraint expected for on-board processing.
+    pdf: /pdf/sections/publications/fast-siamese.pdf
+    slides: /pdf/sections/publications/fast-siamese_slides.pdf
+  categories: ["computervision", "deeplearning", "mot", "similaritlearning", "siamesenetworks", "passengercounting"]
+  tags: ["Computer Vision", "Deep Learning", "Multi-Object Tracking", "Similarity Learning", "Siamese Networks", "Passenger Counting"]
+
+- title: Suivi de passagers de bus par apprentissage profond
+  publishedIn: 
+    name: Reconnaissance des Formes, Image, Apprentissage et Perception (RFIAP’18)
+    date: June 2018
+    url: https://rfiap2018.ign.fr/
+  authors:
+  - name: Claire Labit-Bonis
+    url: .
+  - name: Jérôme Thomas
+    url: 
+  - name: Frédéric Lerasle
+    url: https://homepages.laas.fr/lerasle/
+  - name: Francisco Madrigal
+    url: https://scholar.google.com/citations?view_op=list_works&hl=en&hl=en&user=Xt4u35wAAAAJ
+  paper:
+    summary: In this paper we present a comparative study of tracking-by-detection approaches applied to passenger counting in city buses. A detector targets passengers at each frame, a tracker then matches detections together through time to produce trajectories. We compare three deep learning detectors still under-explored in our context, and couple them with a real time tracker for global evaluation on our large scale in situ dataset. The results we present are very encouraging in terms of detection, tracking rate and speed expected for our embedded perspectives.
+    pdf: /pdf/sections/publications/bus-passenger-counting.pdf
+    slides: /pdf/sections/publications/bus-passenger-counting_slides.pdf
+  categories: ["computervision", "deeplearning", "mot", "passengercounting"]
+  tags: ["Computer Vision", "Deep Learning", "Multi-Object Tracking", "Siamese Networks", "Passenger Counting"]
+
+- title: WithU - un robot low-cost de téléprésence
+  publishedIn: 
+    name: Conférence francophone sur l’Interaction Homme-Machine (IHM’15)
+    date: October 2015
+    url: https://dumas.ccsd.cnrs.fr/IHM-2015
+  authors:
+  - name: Yorian Delmas
+  - name: Claire Labit-Bonis
+    url: .
+  - name: Jérémy Ouanély
+  - name: Yannick Traoré
+  - name: Aurélien Veillard
+  - name: Michel Taïx
+    url: https://gepettoweb.laas.fr/index.php/Members/MichelTa%C3%AFx
+  - name: Philippe Truillet
+    url: https://www.irit.fr/~Philippe.Truillet/index.html
+  paper:
+    summary: Being able to interact with a remote environment, to "act as if you were there" without having to move, is made possible by techniques that have emerged and evolved since the 1960s. From simple teleconferencing allowing to participate in meetings on the other side of the world, to the telemanipulation of medical robots in meticulous surgical operations, telepresence allows a user to be virtually present in a remote location. We show here the design and development of a working prototype with low-cost tools.
+    pdf: /pdf/sections/publications/withu.pdf
+    slides: /pdf/sections/publications/withu_slides.pdf
+  categories: ["telepresence", "prototyping"]
+  tags: ["Telepresence", "Prototyping"]

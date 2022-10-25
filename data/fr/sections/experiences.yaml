@@ -1,0 +1,86 @@
+# section information
+section:
+  name: Expériences
+  id: experiences
+  enable: false
+  weight: 3
+  showOnNavbar: true
+  # Can optionally hide the title in sections
+  # hideTitle: true 
+
+experiences:
+- company:
+    name: ACTIA Automotive
+    url: "https://www.actia.com/fr"
+    location: Toulouse, France
+    overview: ACTIA designs and manufactures electronic, software and telecommunication systems for public transport vehicles, construction equipment, trains, heavy trucks, but also for automotive diagnostics, aeronautics and space.
+  positions:
+  - designation: A.I. specialized architect
+    start: Jun 2021
+    responsibilities:
+    - Design and develop ...
+    - Blabla
+  - designation: PhD student
+    start: Mar 2017
+    end: Jun 2021
+    responsibilities:
+    - This thesis focused on the study and adaptation of deep learning methods to the processing of video streams embedded in special vehicles such as city buses, through specific applications such as passenger counting. 
+  - designation: Engineer
+    start: Sep 2016
+    end: Mar 2017
+    responsibilities:
+    - Blabla
+  - designation: Intern
+    start: Mar 2016
+    end: Sep 2016
+    responsibilities:
+    - Blabla
+
+- company:
+    name: Université Toulouse III - Paul Sabatier
+    url: "https://www.univ-tlse3.fr/"
+    location: Toulouse, France
+    # company overview
+    overview: 
+  positions:
+  - designation: Teaching assistant
+    start: Sep 2016
+    responsibilities:
+    - blabla
+
+# # Your experiences
+# experiences:
+- company:
+    name: LAAS-CNRS
+    url: "https://www.laas.fr"
+    location: Toulouse, France
+    # company overview
+    overview: Example Co. is a widely recognized company for cloud-native development. It builds tools for Kubernetes.
+  positions:
+  - designation: Intern
+    start: May 2015
+    end: Aug 2015
+    responsibilities:
+    - blabla
+
+- company:
+    name: IMaR - CIDS
+    url: "http://imar.ie/"
+    location: Tralee, Ireland
+    overview: PreExample Co. is a gateway company to enter into Example co. So, nothing special here.
+  positions:
+  - designation: Intern
+    start: Jan 2013
+    end: Jul 2013
+    responsibilities:
+    - Write 
+
+- company:
+    name: Boulangerie Pâtisserie de Tradition II
+    location: Toulouse, France
+  positions:
+  - designation: Bakery salesperson
+    start: Mar 2008
+    end: Oct 2013
+    responsibilities:
+    - blabla

@@ -1,0 +1,37 @@
+# section information
+section:
+  name: Formation
+  id: education
+  enable: false
+  weight: 4
+  showOnNavbar: true
+  # Can optionally hide the title in sections
+  # hideTitle: true 
+
+degrees:
+  - institution: 
+      name: Université Paul Sabatier
+      url: ""
+      location: Toulouse, France
+    timeframe: 2017-2021
+    name: Ph.D en Deep Learning appliqué à la vision par ordinateur
+    grade: 
+      name: truc
+      scale: 
+      achieved: 3.5
+    publications:
+      - url: "www.laas.fr"
+        title: blabla
+      - url: "truc.fr"
+        title: 
+    takenCourses:
+      hideScale: true
+      showGrades: false
+      courses:
+        - name:
+          achieved: 
+    extracurricularActivities:
+      - bla
+      - bla
+
+  

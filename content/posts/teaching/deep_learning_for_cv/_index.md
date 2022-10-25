@@ -5,5 +5,5 @@ menu:
     name: Deep Learning & CV
     identifier: dlcv
     parent: teaching
-    weight: 10
+    weight: 20
 ---

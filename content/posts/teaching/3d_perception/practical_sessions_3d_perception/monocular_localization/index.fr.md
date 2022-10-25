@@ -19,7 +19,7 @@ menu:
     name: Localisation mono.
     identifier: monocular-localization
     parent: 3d-perception-practical-sessions
-    weight: 30
+    weight: 20
 ---
 <!-- #TODO: expliquer dmatPos*matPos, lambda, détailler le calcul de matrice intrinsic inverse et stockage des segments 
 #l1-l2. Pourquoi ne pas utiliser Ni.(P2i-P1i) plutôt que Ni.P1i + Ni.P2i ?
