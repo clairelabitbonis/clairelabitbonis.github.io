@@ -1,0 +1,51 @@
+# section information
+section:
+  name: About
+  id: about
+  enable: true
+  weight: 1
+  showOnNavbar: true
+  template: sections/about.html
+
+# your designation
+designation: Ingénieure I.A.
+# your company information
+company:
+  name: ACTIA
+  url: "https://www.actia.com"
+
+# your resume. this file path should be relative to you "static" directory
+# resume: "files/resume.pdf"
+
+# a summary about you
+summary: 'Je suis architecte logiciel en intelligence artificielle aplliquée à la vision par ordinateur. J'ai obtenu mon doctorat en 2021, au sein des équipes du [LAAS-CNRS](https://www.laas.fr) et d'[ACTIA](https://www.actia.com/fr/), portant sur la détection et le suivi multi-objets appliqués aux cas d'usage des transports publics.'
+
+
+# your social links
+# give as many as you want. use font-awesome for the icons.
+socialLinks:
+- name: LinkedIn
+  icon: "fab fa-linkedin"
+  url: "https://www.linkedin.com/in/clairelabitbonis"
+- name: E-mail
+  icon: "fa-solid fa-envelope"
+  url: "mailto:clairelabitbonis@gmail.com"
+
+# your soft skills
+# give the percentage between 50 to 100 with 5 intervals.
+# currently supported colors: blue, yellow, pink, green, sky, orange
+badges:
+- type: soft-skill-indicator
+  name: Implication
+  percentage: 100
+  color: green
+
+- type: soft-skill-indicator
+  name: Bonne volonté
+  percentage: 100
+  color: pink
+
+- type: soft-skill-indicator
+  name: Curiosité
+  percentage: 100
+  color: yellow
