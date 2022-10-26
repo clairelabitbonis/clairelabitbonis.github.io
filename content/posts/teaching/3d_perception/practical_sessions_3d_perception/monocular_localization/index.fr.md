@@ -19,7 +19,7 @@ menu:
     name: Localisation mono.
     identifier: monocular-localization
     parent: 3d-perception-practical-sessions
-    weight: 30
+    weight: 20
 ---
 <!-- #TODO: expliquer dmatPos*matPos, lambda, détailler le calcul de matrice intrinsic inverse et stockage des segments 
 #l1-l2. Pourquoi ne pas utiliser Ni.(P2i-P1i) plutôt que Ni.P1i + Ni.P2i ?
@@ -41,7 +41,7 @@ Ne vous jetez pas dans le codage des fonctions dès la partie "définition des o
 {{< /alert >}}
 
 ## Téléchargement des fichiers
-Les fichiers du TP peuvent être téléchargés sur votre page de cours dans Moodle, ou *via* [ce lien](files/files.zip).
+Les fichiers du TP peuvent être téléchargés sur votre page de cours dans Moodle, ou *via* [ce lien](files/files.zip). La correction est disponible [ici](files/localisation.py).
 
 ## Définition des objectifs {#anchor-step-0}
 L'objectif de cet exercice est de trouver la transformation optimale à appliquer à un modèle 3D exprimé en centimètres dans un repère *objet* \\(\mathcal{R\_o} (X,Y,Z)\\) (parfois appelé repère *monde* \\(\mathcal{R\_w}\\)) afin de le dessiner dans une image 2D exprimée en pixels dans un repère *image* \\(\mathcal{R\_i} (u,v)\\). Le modèle 3D a été téléchargé sur [free3d](https://free3d.com) et modifié dans [Blender](https://www.blender.org/) pour les besoins de l'exercice. Ses points et arêtes ont respectivement été exportés *via* un script Python dans les fichiers `pikachu.xyz` et `pikachu.edges`.

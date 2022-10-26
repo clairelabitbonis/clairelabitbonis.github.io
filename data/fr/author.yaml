@@ -2,7 +2,7 @@
 name: "Claire Labit-Bonis"
 nickname: "Claire"
 # greeting message before your name. it will default to "Hi! I am" if not provided
-greeting: "Salut, je suis"
+greeting: "Bonjour, je suis"
 image: "images/author/claire.png"
 # give your some contact information. they will be used in the footer
 contactInfo:
@@ -13,6 +13,6 @@ contactInfo:
 summary:
   - Je suis ingénieure en I.A. et vision par ordinateur
   - Je suis enseignante
-  - J'aime découvrir plein de choses
-  - J'aime les possibilités infinies de l'apprentissage machine
-  - J'adore travailler sur des projets qui m'amusent
+  - J'adore découvrir de nouvelles choses
+  - Je travaille sur l'apprentissage automatique
+  - J'aime travailler sur des projets amusants

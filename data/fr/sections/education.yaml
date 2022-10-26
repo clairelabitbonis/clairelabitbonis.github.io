@@ -1,6 +1,6 @@
 # section information
 section:
-  name: Education
+  name: Formation
   id: education
   enable: false
   weight: 4
@@ -14,7 +14,7 @@ degrees:
       url: ""
       location: Toulouse, France
     timeframe: 2017-2021
-    name: Ph.D in Deep Learning applied to Computer Vision
+    name: Ph.D en Deep Learning appliqué à la vision par ordinateur
     grade: 
       name: truc
       scale: 

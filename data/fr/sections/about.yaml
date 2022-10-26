@@ -1,6 +1,6 @@
 # section information
 section:
-  name: About
+  name: A propos
   id: about
   enable: true
   weight: 1
@@ -18,7 +18,7 @@ company:
 # resume: "files/resume.pdf"
 
 # a summary about you
-summary: 'Je suis architecte logiciel en intelligence artificielle aplliquée à la vision par ordinateur. J'ai obtenu mon doctorat en 2021, au sein des équipes du [LAAS-CNRS](https://www.laas.fr) et d'[ACTIA](https://www.actia.com/fr/), portant sur la détection et le suivi multi-objets appliqués aux cas d'usage des transports publics.'
+summary: "Je suis architecte logiciel spécialisée en intelligence artificielle appliquée à la vision par ordinateur. J'ai obtenu mon doctorat en 2021 au sein des équipes du [LAAS-CNRS](https://www.laas.fr) et d'[ACTIA](https://www.actia.com/fr/), en travaillant sur la détection et le suivi multi-objets pour des cas d'utilisation dans les transports publics."
 
 
 # your social links
