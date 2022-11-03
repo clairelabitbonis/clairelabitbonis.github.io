@@ -37,7 +37,7 @@ menu:
 
 >Introduction à l’IA --> cf slides RDV innovation
 
-{{< img src="images/papas_ia.png" align="center" title="Les pères de l'IA" >}}
+![Les pères de l'IA](images/papas_ia.png)
 
 #### Le contexte technique du *deep learning*
 
@@ -63,12 +63,12 @@ menu:
 
 #### A l'origine est le neurone 
 
-{{< img src="images/neurone.png" align="center" title="Principe du neurone" >}}
+![Principe du neurone](images/neurone.png)
 
 #### Fonction d'activation
 #### Convolution
 
-{{< img src="images/convolution.gif" align="center" title="Opération de convolution" >}}
+![Opération de convolution](images/convolution.gif)
 
 #### Réseau de convolution
 
