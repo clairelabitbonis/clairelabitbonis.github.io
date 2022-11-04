@@ -1,6 +1,6 @@
 ---
-title: "00 | Pourquoi ?"
-date: 2022-07-16
+title: "DLCV-CM-00 | Pourquoi ?"
+date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
 

@@ -1,6 +1,6 @@
 ---
-title: "[DLCV] 11 | Voyons..."
-date: 2022-07-16
+title: "DLCV-TP-11 | Voyons..."
+date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
 

@@ -1,5 +1,5 @@
 ---
-title: "00 | Présentation"
+title: "DLCV-TP-00 | Présentation"
 date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
@@ -44,13 +44,17 @@ Nous allons entrainer YOLOv5 à détecter plusieurs classes d'objets, à raison 
 
 Pour cela, nous passerons par plusieurs étapes :
 
-* <mark>**étape 1 - acquisition**</mark> : chaque binôme prendra plusieurs séquences vidéo de la classe d'objets qu'il aura choisie parmi une liste proposée, et la mettra sur un serveur de données commun aux groupes A1/A2 et B1/B2 ;
-* <mark>**étape 2 - annotation**</mark> : avec l'outil CVAT, chaque binôme annotera ses propres séquences d'images avec la classe d'objet choisie, de sorte qu'à la fin de la phase d'annotation, le groupe entier de TP aura collectivement construit un *dataset* multi-classes dont tout le monde bénéficiera pour faire ses apprentissages ;
-* <mark>**étape 3 - prise en main du code de YOLOv5**</mark> : à la fin de cette étape, vous saurez appliquer sur vos propres images un modèle YOLOv5-S pré-entrainé sur COCO, entrer dans l'architecture du réseau et identifier ses différentes couches et leurs dimensions, visualiser la sortie de détection obtenue, etc. Pour parvenir à cette prise en main, un jeu de "où est Charlie ?" vous sera proposé et vous poussera à décortiquer l'exécution du code pas à pas. Vous devrez par exemple répondre à des questions comme "quelle est la taille du tenseur en sortie de la couche 17 pour une image d'entrée de 512x512x3 ?" ;
-* <mark>**étape 4 - apprentissage de YOLOv5 sur notre *dataset***</mark> : l'idéal pour analyser les performances d'un jeu de paramètres donné (résolution des images d'entrée, taille du réseau, taille de *batch*, etc.) est de lancer autant d'apprentissages que de configurations possibles et de les comparer ensuite pour sélectionner celle qui est la meilleure. On peut ensuite afficher sur un même graphe différentes tailles de modèles, pour différentes résolutions, et comparer leur rapidité d'exécution à la *mean average precision* qu'ils réalisent sur un *dataset* donné, par exemple :
+* :fire: <mark>**étape 1 - acquisition**</mark> : chaque binôme prendra plusieurs séquences vidéo de la classe d'objets qu'il aura choisie parmi une liste proposée, et la mettra sur un serveur de données commun aux groupes A1/A2 et B1/B2 ;
+* :fire: <mark>**étape 2 - annotation**</mark> : avec l'outil CVAT, chaque binôme annotera ses propres séquences d'images avec la classe d'objet choisie, de sorte qu'à la fin de la phase d'annotation, le groupe entier de TP aura collectivement construit un *dataset* multi-classes dont tout le monde bénéficiera pour faire ses apprentissages ;
+* :fire: <mark>**étape 3 - prise en main du code de YOLOv5**</mark> : à la fin de cette étape, vous saurez appliquer sur vos propres images un modèle YOLOv5-S pré-entrainé sur COCO, entrer dans l'architecture du réseau et identifier ses différentes couches et leurs dimensions, visualiser la sortie de détection obtenue, etc. Pour parvenir à cette prise en main, un jeu de "où est Charlie ?" vous sera proposé et vous poussera à décortiquer l'exécution du code pas à pas. Vous devrez par exemple répondre à des questions comme "quelle est la taille du tenseur en sortie de la couche 17 pour une image d'entrée de 512x512x3 ?" ;
+* :fire: <mark>**étape 4 - apprentissage de YOLOv5 sur notre *dataset***</mark> : l'idéal pour analyser les performances d'un jeu de paramètres donné (résolution des images d'entrée, taille du réseau, taille de *batch*, etc.) est de lancer autant d'apprentissages que de configurations possibles et de les comparer ensuite pour sélectionner celle qui est la meilleure. On peut ensuite afficher sur un même graphe différentes tailles de modèles, pour différentes résolutions, et comparer leur rapidité d'exécution à la *mean average precision* qu'ils réalisent sur un *dataset* donné, par exemple :
+
+<center>
 
 ![Comparaison des performances de YOLOv5 sur COCO](images/perfs_yolov5.png)
 *Source : https://github.com/ultralytics/yolov5*
+
+</center>
 
 >Un apprentissage dure plusieurs heures. Pour pouvoir comparer toutes ces configurations, il faut soit disposer de plusieurs serveurs GPU puissants qui peuvent faire tourner en parallèle plusieurs configurations, soit disposer de beaucoup de temps et être patient... 
 >
@@ -62,7 +66,7 @@ Pour cela, nous passerons par plusieurs étapes :
 >
 >Chaque binôme se positionnera donc sur une configuration donnée et lancera l'apprentissage associé sur le *dataset* du groupe de TP.
 
-* <mark>**étape 5 - analyse des performances**</mark> : une fois tous les apprentissages faits, chaque binôme pourra évaluer les performances de sa propre configuration, analyser les résultats de manière quantitative, *i.e.*, avec des chiffres, et de manière qualitative, *i.e.*, avec une visualisation "à l'oeil" des cas d'erreur et des cas qui fonctionnent. Une évaluation comparative sera également réalisable, puisque tout le monde aura accès aux résultats obtenus par les autres binômes, au travers d'un *leaderboard* commun au groupe.
+* :fire: <mark>**étape 5 - analyse des performances**</mark> : une fois tous les apprentissages faits, chaque binôme pourra évaluer les performances de sa propre configuration, analyser les résultats de manière quantitative, *i.e.*, avec des chiffres, et de manière qualitative, *i.e.*, avec une visualisation "à l'oeil" des cas d'erreur et des cas qui fonctionnent. Une évaluation comparative sera également réalisable, puisque tout le monde aura accès aux résultats obtenus par les autres binômes, au travers d'un *leaderboard* commun au groupe.
 
 ## Modalités d'évaluation
 
@@ -74,15 +78,100 @@ Chaque binôme produira une capsule vidéo (c'est-à-dire une séquence vidéo) 
 
 Vous l'aurez compris, l'évaluation de votre travail ne dépendra pas de la performance de votre apprentissage (et donc de la configuration qui vous aura été attribuée), mais plutôt de l'analyse que vous serez capable d'en faire.
 
-## Outils du TP et configuration du *workspace*
+## Outils et configuration du *workspace*
 
+### Fichier partagé 2022-2023
 
+Afin que tout le monde ait l'information de quel binôme travaille sur quelle classe et quelle configuration de YOLO, un :fire::page_with_curl: [fichier partagé est mis à votre disposition](https://docs.google.com/spreadsheets/d/1smyGWTv-3chS242o51kwthJtzzOhafJqURbdl5zbyNE/edit?usp=sharing) :page_with_curl::fire:. Le partage est soumis à validation, il faudra attendre d'y avoir été autorisé avant de pouvoir modifier le document.
 
-### Fichier partagé pour les tâches communes
+>Les vidéos ci-après vous guident dans le remplissage de ce document. 
+>
+>Par souci de confidentialité, les noms utilisés sont fictifs.
 
+***Let's go*** :
+___________________
+
+* :fire::computer: <mark>***étape 1*</mark> : configuration des binômes**
+___________________
+
+* :fire::computer: <mark>***étape 2*</mark> : choix des classes d'objets**
+___________________
+
+* :fire::computer: <mark>***étape 3*</mark> : choix de la configuration de YOLOv5**
+___________________
 
 
 ### IDE et clone de YOLOv5
+
+Cette section vous guide dans la configuration de votre *workspace* avec les outils dont vous disposez en salle de TP. La configuration proposée se base sur un environnement Ubuntu 20.04, avec l'IDE VSCode et la création d'un environnement virtuel à l'aide de `python venv`.
+Vous êtes évidemment libres d'utiliser n'importe quel IDE si vous avez d'autres préférences, ou d'utiliser Anaconda pour créer votre environnement virtuel... le principal étant que ça marche !
+
+***Let's go*** :
+___________________
+
+* :fire::computer: <mark>***étape 1*</mark> : mise en place de l'arborescence**
+
+  ```sh
+  ## Clonage du dépôt Github de la release 6.2 de yolov5
+  login@machine:~$ cd <path/to/workspace>
+  login@machine:<path/to/workspace>$ git clone -b v6.2 https://github.com/ultralytics/yolov5.git
+  login@machine:<path/to/workspace>$ cd yolov5
+
+  ## Configuration de l'environnement virtuel nommé 'yolov5env'
+  login@machine:<path/to/workspace>/yolov5$ python3 -m venv yolov5env # Création
+  login@machine:<path/to/workspace>/yolov5$ source yolov5env/bin/activate # Activation
+  (yolov5env) login@machine:<path/to/workspace>/yolov5$ python3 -m pip install --upgrade pip # Mise à jour de pip
+  (yolov5env) login@machine:<path/to/workspace>/yolov5$ pip3 install -r requirements.txt # Install libs
+  ```
+  *A ce stade, toute l'arborescence de YOLOv5 est en place, toutes les librairies sont installées.*
+___________________
+
+* :fire::computer: <mark>***étape 2*</mark> : configuration de VS Code**
+  
+  Dans VS Code, ouvrez le dossier `yolov5` de l'étape précédente :
+
+  <center>
+
+  ![Ouverture du workspace dans VS Code](images/open_folder_vscode.png)
+
+  </center>
+
+  Assurez-vous ensuite que l'extension pour Python est bien installée. Pour cela, accédez à l'onglet "Extensions" *via* le raccourci `Ctrl + Shift + X` et cherchez `python`. Installez l'extension si elle ne l'est pas déjà :
+
+  <center>
+
+  ![Installation de l'extension pour Python](images/install_extension_python_vscode.png)
+
+  </center>
+
+  Sélectionnez ensuite l'interpréteur Python de l'environnement virtuel que vous avez créé à l'étape 1, en utilisant le raccourci `Ctrl + Shift + P` pour faire apparaître la palette de commande, puis en tapant la commande `Python: Select Interpreter`. Parmi les choix proposés, cliquez sur celui correspondant à l'environnement virtuel `yolov5env` :
+
+  <center>
+
+  ![Sélection de l'interpréteur Python](images/select_interpreter_vscode.png)
+
+  </center>
+___________________
+
+* :fire::computer: <mark>***étape 3*</mark> : voyons si vous avez suivi...**
+
+  Si tout est correctement configuré, vous pouvez lancer un terminal dans VS Code *via* `Terminal > New Terminal` et taper la commande suivante :
+
+  ```sh
+  (yolov5env) login@machine:<path/to/yolov5>$ python detect.py --source 'https://ultralytics.com/images/zidane.jpg'
+  ```
+
+  Une fois la commande exécutée, vous retrouvez le résultat de l'éxecution du modèle YOLOv5-S sur l'image `zidane.jpg` dans le dossier `runs/detect/exp` :
+
+  <center>
+
+  ![Vérification du fonctionnement de YOLOv5](images/zidane.png)
+
+  </center>
+
+___________________
+
+:fire::fireworks::thumbsup::star2: **Well done !**
 
 ### CVAT pour l'annotation
 

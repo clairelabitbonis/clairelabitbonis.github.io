@@ -1,5 +1,5 @@
 ---
-title: "[3DP] Localisation monoculaire par PnL itérative"
+title: "3DP-TP-01 | Localisation monoculaire par PnL itérative"
 date: 2022-07-16T08:06:25+06:00
 description: "Iterative estimation of a camera extrinsic parameters."
 summary: "Iterative estimation of a camera extrinsic parameters."
