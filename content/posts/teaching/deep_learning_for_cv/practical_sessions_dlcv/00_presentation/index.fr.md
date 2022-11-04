@@ -1,6 +1,6 @@
 ---
 title: "00 | Présentation"
-date: 2022-07-16
+date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
 
@@ -10,7 +10,7 @@ hightlight_languages: ["python","bash"]
 
 authors: ["Claire Labit-Bonis"]
 
-# hero: featured.png
+hero: featured.png
 
 tags: ["Teaching"]
 
@@ -76,13 +76,19 @@ Vous l'aurez compris, l'évaluation de votre travail ne dépendra pas de la perf
 
 ## Outils du TP et configuration du *workspace*
 
-### Serveur de données pour le *dataset*
 
-### CVAT pour l'annotation
+
+### Fichier partagé pour les tâches communes
+
+
 
 ### IDE et clone de YOLOv5
 
-### Fichier partagé pour les tâches communes
+### CVAT pour l'annotation
+
+### Serveur de données pour le *dataset*
+
+
 
 
 

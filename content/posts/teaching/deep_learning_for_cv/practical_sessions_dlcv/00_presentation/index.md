@@ -1,6 +1,6 @@
 ---
 title: "00 | Presentation"
-date: 2022-07-16
+date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
 
@@ -10,7 +10,7 @@ hightlight_languages: ["python","bash"]
 
 authors: ["Claire Labit-Bonis"]
 
-# hero: featured.png
+hero: featured.png
 
 tags: ["Teaching"]
 
