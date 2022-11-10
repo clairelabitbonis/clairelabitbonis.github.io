@@ -1,5 +1,5 @@
 ---
-title: "DLCV-CM-10 | Let's learn deeply"
+title: "DLCV-CM-01 | Let's learn deeply"
 date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
@@ -16,9 +16,9 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: "10 | Let's learn deeply"
-    identifier: dlcv-course-03
+    name: "01 | Let's learn deeply"
+    identifier: dlcv-course-02
     parent: dlcv-course
-    weight: 30
+    weight: 20
 ---
 

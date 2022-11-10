@@ -89,9 +89,18 @@ So that everyone has the information of which pair is working on which class and
 >
 >For confidentiality reasons, the names used are fictitious.
 
-#### Configuring the pairs
-#### Choice of object classes
-#### Choice of the YOLOv5 configuration
+***Let's go*** :
+___________________
+
+* :fire::computer: <mark>***étape 1*</mark> : configuring work pairs**
+___________________
+
+* :fire::computer: <mark>***étape 2*</mark> : object classes choice**
+___________________
+
+* :fire::computer: <mark>***étape 3*</mark> : YOLOv5 configuration choice**
+___________________
+
 
 ### IDE and YOLOv5 clone
 

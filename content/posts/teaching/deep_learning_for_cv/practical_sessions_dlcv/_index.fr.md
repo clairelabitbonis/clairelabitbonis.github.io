@@ -1,5 +1,6 @@
 ---
 title: "[DLCV] Travaux pratiques"
+draft: false
 menu:
   sidebar:
     name: Travaux pratiques

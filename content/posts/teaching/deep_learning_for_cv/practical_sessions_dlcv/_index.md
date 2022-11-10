@@ -1,5 +1,6 @@
 ---
 title: "[DLCV] Practical sessions"
+draft: false
 menu:
   sidebar:
     name: Practical sessions

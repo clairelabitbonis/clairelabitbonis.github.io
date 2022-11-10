@@ -1,0 +1,29 @@
+<!-- <div class="Container"
+ style="padding-bottom:56.25%; position:relative; display:block; width: 100%">
+ <iframe id="googleSlideIframe"
+  width="100%" height="100%"
+  src="{{ .Get "src"}}"
+  frameborder="0" 
+  allowfullscreen="true" 
+  mozallowfullscreen="true" 
+  webkitallowfullscreen="true"></iframe>
+</div> -->
+{{ $src := .Get "src" }}
+{{ $type := .Get "type" }}
+{{/*
+  A page can have multiple videos. We need to generate unique id for them.
+  Here, we are generating a sequence from 1 to 200 and taking the first element after a shuffle.
+  This will give a random number in most cases. However, if the page has many videos, we might have a collision.
+  We should find a better approach for doing this.
+*/}}
+{{ $randNumber :=  index (seq 200 | shuffle) 0 }}
+
+<div style="padding-bottom:50%; position:relative; display:block; width: 100%; height: 200%">
+<iframe id="gslides-{{ $randNumber }}" 
+src="{{ $src }}"
+frameborder="0" 
+allowfullscreen="true" 
+mozallowfullscreen="true" 
+webkitallowfullscreen="true"
+style="padding-bottom:50%; position:absolute;  width:100%; height: 200%; overflow:auto;"></iframe>
+</div>

@@ -10,7 +10,7 @@ hightlight_languages: ["python","bash"]
 
 authors: ["Claire Labit-Bonis"]
 
-# hero: featured.png
+hero: featured.png
 
 tags: ["Teaching"]
 
@@ -21,6 +21,10 @@ menu:
     parent: dlcv-course
     weight: 10
 ---
+
+{{< gslides src="https://docs.google.com/presentation/d/e/2PACX-1vSvpzsFxfdbubUOPNbqnD-AVZe9F4YUl5dI2CDqUVKKbuhGHbLa5oEYHCGRh9j5t3Jwzsov_pyjnljk/embed?start=false&loop=false&delayms=3000" >}}
+
+
 > ## Objectifs pédagogiques
 >
 >Ce premier cours a pour objectif de répondre aux trois questions suivantes autour du *deep learning* : 

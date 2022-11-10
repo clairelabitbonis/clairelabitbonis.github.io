@@ -44,7 +44,7 @@ Do not dive headfirst into the code ! The first part "goal description" is just 
 {{< /alert >}}
 
 ## Contents download
-Practical session files can be downloaded through your course on Moodle, or at [this link](files/files.zip). Corresction can be found [here](files/localisation.py).
+Practical session files can be downloaded through your course on Moodle, or at [this link](files/files.zip). 
 
 ## Goal description {#anchor-step-0}
 This exercise aims at finding the optimal transformation between a 3D model expressed in centimeters in an *object* coordinate system \\(\mathcal{R\_o} (X,Y,Z)\\) (sometimes called *world* coordinate system \\(\mathcal{R\_w}\\)) in order to draw it as an overlay in a 2D pixel image defined in its *image* coordinate system \\(\mathcal{R\_i} (u,v)\\). The 3D model was downloaded from [free3d](https://free3d.com) and modified within [Blender](https://www.blender.org/) for the needs of this exercise. Points and edges were respectively exported *via* a Python script to the `pikachu.xyz` and `pikachu.edges` files.

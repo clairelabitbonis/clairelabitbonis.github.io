@@ -21,3 +21,5 @@ menu:
     parent: dlcv-course
     weight: 40
 ---
+
+{{< gslides src="https://docs.google.com/presentation/d/e/2PACX-1vQB7akVX9Aqy2ULrWp7_ceEy4fPQTjbhOJsyC2uYmvo0Xz6dBuUWq1qSIiL5vJrNbAheZIAvhzX_fUr/embed?start=false&loop=false&delayms=3000" >}}
