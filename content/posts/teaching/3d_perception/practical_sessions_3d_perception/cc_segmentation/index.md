@@ -211,7 +211,7 @@ rotation_matrix = np.array(((1, 0,  0, 0),
 rotated_matrix = np.dot(rotation_matrix, homogeneous.T).T
 
 # Delete the homogeneous coordinate to get back to the original shape
-rotated_matrix = np.delete(homogeneous, 3, 1)
+rotated_matrix = np.delete(rotated_matrix, 3, 1)
 ```
 
 {{< alert type="info" >}}
