@@ -1,5 +1,5 @@
 ---
-title: "DLCV-CM-00 | Pourquoi ?"
+title: "DLCV-CM-00 | De l'I.A. au deep learning ?"
 date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
@@ -16,7 +16,7 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: "00 | Pourquoi ?"
+    name: "00 | De l'IA au DL ?"
     identifier: dlcv-course-01
     parent: dlcv-course
     weight: 10

@@ -1,6 +1,6 @@
 ---
 title: "Deep Learning for Computer Vision"
-draft: true
+draft: false
 menu:
   sidebar:
     name: Deep Learning & CV

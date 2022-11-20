@@ -1,6 +1,6 @@
 ---
 title: "Apprentissage profond pour la Vision par Ordinateur"
-draft: true
+draft: false
 menu:
   sidebar:
     name: Deep Learning & CV
