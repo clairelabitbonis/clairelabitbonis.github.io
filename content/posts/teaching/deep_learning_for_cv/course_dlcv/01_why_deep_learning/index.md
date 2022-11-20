@@ -1,5 +1,5 @@
 ---
-title: "DLCV-CM-00 | From A.I. to deep learning?"
+title: "DLCV-CM-00 | From A.I. to deep learning"
 date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
@@ -16,7 +16,7 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: "00 | From AI to DL?"
+    name: "00 | From AI to DL"
     identifier: dlcv-course-01
     parent: dlcv-course
     weight: 10
