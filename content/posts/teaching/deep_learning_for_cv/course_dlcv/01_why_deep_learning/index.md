@@ -22,3 +22,12 @@ menu:
     weight: 10
 ---
 
+{{< gslides src="https://docs.google.com/presentation/d/e/2PACX-1vSvpzsFxfdbubUOPNbqnD-AVZe9F4YUl5dI2CDqUVKKbuhGHbLa5oEYHCGRh9j5t3Jwzsov_pyjnljk/embed?start=false&loop=false&delayms=3000" >}}
+
+
+> ## Educational objectives
+>
+>This first class aims at answering three questions about *deep learning* : 
+>   * **what is it for?** 
+>   * **why is it technically interesting?**
+>   * **what are the main concepts?**
