@@ -1,5 +1,5 @@
 ---
-title: "DLCV-CM-01 | Let's go deeper"
+title: "DLCV-CM-01 | Deep dive into object detection"
 date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
@@ -16,7 +16,7 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: "01 | Let's go deeper"
+    name: "01 | DD into OD"
     identifier: dlcv-course-02
     parent: dlcv-course
     weight: 20
