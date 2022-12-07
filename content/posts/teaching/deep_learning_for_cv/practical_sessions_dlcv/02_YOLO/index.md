@@ -11,7 +11,7 @@ hightlight_languages: ["python","bash"]
 
 authors: ["Claire Labit-Bonis"]
 
-# hero: featured.png
+hero: featured.png
 
 tags: ["Teaching"]
 
