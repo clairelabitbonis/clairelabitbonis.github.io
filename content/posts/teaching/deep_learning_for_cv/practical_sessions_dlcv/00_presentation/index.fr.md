@@ -80,15 +80,6 @@ Vous l'aurez compris, l'évaluation de votre travail ne dépendra pas de la perf
 
 ## Outils et configuration du *workspace*
 
-
-### Shared file 2022-2023
-
-So that everyone has the information of which pair is working on which class and which YOLO configuration, a :fire::page_with_curl: [shared file is available](https://docs.google.com/spreadsheets/d/1smyGWTv-3chS242o51kwthJtzzOhafJqURbdl5zbyNE/edit?usp=sharing) :page_with_curl::fire:. Sharing is subject to validation, you will have to wait until you have been authorized before you can modify the document.
-
->The videos below guide you in filling this document. 
->
->For confidentiality reasons, the names used are fictitious.
-
 ### IDE et clone de YOLOv5 -- si vous voulez être en local sur vos machines (CPU *only*)
 
 Cette section vous guide dans la configuration de votre *workspace* avec les outils dont vous disposez en salle de TP. La configuration proposée se base sur un environnement Ubuntu 20.04, avec l'IDE VSCode et la création d'un environnement virtuel à l'aide de `python venv`.
@@ -169,6 +160,13 @@ Une fois connecté en SSH au serveur GPU, activez l'environnement virtuel créé
   login@serveur-gpu:~$ cd <path/to/workspace>/yolov5
   (env) login@serveur-gpu:<path/to/workspace>/yolov5$ source /scratch/marigo/venv/bin/activate
   ``` 
+### Lancer le code en mode *debug*
+Dans l'onglet *debug*, cliquez sur "créer un fichier launch.json". Vous pouvez ensuite configurer le `.json` comme ci-dessous, et adapter les paramètres d'appel :
+
+![Launch .JSON](images/launchjson.png)
+
+Vous pouvez ensuite ajouter une configuration pour le *debug* du fichier `train.py` par exemple.
+
 
 ### CVAT pour l'annotation
 

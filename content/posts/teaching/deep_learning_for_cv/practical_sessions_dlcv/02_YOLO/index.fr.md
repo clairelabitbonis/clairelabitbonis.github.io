@@ -45,12 +45,7 @@ Après réorganisation du *dataset* à la suite des TPs de la semaine dernière,
 
 ![Arborescence du dataset](images/arborescence.png)
 
-### Lancer le code en mode *debug*
-Dans l'onglet *debug*, cliquez sur "créer un fichier launch.json". Vous pouvez ensuite configurer le `.json` comme ci-dessous, et adapter les paramètres d'appel :
-
-![Launch .JSON](images/launchjson.png)
-
-Vous pouvez ensuite ajouter une configuration pour le *debug* du fichier `train.py` par exemple.
+> Connectez-vous en SSH au serveur GPU, faites une copie vers votre *home* du dossier de votre binôme et fermez la connexion SSH. Les dossiers personnels étant synchronisés, vous avez accès au dossier nouvellement copié dans votre espace personnel. Vous travaillerez dans ce dossier pour réaliser les traitements (ça évitera une mauvaise manip' qui écrase tout sur le serveur...).
 
 ## Quête principale
 ### La moulinette des labels
@@ -85,34 +80,35 @@ Votre mission est donc de vous placer dans votre dossier, et de remplacer dans c
   14: velo
 ```
 
-> **Exemple** avec le fichier `frame_00256.txt` de la classe `gourdes` :
+> **Exemple** avec le fichier `frame_00256.txt` de la classe `lunettes` :
 >
 > Avant : ![Avant moulinette](images/label_a_changer.png)
-> ERRATUM : pas 6, 5.
+> 
 > Après : ![Après moulinette](images/gourde_label.png)
 
 A vous de trouver la meilleure manière de le faire : à la main (ça peut marcher, mais vous y serez encore la semaine prochaine), avec un script *bash*, un script Python, en utilisant des librairies comme `glob` pour parcourir les dossiers, etc.
 
-### *Split, split, split!*
-Avant de lancer l'apprentissage, il faut séparer la base en trois sous-ensembles : apprentissage, validation, et test. Pour cela, YOLOv5 charge un fichier `yaml` qui contient les informations sur les classes et les fichiers contenant l'information du *split*. Par exemple, pour le détecteur de Claire / Pierre vu en cours :
 
-![YAML](images/yaml.png)
+### *Split, split, split!*
+Avant de lancer l'apprentissage, il faut séparer la base en trois sous-ensembles : apprentissage, validation, et test. 
 
 Situés dans le dossier `path`, les fichiers `train.txt`, `val.txt` et `test.txt` doivent contenir les chemins vers les images correspondantes :
 
-![train.txt](images/train_txt.png)
+![train.txt](images/train_split.png)
 
 A vous de jouer : toujours dans votre dossier (au même niveau que les dossiers 1/2/3/4/5), construisez ces trois fichiers (à l'aide d'une commande `shell`, d'un script ou autre). La répartition entre les trois *sets* est de l'ordre de 65% / 25% / 10%.
 
 ### Train
 
-Une fois qu'on aura tous les trois sous-ensembles pour chaque classe, on pourra les regrouper dans trois fichiers principaux `train.txt`, `val.txt` et `test.txt` pour tout le *dataset*. Puis vous serez en mesure de lancer l'apprentissage correspondant à la configuration que vous avez tirée au sort. 
+Une fois qu'on aura les trois sous-ensembles pour l'ensemble des classes, on pourra les regrouper dans trois fichiers principaux `train.txt`, `val.txt` et `test.txt` pour tout le *dataset*. Puis on sera en mesure de lancer l'apprentissage correspondant à la configuration que vous avez tirée au sort. 
 
-> Assurez-vous que l'apprentissage se lance et ne plante pas, puis ***arrêtez-le*** : nous (corps enseignant) lancerons les apprentissages en dehors des heures de TP d'ici la semaine prochaine, pour éviter de surcharger le serveur d'un coup. 
+> Pour cette étape, nous vous demandons simplement de construire la ligne de commande avec les bons paramètres pour votre configuration. Nous (corps enseignant) lancerons les apprentissages en dehors des heures de TP d'ici la semaine prochaine, pour éviter de surcharger le serveur d'un coup. Il faut également avoir rassemblé au préalable toutes les données que vous aurez construites aujourd'hui avant de pouvoir lancer un apprentissage.
+
+Une fois la moulinette et le *split* réalisés, il vous faudra *uploader* votre dossier sur le serveur GPU, à l'emplacement temporaire suivant : `/scratch/labi/DLCV/dataset/tmp/b/<classe>/<votre_dossier>`.
 
 ## Quêtes annexes
-### *Seeing data augmentation*
-Je veux voir du MixUp ! Modifiez le code pour qu'au moment de l'apprentissage on puisse visualiser la *data augmentation* faite par YOLO. S'il n'y a jamais de MixUp, c'est qu'il est désactivé dans le fichier de configuration. Changez les hyperparamètres qui vont bien pour que le MixUp soit effectué avec une probabilité de 0.25.
+### *Detect with coco.pt*
+Lancez `detect.py` avec les poids `yolov5s.pt` (qui sont pré-entrainés sur COCO) sur des images de votre *dataset* et visualisez les résultats dans `runs/detect/`. Faites-le tourner en mode *debug* pour pouvoir faire du pas à pas, ça vous servira pour la suite.
 
 ### Et la valeur du poids est...
 Prenez votre date de naissance, additionnez tous les chiffres entre eux récursivement, jusqu'à tomber sur un seul chiffre, \\(x\\).
@@ -124,18 +120,24 @@ Quelle est la valeur du poids du filtre de convolution n° \\(j\\) de la couche 
 
 Doliprane ?
 
-### *Detect with coco.pt*
-Lancez `detect.py` avec les poids `yolov5s.pt` (qui sont pré-entrainés sur COCO) sur des images de votre *dataset* et visualisez les résultats dans `runs/detect/`.
+Affichez aussi le contenu de la *feature map* après le *backbone*, pour voir.
 
+### *Seeing data augmentation*
+> Cette étape sera possible à la séance prochaine, quand le *training* sera correctement configuré.
+
+On veut voir du MixUp ! Modifiez le code pour qu'au moment de l'apprentissage on puisse visualiser la *data augmentation* faite par YOLO. S'il n'y a jamais de MixUp, c'est qu'il est désactivé dans le fichier de configuration des hyperparamètres. Changez les hyperparamètres qui vont bien pour que le MixUp soit effectué avec une probabilité de 0.25.
+
+Vous pouvez aussi afficher le résultat de la mosaïque et d'autres transformations par exemple.
+ 
 ### Où est Charlie ? *(ou l'activation du mode hardcore)*
 
-Pour appréhender le fonctionnement de YOLOv5, on peut répondre à un ensemble de questions. Pour en trouver les réponses, plusieurs techniques : Google, fouiner dans le code, exécuter en mode *debug*... L'idée n'est pas de répondre de manière exhaustive (certaines questions peuvent être *tricky* quand on débute en PyTorch), mais d'enclencher la réflexion sur les questions que l'on se pose quand on utilise un réseau. Enfin, l'objectif est quand même de répondre au maximum :wink:
+Pour appréhender le fonctionnement de YOLOv5, on peut répondre à un ensemble de questions. Pour en trouver les réponses, plusieurs techniques : Google, fouiner dans le code, exécuter en mode *debug*... L'idée n'est pas de répondre de manière exhaustive (certaines questions peuvent être *tricky* quand on débute en PyTorch), mais d'enclencher la réflexion sur les questions que l'on se pose quand on utilise un réseau. Cela dit, l'objectif est quand même de répondre au maximum de questions :wink:
 
 Les voilà en vrac, on dit merci à Pierre :
 
 #### Questions générales
 - Combien de classes y a-t-il dans le *dataset* VisDrone ?
-- Quelle différence de poids y a-t-il entre YOLOv5-s et YOLOv5-l ?
+- Quel est le ratio entre le nombre de poids de YOLOv5-S et YOLOv5-L ?
 - Quelle différence entre YOLOv5-p2 et YOLOv5-p6 ?
 - Que contient le `model.pt` sauvegardé ?
 - Quelles tâches d'apprentissage peuvent être réalisées avec YOLO ?
@@ -148,22 +150,23 @@ Les voilà en vrac, on dit merci à Pierre :
 - Quelles couches composent le module "Conv" de YOLO ?
 - Quelle différence entre Bottleneck et Bottleneck CSP ?
 - Dans un module PyTorch, quelle fonction doit être implémentée pour faire passer les *inputs* dans le réseau ?
+- Dans un module PyTorch, quelle fonction doit être implémentée pour que l'apprentissage des poids soit possible ?
 - Que fait le SPP ?
-- A quoi sert le Focus ? Par quoi aurait-on pu le remplacer ?
-- Concat permet-il de fusionner des couches ou des *batches* ? (Pourquoi ?)
-- Donnez la structure de la sortie de YOLO en classification
+- Comment fonctionne et à quoi sert le Focus ? Par quoi aurait-on pu le remplacer ?
+- Le Concat est-il utilisé pour fusionner des couches ou bien des *batches* ? (Pourquoi ?)
+- Donnez la structure de la sortie de YOLO en détection (bon courage !).
 
 #### Compréhension générale
 - Que prédira le réseau si on donne le fichier de configuration avec 80 classes (COCO) mais sur notre *dataset* ?
-- Que prédira le réseau si on donne le fichier de configuration avec 80 classes (COCO) mais avec nos poids sur le *dataset* COCO ?
-- Par quoi aurait-on pu remplacer la fonction d'activation SiLU (exemple : `common.py`, ligne 134) ?
+- Que prédira le réseau avec nos poids sur le *dataset* COCO ?
+- Par quoi aurait-on pu remplacer la fonction d'activation SiLU ?
 - Proposez une autre approche remplaçant le Concat.
 - A quoi sert le *dropout* de YOLO ?
 - Est-il possible de *freezer* toutes les couches ? Que se passerait-il ?
 - Par quoi peut-on remplacer la fonction UpSample de YOLO ?
 - Mieux vaut utiliser YOLOv5-M ou ResNet50 ? Pourquoi ?
 - Mieux vaut utiliser YOLOv5-L ou YOLOv5-X ? Pourquoi ?
-- Qui de Zidane ou Ancelotti a gagné le *match* ?
+- Combien de coups de tête Zidane a-t-il donné de plus qu'Ancelotti ?
 
 
 
