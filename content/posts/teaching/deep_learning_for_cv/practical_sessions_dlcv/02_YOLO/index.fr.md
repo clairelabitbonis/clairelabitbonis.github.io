@@ -55,11 +55,11 @@ Vous pouvez ensuite ajouter une configuration pour le *debug* du fichier `train.
 ## Quête principale
 ### La moulinette des labels
 
-{{< alert type="danger" >}}
+<!-- {{< alert type="danger" >}}
 ***/!\ DANGER /!\\*** 
 
 Vous allez travailler dans les dossiers du *dataset* directement. Ne vous trompez pas, n'écrasez pas vos fichiers de labels ou ceux de vos camarades, ce serait dommage, il faudrait tout ré-annoter... :angel:
-{{< /alert >}}
+{{< /alert >}} -->
 
 La semaine dernière dans CVAT, vous avez tous annoté votre classe d'objet indépendamment des autres binômes. Dans vos fichiers de labels, votre numéro de classe est donc `0`, quelle que soit votre classe. Or pour entrainer un détecteur multi-classes, chaque classe doit porter un indice différent.
 
@@ -73,7 +73,7 @@ Votre mission est donc de vous placer dans votre dossier, et de remplacer dans c
   2: bague
   3: chaise
   4: ecouteurs
-  6: gourdes
+  5: gourdes
   6: lunettes
   7: montre
   8: voiture
@@ -88,7 +88,7 @@ Votre mission est donc de vous placer dans votre dossier, et de remplacer dans c
 > **Exemple** avec le fichier `frame_00256.txt` de la classe `gourdes` :
 >
 > Avant : ![Avant moulinette](images/label_a_changer.png)
->
+> ERRATUM : pas 6, 5.
 > Après : ![Après moulinette](images/gourde_label.png)
 
 A vous de trouver la meilleure manière de le faire : à la main (ça peut marcher, mais vous y serez encore la semaine prochaine), avec un script *bash*, un script Python, en utilisant des librairies comme `glob` pour parcourir les dossiers, etc.
