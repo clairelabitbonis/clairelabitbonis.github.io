@@ -92,7 +92,7 @@ A vous de trouver la meilleure manière de le faire : à la main (ça peut march
 ### *Split, split, split!*
 Avant de lancer l'apprentissage, il faut séparer la base en trois sous-ensembles : apprentissage, validation, et test. 
 
-Situés dans le dossier `path`, les fichiers `train.txt`, `val.txt` et `test.txt` doivent contenir les chemins vers les images correspondantes :
+Les fichiers `train.txt`, `val.txt` et `test.txt` doivent contenir les chemins vers les images correspondantes :
 
 ![train.txt](images/train_split.png)
 
