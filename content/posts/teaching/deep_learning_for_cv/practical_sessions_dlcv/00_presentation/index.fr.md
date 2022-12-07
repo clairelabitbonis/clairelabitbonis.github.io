@@ -80,28 +80,7 @@ Vous l'aurez compris, l'évaluation de votre travail ne dépendra pas de la perf
 
 ## Outils et configuration du *workspace*
 
-### Fichier partagé 2022-2023
-
-Afin que tout le monde ait l'information de quel binôme travaille sur quelle classe et quelle configuration de YOLO, un :fire::page_with_curl: [fichier partagé est mis à votre disposition](https://docs.google.com/spreadsheets/d/1smyGWTv-3chS242o51kwthJtzzOhafJqURbdl5zbyNE/edit?usp=sharing) :page_with_curl::fire:. Le partage est soumis à validation, il faudra attendre d'y avoir été autorisé avant de pouvoir modifier le document.
-
->Les vidéos ci-après vous guident dans le remplissage de ce document. 
->
->Par souci de confidentialité, les noms utilisés sont fictifs.
-
-***Let's go*** :
-___________________
-
-* :fire::computer: <mark>***étape 1*</mark> : configuration des binômes**
-___________________
-
-* :fire::computer: <mark>***étape 2*</mark> : choix des classes d'objets**
-___________________
-
-* :fire::computer: <mark>***étape 3*</mark> : choix de la configuration de YOLOv5**
-___________________
-
-
-### IDE et clone de YOLOv5
+### IDE et clone de YOLOv5 -- si vous voulez être en local sur vos machines (CPU *only*)
 
 Cette section vous guide dans la configuration de votre *workspace* avec les outils dont vous disposez en salle de TP. La configuration proposée se base sur un environnement Ubuntu 20.04, avec l'IDE VSCode et la création d'un environnement virtuel à l'aide de `python venv`.
 Vous êtes évidemment libres d'utiliser n'importe quel IDE si vous avez d'autres préférences, ou d'utiliser Anaconda pour créer votre environnement virtuel... le principal étant que ça marche !
@@ -173,13 +152,18 @@ ___________________
 
 :fire::fireworks::thumbsup::star2: **Well done !**
 
+### IDE et clone de YOLOv5 -- pour tourner sur le serveur GPU
+
+Une fois connecté en SSH au serveur GPU, activez l'environnement virtuel créé par Pierre :
+
+  ```sh
+  login@serveur-gpu:~$ cd <path/to/workspace>/yolov5
+  (env) login@serveur-gpu:<path/to/workspace>/yolov5$ source /scratch/marigo/venv/bin/activate
+  ``` 
+
 ### CVAT pour l'annotation
 
 ### Serveur de données pour le *dataset*
-
-
-
-
 
 ## Planning des séances
 
