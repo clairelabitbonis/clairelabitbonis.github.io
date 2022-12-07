@@ -80,6 +80,15 @@ Vous l'aurez compris, l'évaluation de votre travail ne dépendra pas de la perf
 
 ## Outils et configuration du *workspace*
 
+
+### Shared file 2022-2023
+
+So that everyone has the information of which pair is working on which class and which YOLO configuration, a :fire::page_with_curl: [shared file is available](https://docs.google.com/spreadsheets/d/1smyGWTv-3chS242o51kwthJtzzOhafJqURbdl5zbyNE/edit?usp=sharing) :page_with_curl::fire:. Sharing is subject to validation, you will have to wait until you have been authorized before you can modify the document.
+
+>The videos below guide you in filling this document. 
+>
+>For confidentiality reasons, the names used are fictitious.
+
 ### IDE et clone de YOLOv5 -- si vous voulez être en local sur vos machines (CPU *only*)
 
 Cette section vous guide dans la configuration de votre *workspace* avec les outils dont vous disposez en salle de TP. La configuration proposée se base sur un environnement Ubuntu 20.04, avec l'IDE VSCode et la création d'un environnement virtuel à l'aide de `python venv`.
