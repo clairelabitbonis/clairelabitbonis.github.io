@@ -78,7 +78,7 @@ Chaque binôme produira une capsule vidéo (c'est-à-dire une séquence vidéo) 
 
 Vous l'aurez compris, l'évaluation de votre travail ne dépendra pas de la performance de votre apprentissage (et donc de la configuration qui vous aura été attribuée), mais plutôt de l'analyse que vous serez capable d'en faire.
 
-## Outils et configuration du *workspace*
+<!-- ## Outils et configuration du *workspace*
 
 ### IDE et clone de YOLOv5 -- si vous voulez être en local sur vos machines (CPU *only*)
 
@@ -170,7 +170,7 @@ Vous pouvez ensuite ajouter une configuration pour le *debug* du fichier `train.
 
 ### CVAT pour l'annotation
 
-### Serveur de données pour le *dataset*
+### Serveur de données pour le *dataset* -->
 
 ## Planning des séances
 
