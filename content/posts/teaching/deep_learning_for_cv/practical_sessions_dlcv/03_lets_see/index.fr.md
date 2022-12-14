@@ -23,7 +23,7 @@ menu:
     weight: 30
 ---
 
-## **Previously in "DLCV Practical sessions"...**
+## **Previously on "DLCV Practical sessions"...**
 
  <center>
 
