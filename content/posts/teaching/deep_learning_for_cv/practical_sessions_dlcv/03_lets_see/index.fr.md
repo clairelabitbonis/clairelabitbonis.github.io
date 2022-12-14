@@ -27,7 +27,7 @@ menu:
 
  <center>
 
-<img src="images/previously_in.png" alt="Previously in DLCV practical sessions" width="70%"/>
+<img src="images/previously_on_dlcv.png" alt="Previously on DLCV practical sessions" width="70%"/>
 
  </center>
 
