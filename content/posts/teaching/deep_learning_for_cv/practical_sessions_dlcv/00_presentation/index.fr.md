@@ -78,6 +78,11 @@ Chaque binôme produira une capsule vidéo (c'est-à-dire une séquence vidéo) 
 
 Vous l'aurez compris, l'évaluation de votre travail ne dépendra pas de la performance de votre apprentissage (et donc de la configuration qui vous aura été attribuée), mais plutôt de l'analyse que vous serez capable d'en faire.
 
+{{< alert type="danger" >}}
+La **deadline** est fixée au 12 janvier 2023 à 18h. Vous devez déposer sur Moodle votre fichier au format `.mp4` ; il ne doit pas dépasser 256 Mo.
+
+{{< /alert >}}
+
 <!-- ## Outils et configuration du *workspace*
 
 ### IDE et clone de YOLOv5 -- si vous voulez être en local sur vos machines (CPU *only*)
