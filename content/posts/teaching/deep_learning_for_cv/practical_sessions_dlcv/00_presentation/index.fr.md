@@ -70,18 +70,49 @@ Pour cela, nous passerons par plusieurs étapes :
 
 ## Modalités d'évaluation
 
-Chaque binôme produira une capsule vidéo (c'est-à-dire une séquence vidéo) d'environ 5~10 minutes. Bien sûr, la pertinence du contenu importe plus que la longueur de la capsule ; libre à vous donc de décider du temps qu'il vous faut pour aborder, par exemple :
-* les statistiques de vos acquisitions (la classe choisie, les différents contextes d'acquisition, le nombre d'images annotées, la stratégie d'annotation, le temps passé, les difficultés rencontrées...) ;
-* l'analyse quantitative de vos résultats (métriques de performance, nombre d'*epochs* pour converger, rapidité d'exécution du modèle, répartition de la performance sur les différentes classes d'objets, potentiel *overfitting*, comparaison des métriques aux autres configurations et interprétation de cette comparaison...) ;
-* l'analyse qualitative de vos résultats (visualisation de l'exécution du modèle, performances selon le contexte d'acquisition, selon la qualité de l'annotation...) ;
-* d'autres idées que vous pourriez avoir.
-
-Vous l'aurez compris, l'évaluation de votre travail ne dépendra pas de la performance de votre apprentissage (et donc de la configuration qui vous aura été attribuée), mais plutôt de l'analyse que vous serez capable d'en faire.
-
 {{< alert type="danger" >}}
-La **deadline** est fixée au 12 janvier 2023 à 18h. Vous devez déposer sur Moodle votre fichier au format `.mp4` ; il ne doit pas dépasser 256 Mo.
-
+La **deadline** est fixée au 12 janvier 2023 à 18h. Vous devez déposer sur Moodle :
+* votre capsule vidéo au format `.mp4` ; elle ne doit pas dépasser 256 Mo ;
+* un fichier `.pdf` avec vos réponses aux quêtes annexes.
 {{< /alert >}}
+
+### Capsule vidéo
+Chaque binôme produira une capsule vidéo (c'est-à-dire une séquence vidéo) d'environ 10 minutes. Bien sûr, la pertinence du contenu importe plus que la longueur de la capsule. 
+
+Le tableau d'analyse ci-dessous peut vous aider à structurer votre analyse et vous donne une idée des points qui seront évalués :
+
+<center>
+
+![Tableau d'analyse](images/modalites_evaluation.png)
+
+</center>
+
+Globalement, on aura :
+* les <mark>trois grandes thématiques</mark> vues en cours et en TP peuvent donner lieu à analyse : 
+  * le ***dataset*** (acquisition, annotation), 
+  * l'**apprentissage**, 
+  * et l'**inférence** (= la détection appliquée à des données inconnues ou de test avec le modèle entrainé) ;
+* <mark>trois types d'analyse</mark> possibles :
+  * l'**analyse quantitative** qui consiste à analyser la répartition des classes, le nombre d'instances annotées, présenter des chiffres, interpréter des courbes de résultats, des temps d'exécution du réseau en fonction de sa taille, de la résolution image, commenter les métriques de performance en fonction du *split*, de la classe, etc.,
+  * l'**analyse qualitative** qui consiste à analyser visuellement les performances d'une configuration de réseau donnée, par exemple se rendre compte que les petits réseaux ont plus de mal à détecter les petits objets, que la classe `velo` est mieux détectée quand le vélo prend toute l'image (faire le lien avec l'annotation qui a été faite), ou que les petits objets circulaires et orangés sont souvent détectés comme des lentilles (exemple : l'oeil du pigeon...),
+  * le **retour d'expérience** : je vous demande votre avis ! Comment vous êtes-vous réparti l'annotation dans le binôme ? Entre différents binômes qui ont annoté la même classe ? Quelles difficultés avez-vous rencontrées ? Quelles questions vous êtes-vous posées au moment de l'acquisition ? Que feriez-vous différemment ? Quelle a été votre stratégie pour choisir vos exemples d'inférence ? Comment avez-vous décidé de la répartition entre les différents *splits* de *train*, *val* et *test* ? 
+* <mark>deux niveaux d'analyse</mark> :
+  * **micro** : vous pouvez analyser votre classe d'annotation (métriques de performance sur train/val/test, quantité annotée, type d'annotation, nombre d'instances par image, stratégie d'annotation, etc.), les performances fines de votre configuration de réseau* (temps d'exécution, taille du réseau, place mémoire, nombre de couches, de paramètres, analyse des courbes F1, PR, etc.),
+  * **macro** : vous *vs.* la promo entière et les autres configurations. Par exemple, une analyse plus globale qui compare les différentes courbes F1 des différents apprentissages -- quelle est l'influence de la taille du réseau ? Quelle configuration converge le mieux ? Le plus rapidement ? Laquelle gère mieux les petits objets ? Quelle classe se distingue des autres et pourquoi ? Quelle a été la dynamique de groupe globalement ? Quelles discussions avez-vous eues avec les autres binômes pour vous accorder sur une stratégie d'annotation ? 
+  
+*celle tirée au sort en TP -- si elle était trop mauvaise, prenez-en une autre, pas grave, il faut pouvoir en dire quelque chose d'autre que "c'est nul et ça marche pas"... 
+
+> Il y a **des millions de choses** à dire et tout n'est pas applicable à toutes les classes d'objets, toutes les configurations ni tous les binômes. Etre exhaustif vous demanderait une analyse de 45 minutes à 2 jours (rien que ça). Soyez synthétiques et pertinents. Ce n'est pas une tâche simple, mais il y a de la matière à votre disposition.
+>
+> **Pas de contrainte sur le format** : une vidéo d'un PPT qui défile, une superproduction *full* 3D pour concurrencer Avatar 2... l'important est d'avoir un contenu pertinent, et que ça ne soit pas la corvée du siècle pour vous. Amusez-vous comme on s'est amusés en cours et en TP, mais vendez-nous une analyse de rêve ;)
+
+### Quêtes annexes
+
+Le plus pratique pour répondre à ces quêtes annexes est de noter vos réponses dans un rapport, d'où la contrainte donnée plus haut d'un `.pdf` déposé sur Moodle. 
+
+Je vous laisse aller voir [ici](http://clairelabitbonis.github.io/fr/posts/teaching/deep_learning_for_cv/practical_sessions_dlcv/02_yolo/#qu%C3%AAtes-annexes) pour le contenu des quêtes annexes.
+
+Les quêtes annexes sont annexes, mais elles vous apporteront du bonus si vous les faites. Rappelez-vous : Far Cry, Assassin's Creed, tout ça tout ça.
 
 <!-- ## Outils et configuration du *workspace*
 
