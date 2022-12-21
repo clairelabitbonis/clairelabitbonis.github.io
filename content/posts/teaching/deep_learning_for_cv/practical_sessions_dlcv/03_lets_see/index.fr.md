@@ -205,7 +205,7 @@ ___________________
 >
 > Il y a DEUX serveurs GPU à l'INSA ! accessibles *via* srv-gei-gpu1 et srv-gei-gpu2. Un serveur contient 4 GPUs. Vous pouvez lancer un apprentissage multi-GPUs sur un même serveur, et des apprentissages distincts en parallèle sur les deux serveurs (ce sont des machines physiques différentes, vous ne pourrez pas faire par exemple un apprentissage multi-GPUs sur 2*4 GPUs, mais vous pourrez lancer un apprentissage parallélisé sur les 4 GPUs du serveur 1, et un autre apprentissage parallélisé sur les 4 GPUs du serveur 2).
 
-### La manière dont je travaille
+### La manière dont je travaille (et ce n'est donc que mon point de vue)
 
 J'ai toujours deux usages différents quand je lance des apprentissages ou une inférence : 
 * l'usage en mode *debug* qui me permet de naviguer dans le *workspace*, d'exécuter le code pas à pas, d'avoir une vue pratique des fichiers que je manipule, etc. Ca me permet de tout mettre en place et d'être sûre que tout fonctionne avant de lancer mes scripts ; 
