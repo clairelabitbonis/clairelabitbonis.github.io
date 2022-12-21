@@ -71,14 +71,16 @@ Pour cela, nous passerons par plusieurs étapes :
 ## Modalités d'évaluation
 
 {{< alert type="danger" >}}
-La **deadline** est fixée au 12 janvier 2023 à 20h. Vous devez déposer sur Moodle :
+La **deadline** est fixée au 12 janvier 2023 à 20h. Vous devez déposer [sur Moodle](https://moodle.insa-toulouse.fr/course/view.php?id=1154&section=4) :
 * votre capsule vidéo au format `.mp4` ;
 * un fichier `.pdf` avec vos réponses aux quêtes annexes.
 Les deux fichiers additionnés ne doivent pas dépasser 256Mo.
 {{< /alert >}}
 
 ### Capsule vidéo
-Chaque binôme produira une capsule vidéo (c'est-à-dire une séquence vidéo) d'environ 10 minutes. Bien sûr, la pertinence du contenu importe plus que la longueur de la capsule. 
+Chaque binôme produira une capsule vidéo (c'est-à-dire une séquence vidéo) d'environ 10 minutes. Bien sûr, la pertinence du contenu importe plus que la longueur de la capsule, même si la consigne de temps est à respecter. 
+
+> Si les 256 Mo sont trop difficiles à atteindre, donnez-nous un lien [Youtube vers votre vidéo par exemple](https://youtu.be/eBGIQ7ZuuiU). Ou Drive. Ou autre. On est à l'ère du numérique, on trouvera une solution.
 
 Le tableau d'analyse ci-dessous peut vous aider à structurer votre analyse et vous donne une idée des points qui seront évalués :
 
