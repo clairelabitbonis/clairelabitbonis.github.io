@@ -210,7 +210,7 @@ J'ai toujours deux usages différents quand je lance des apprentissages ou une i
 * l'usage en mode *debug* qui me permet de naviguer dans le *workspace*, d'exécuter le code pas à pas, d'avoir une vue pratique des fichiers que je manipule, etc. Ca me permet de tout mettre en place et d'être sûre que tout fonctionne avant de lancer mes scripts ; 
 * l'usage en mode *release* : je lance tous les apprentissages, inférences, etc. d'une traite, la plupart du temps en mode console. Si j'ai besoin de monitorer les apprentissages, je lance `tensorboard` *via* VS Code en SSH sur srv-ens-calcul ou sur srv-gei-gpu selon la configuration dans laquelle je suis.
 
-#### Fichiers nécessaires pour un apprentissage sur données *custom*
+### Fichiers nécessaires pour un apprentissage sur données *custom*
 Pour pouvoir entrainer YOLOv5 comme on l'a fait en TP, il faut :
 * les données avec la structure `<path/to/data>/images/*.jpg` et `<path/to/data>/labels/*.txt` -- pour chaque image, un fichier texte avec son annotation au format YOLO ;
 * un fichier `train.txt` contenant les chemins d'accès à toutes les images du *split* de *train*. Idem pour `val.txt` et `test.txt` ;
@@ -219,20 +219,20 @@ Pour pouvoir entrainer YOLOv5 comme on l'a fait en TP, il faut :
 <img src="images/fichier_config_yolo.png" alt="Labels" width="80%"/>
 </center>
 
-#### La configuration *debug*
+### La configuration *debug*
 
-##### *Si je suis à l'extérieur de l'INSA :*
+#### *Si je suis à l'extérieur de l'INSA :*
 1. j'ouvre VS Code en local sur ma machine ;
 2. j'ouvre une connexion SSH avec srv-ens-calcul.insa-toulouse.fr après avoir installé l'extension Remote-SSH (Ctrl+Shift+X pour ouvrir le gestionnaire d'extension)
 
-##### *Si je suis à l'INSA**
+#### *Si je suis à l'INSA**
 *ou sur montp.insa-toulouse.fr avec le VPN et une interface graphique
 1. j'ouvre VS Code ;
 2. j'ouvre une connexion SSH directement avec srv-gei-gpu1 (ou srv-gei-gpu2) après avoir installé l'extension Remote-SSH (Ctrl+Shift+X pour ouvrir le gestionnaire d'extension)
 
 > Dans le premier cas, je bénéficie de l'environnement matériel des postes non-GPU pour exécuter le code en pas à pas. Dans le deuxième cas, je bénéficie directement du matériel du serveur GPU. Peu de différence tant que j'exécute en mode *debug*, le traitement n'a pas besoin d'être ultra-rapide. Si je veux lancer un apprentissage, je suis obligée d'être sur le GPU (ce sera beaucoup trop long sinon).
 
-##### Configurations de *debug*
+#### Configurations de *debug*
 
 Pour exécuter `train.py` ou `detect.py` en mode *debug* et ainsi pouvoir faire une exécution pas à pas avec des points d'arrêt dans le code, il faut créer le fichier `.vscode/launch.json` avec les paramètres désirés pour l'exécution : 
 
@@ -251,7 +251,7 @@ Il suffit ensuite de lancer l'une ou l'autre des configurations depuis l'onglet 
 </center>
 
 
-##### En mode *release*
+#### En mode *release*
 
 Une fois que tout est OK et que je suis prête à lancer mes apprentissages, je procède en mode console :
 
