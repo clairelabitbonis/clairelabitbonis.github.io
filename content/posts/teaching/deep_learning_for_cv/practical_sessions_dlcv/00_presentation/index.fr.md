@@ -71,9 +71,10 @@ Pour cela, nous passerons par plusieurs étapes :
 ## Modalités d'évaluation
 
 {{< alert type="danger" >}}
-La **deadline** est fixée au 12 janvier 2023 à 18h. Vous devez déposer sur Moodle :
-* votre capsule vidéo au format `.mp4` ; elle ne doit pas dépasser 256 Mo ;
+La **deadline** est fixée au 12 janvier 2023 à 20h. Vous devez déposer sur Moodle :
+* votre capsule vidéo au format `.mp4` ;
 * un fichier `.pdf` avec vos réponses aux quêtes annexes.
+Les deux fichiers additionnés ne doivent pas dépasser 256Mo.
 {{< /alert >}}
 
 ### Capsule vidéo
