@@ -1,5 +1,5 @@
 ---
-title: "DLCV-TP-11 | Let's see..."
+title: "DLCV-TP-10 | Let's see..."
 date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
@@ -17,7 +17,7 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: "03 | Let's see..."
+    name: "10 | Let's see..."
     identifier: dlcv-practical-sessions-03
     parent: dlcv-practical-sessions
     weight: 30

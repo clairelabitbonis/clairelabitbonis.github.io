@@ -1,5 +1,5 @@
 ---
-title: "DLCV-TP-11 | Voyons..."
+title: "DLCV-TP-10 | Voyons..."
 date: 2022-12-14T10:00:00+09:00
 description: ""
 summary: ""
@@ -17,7 +17,7 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: "11 | Voyons..."
+    name: "10 | Voyons..."
     identifier: dlcv-practical-sessions-03
     parent: dlcv-practical-sessions
     weight: 30
