@@ -112,7 +112,7 @@ Pour exécuter le code soit sur `data02_object`, soit sur `data03_object`, il su
 ```python
 # Load pre-processed model point cloud
 print("Extracting MODEL object...")
-model = datatools.load_XYZ_data_to_vec('data/data01_segmented.xyz')
+model = datatools.load_XYZ_data_to_vec('data/data01_segmented.xyz')[:,:3]
 
 # Load raw data point cloud
 print("Extracting DATA02 object...")
