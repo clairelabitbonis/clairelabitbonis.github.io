@@ -142,14 +142,17 @@ The second part of the code consists in coding the call to the `icp` function of
 
 ```python
 ##########################################################################
-# Run ICP to get data transformation w.r.t the model, final error and execution time
+# Call ICP:
+#   Here you have to call the icp function in icp library, get its return
+#   variables and apply the transformation to the model in order to overlay
+#   it onto the reference model.
 
-#**************** To be completed ****************
-T = np.eye(4,4)
-errors = np.zeros((1,100))
-iterations = 100
-total_time=0
-#*************************************************
+matrix = np.eye(4,4)        # Transformation matrix returned by icp function
+errors = np.zeros((1,100))  # Error value for each iteration of ICP
+iterations = 100            # The total number of iterations applied by ICP
+total_time=0                # Total time of convergence of ICP
+
+# ------- YOUR TURN HERE -------- 
 
 # Draw results
 fig = plt.figure(1, figsize=(20, 5))
