@@ -133,14 +133,17 @@ La deuxième partie du code consiste à coder l'appel à la fonction `icp` de la
 
 ```python
 ##########################################################################
-# Run ICP to get data transformation w.r.t the model, final error and execution time
+# Call ICP:
+#   Here you have to call the icp function in icp library, get its return
+#   variables and apply the transformation to the model in order to overlay
+#   it onto the reference model.
 
-#**************** To be completed ****************
-T = np.eye(4,4)
-errors = np.zeros((1,100))
-iterations = 100
-total_time=0
-#*************************************************
+matrix = np.eye(4,4)        # Transformation matrix returned by icp function
+errors = np.zeros((1,100))  # Error value for each iteration of ICP
+iterations = 100            # The total number of iterations applied by ICP
+total_time=0                # Total time of convergence of ICP
+
+# ------- YOUR TURN HERE -------- 
 
 # Draw results
 fig = plt.figure(1, figsize=(20, 5))
@@ -183,26 +186,23 @@ $$P_f^{(4 \times N)} = T^{(4 \times 4)} . P_i^{(4 \times N)}$$
 Dans le code, la troisième partie consiste donc à appliquer la matrice de transformation au modèle à comparer. Un exemple de l'application d'une matrice de rotation homogène à une autre matrice est donné ci-après :
 
 ```python
-"""
-  EXAMPLE: How to transform a 3D matrix with a rotation on its x-axis:
-"""
-# Construct a homogeneous matrix from the original one
-homogeneous = np.ones((original.shape[0], 4))
-homogeneous[:,:3] = np.copy(original)
-
-# Define the rotation matrix
+# EXAMPLE of how to apply a homogeneous transformation to a set of points
+''' 
+# (1) Make a homogeneous representation of the model to transform
+homogeneous_model = np.ones((original_model.shape[0], 4))   ##### Construct a [N,4] matrix
+homogeneous_model[:,0:3] = np.copy(original_model)          ##### Replace the X,Y,Z columns with the model points
+# (2) Construct the R|t homogeneous transformation matrix / here a rotation of 36 degrees around x axis
 theta = np.radians(36)
 c, s = np.cos(theta), np.sin(theta)
-rotation_matrix = np.array(((1, 0,  0, 0),
-                             0, c, -s, 0),
-                             0, s,  c, 0),
-                             0, 0,  0, 1)))
-
-# Apply the rotation to the original point cloud
-rotated_matrix = np.dot(rotation_matrix, homogeneous.T).T
-
-# Delete the homogeneous coordinate to get back to the original shape
-rotated_matrix = np.delete(rotated_matrix, 3, 1)
+homogeneous_matrix = np.array([[1, 0, 0, 0],
+                               [0, c, s, 0],
+                               [0, -s, c, 0],
+                               [0, 0, 0, 1]])
+# (3) Apply the transformation
+transformed_model = np.dot(homogeneous_matrix, homogeneous_model.T).T
+# (4) Remove the homogeneous coordinate
+transformed_model = np.delete(transformed_model, 3, 1)
+'''
 ```
 
 {{< alert type="info" >}}
