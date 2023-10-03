@@ -195,26 +195,22 @@ $$P_f^{(4 \times N)} = T^{(4 \times 4)} . P_i^{(4 \times N)}$$
 In the code, the third part consists in applying the transformation matrix to the model to be compared. An example of how to apply a homogeneous transformation to the matrix can be written as follows:
 
 ```python
-"""
-  EXAMPLE: How to transform a 3D matrix with a rotation on its x-axis:
-"""
-# Construct a homogeneous matrix from the original one
-homogeneous = np.ones((original.shape[0], 4))
-homogeneous[:,:3] = np.copy(original)
-
-# Define the rotation matrix
+# EXAMPLE of how to apply a homogeneous transformation to a set of points
+''' 
+# (1) Make a homogeneous representation of the model to transform
+homogeneous_model = np.ones((original_model.shape[0], 4))   ##### Construct a [N,4] matrix
+homogeneous_model[:,0:3] = np.copy(original_model)          ##### Replace the X,Y,Z columns with the model points
+# (2) Construct the R|t homogeneous transformation matrix / here a rotation of 36 degrees around x axis
 theta = np.radians(36)
 c, s = np.cos(theta), np.sin(theta)
-rotation_matrix = np.array(((1, 0,  0, 0),
-                             0, c, -s, 0),
-                             0, s,  c, 0),
-                             0, 0,  0, 1)))
-
-# Apply the rotation to the original point cloud
-rotated_matrix = np.dot(rotation_matrix, homogeneous.T).T
-
-# Delete the homogeneous coordinate to get back to the original shape
-rotated_matrix = np.delete(rotated_matrix, 3, 1)
+homogeneous_matrix = np.array([[1, 0, 0, 0],
+                               [0, c, s, 0],
+                               [0, -s, c, 0],
+                               [0, 0, 0, 1]])
+# (3) Apply the transformation
+transformed_model = np.dot(homogeneous_matrix, homogeneous_model.T).T
+# (4) Remove the homogeneous coordinate
+transformed_model = np.delete(transformed_model, 3, 1)
 ```
 
 {{< alert type="info" >}}
