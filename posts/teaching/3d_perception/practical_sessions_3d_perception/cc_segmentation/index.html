@@ -30,14 +30,17 @@ Pour exécuter le code soit sur <code>data02_object</code>, soit sur <code>data0
 </span></span><span style=display:flex><span>data <span style=color:#f92672>=</span> data02_object
 </span></span><span style=display:flex><span><span style=color:#75715e># data = data03_object</span>
 </span></span></code></pre></div><h3 id=appel-à-icp>Appel à ICP</h3><p>La deuxième partie du code consiste à coder l&rsquo;appel à la fonction <code>icp</code> de la librairie <code>icp</code>&mldr;</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e>##########################################################################</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Run ICP to get data transformation w.r.t the model, final error and execution time</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Call ICP:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   Here you have to call the icp function in icp library, get its return</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   variables and apply the transformation to the model in order to overlay</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   it onto the reference model.</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#**************** To be completed ****************</span>
-</span></span><span style=display:flex><span>T <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>eye(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>4</span>)
-</span></span><span style=display:flex><span>errors <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>zeros((<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>100</span>))
-</span></span><span style=display:flex><span>iterations <span style=color:#f92672>=</span> <span style=color:#ae81ff>100</span>
-</span></span><span style=display:flex><span>total_time<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#*************************************************</span>
+</span></span><span style=display:flex><span>matrix <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>eye(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>4</span>)        <span style=color:#75715e># Transformation matrix returned by icp function</span>
+</span></span><span style=display:flex><span>errors <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>zeros((<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>100</span>))  <span style=color:#75715e># Error value for each iteration of ICP</span>
+</span></span><span style=display:flex><span>iterations <span style=color:#f92672>=</span> <span style=color:#ae81ff>100</span>            <span style=color:#75715e># The total number of iterations applied by ICP</span>
+</span></span><span style=display:flex><span>total_time<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>                <span style=color:#75715e># Total time of convergence of ICP</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ------- YOUR TURN HERE -------- </span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e># Draw results</span>
 </span></span><span style=display:flex><span>fig <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>figure(<span style=color:#ae81ff>1</span>, figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>5</span>))
@@ -64,26 +67,23 @@ Pour exécuter le code soit sur <code>data02_object</code>, soit sur <code>data0
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>        total_time : execution time
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#39;&#39;&#39;</span>
 </span></span></code></pre></div><h3 id=transformation-du-modèle>Transformation du modèle</h3><p>La matrice <code>T</code> de transformation issue d&rsquo;ICP est la matrice de passage homogène permettant de calquer le modèle <code>data</code>, passé en paramètre de la fonction <code>icp</code>, sur le modèle <code>ref</code>.
-Pour rappel, l&rsquo;application d&rsquo;une matrice homogène pour transformer un ensemble de points d&rsquo;un repère initial \(\mathcal{R_i}\) vers un repère final \(\mathcal{R_f}\) s&rsquo;effectue de la manière suivante :</p><p>$$P_f^{(4 \times N)} = T^{(4 \times 4)} . P_i^{(4 \times N)}$$</p><p>Dans le code, la troisième partie consiste donc à appliquer la matrice de transformation au modèle à comparer. Un exemple de l&rsquo;application d&rsquo;une matrice de rotation homogène à une autre matrice est donné ci-après :</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#e6db74>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>  EXAMPLE: How to transform a 3D matrix with a rotation on its x-axis:
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>&#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Construct a homogeneous matrix from the original one</span>
-</span></span><span style=display:flex><span>homogeneous <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>ones((original<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>0</span>], <span style=color:#ae81ff>4</span>))
-</span></span><span style=display:flex><span>homogeneous[:,:<span style=color:#ae81ff>3</span>] <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>copy(original)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Define the rotation matrix</span>
-</span></span><span style=display:flex><span>theta <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>radians(<span style=color:#ae81ff>36</span>)
-</span></span><span style=display:flex><span>c, s <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>cos(theta), np<span style=color:#f92672>.</span>sin(theta)
-</span></span><span style=display:flex><span>rotation_matrix <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array(((<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>,  <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>),
-</span></span><span style=display:flex><span>                             <span style=color:#ae81ff>0</span>, c, <span style=color:#f92672>-</span>s, <span style=color:#ae81ff>0</span>),
-</span></span><span style=display:flex><span>                             <span style=color:#ae81ff>0</span>, s,  c, <span style=color:#ae81ff>0</span>),
-</span></span><span style=display:flex><span>                             <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>,  <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>)))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Apply the rotation to the original point cloud</span>
-</span></span><span style=display:flex><span>rotated_matrix <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>dot(rotation_matrix, homogeneous<span style=color:#f92672>.</span>T)<span style=color:#f92672>.</span>T
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Delete the homogeneous coordinate to get back to the original shape</span>
-</span></span><span style=display:flex><span>rotated_matrix <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>delete(rotated_matrix, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>1</span>)
+Pour rappel, l&rsquo;application d&rsquo;une matrice homogène pour transformer un ensemble de points d&rsquo;un repère initial \(\mathcal{R_i}\) vers un repère final \(\mathcal{R_f}\) s&rsquo;effectue de la manière suivante :</p><p>$$P_f^{(4 \times N)} = T^{(4 \times 4)} . P_i^{(4 \times N)}$$</p><p>Dans le code, la troisième partie consiste donc à appliquer la matrice de transformation au modèle à comparer. Un exemple de l&rsquo;application d&rsquo;une matrice de rotation homogène à une autre matrice est donné ci-après :</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># EXAMPLE of how to apply a homogeneous transformation to a set of points</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>&#39;&#39;&#39; 
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># (1) Make a homogeneous representation of the model to transform
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>homogeneous_model = np.ones((original_model.shape[0], 4))   ##### Construct a [N,4] matrix
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>homogeneous_model[:,0:3] = np.copy(original_model)          ##### Replace the X,Y,Z columns with the model points
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># (2) Construct the R|t homogeneous transformation matrix / here a rotation of 36 degrees around x axis
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>theta = np.radians(36)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>c, s = np.cos(theta), np.sin(theta)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>homogeneous_matrix = np.array([[1, 0, 0, 0],
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                               [0, c, s, 0],
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                               [0, -s, c, 0],
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                               [0, 0, 0, 1]])
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># (3) Apply the transformation
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>transformed_model = np.dot(homogeneous_matrix, homogeneous_model.T).T
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># (4) Remove the homogeneous coordinate
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>transformed_model = np.delete(transformed_model, 3, 1)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&#39;&#39;&#39;</span>
 </span></span></code></pre></div><div class="alert alert-info"><strong><p>La variable <code>original</code> est un tableau de taille \(N \times 3\), \(N\) étant le nombre de points du modèle et 3 ses coordonnées \(X\), \(Y\) et \(Z\).</p><p>Il faut veiller à lui ajouter une coordonnée homogène et appliquer les transposées nécessaires pour que la multiplication de matrices fonctionne.
 Aidez-vous de l&rsquo;exemple donné dans le code pour réaliser cette étape.</p></strong></div><p>Vous pouvez ensuite afficher le résultat en décommentant et complétant la ligne <code>datatools.draw_data...</code>.</p><h3 id=affichage-de-lerreur>Affichage de l&rsquo;erreur</h3><p>Décommentez et affichez l&rsquo;erreur dans la dernière partie du code, en changeant les &ldquo;&mldr;&rdquo; par les variables correspondantes :</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Display error progress over time</span>
 </span></span><span style=display:flex><span><span style=color:#75715e># **************** To be uncommented and completed ****************</span>
