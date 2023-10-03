@@ -82,7 +82,7 @@ En cliquant sur *split*, deux nuages sont créés, correspondant aux deux côté
 
 Assurez-vous que le nuage nouvellement créé contient environ 10,000 points (le nombre de points est accessible dans le panneau des propriétés sur la gauche).
 
-Supprimez le champ scalaire de la distance *via* **Edit > Scalar fields > Delete**. Sélectionnez seulement le nuage de la boite avant de l'enregistrer au format ASCII Cloud sous le nom `data01_segmented.xyz` dans le dossier `data` du TP. 
+Sélectionnez seulement le nuage de la boite avant de l'enregistrer au format ASCII Cloud sous le nom `data01_segmented.xyz` dans le dossier `data` du TP. 
 
 {{< alert type="info" >}}
 Par précaution, sauvegardez votre projet CloudCompare : pensez à **sélectionner tous les nuages de points**, et à sauvegarder le projet au format CloudCompare.
