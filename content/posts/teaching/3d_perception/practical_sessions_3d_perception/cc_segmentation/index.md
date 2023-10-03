@@ -91,7 +91,7 @@ By clicking on *split*, two clouds are created, corresponding to the two sides o
 
 Make sure that the newly created cloud contains about 10,000 points (the number of points is accessible in the properties panel on the left).
 
-Delete the distance scalar field *via* **Edit > Scalar fields > Delete**. Only select the box cloud before saving it in ASCII Cloud format as `data01_segmented.xyz` in your `data` folder.
+Only select the box cloud before saving it in ASCII Cloud format as `data01_segmented.xyz` in your `data` folder.
  
 {{< alert type="info" >}}
 As a precaution, save your CloudCompare project: remember to **select all point clouds**, and save the project in CloudCompare format.
@@ -121,7 +121,7 @@ To run the code on either `data02_object` or `data03_object`, just comment out t
 ```python
 # Load pre-processed model point cloud
 print("Extracting MODEL object...")
-model = datatools.load_XYZ_data_to_vec('data/data01_segmented.xyz')
+model = datatools.load_XYZ_data_to_vec('data/data01_segmented.xyz')[:,:3]
 
 # Load raw data point cloud
 print("Extracting DATA02 object...")
