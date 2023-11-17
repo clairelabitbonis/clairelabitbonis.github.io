@@ -122,7 +122,7 @@ data02_object = datatools.load_XYZ_data_to_vec('data/data02_object.xyz')
 print("Extracting DATA03 object...")
 data03_object = datatools.load_XYZ_data_to_vec('data/data03_object.xyz')
 
-ref = model_object
+ref = model
 data = data02_object
 # data = data03_object
 ```
