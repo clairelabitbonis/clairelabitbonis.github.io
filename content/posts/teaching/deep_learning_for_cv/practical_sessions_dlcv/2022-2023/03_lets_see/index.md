@@ -1,5 +1,5 @@
 ---
-title: "DLCV-TP-01 | Unity is strength"
+title: "DLCV-TP-10 | Let's see..."
 date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
@@ -17,8 +17,8 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: "01 | Unity is strength"
-    identifier: dlcv-practical-sessions-01
-    parent: dlcv-practical-sessions
-    weight: 10
+    name: "10 | Let's see..."
+    identifier: dlcv-practical-sessions-03
+    parent: dlcv-2022-2023-practical
+    weight: 30
 ---

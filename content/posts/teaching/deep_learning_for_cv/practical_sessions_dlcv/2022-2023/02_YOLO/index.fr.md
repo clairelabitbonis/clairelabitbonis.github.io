@@ -19,7 +19,7 @@ menu:
   sidebar:
     name: "01 | YOLO !"
     identifier: dlcv-practical-sessions-02
-    parent: dlcv-practical-sessions
+    parent: dlcv-2022-2023-practical
     weight: 20
 ---
 

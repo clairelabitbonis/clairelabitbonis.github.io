@@ -19,6 +19,6 @@ menu:
   sidebar:
     name: "01 | L'union fait la force"
     identifier: dlcv-practical-sessions-01
-    parent: dlcv-practical-sessions
+    parent: dlcv-2022-2023-practical
     weight: 10
 ---

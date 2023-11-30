@@ -18,7 +18,7 @@ menu:
   sidebar:
     name: "00 | Presentation"
     identifier: dlcv-practical-sessions-00
-    parent: dlcv-practical-sessions
+    parent: dlcv-2022-2023-practical
     weight: 10
 ---
 

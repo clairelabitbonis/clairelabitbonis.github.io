@@ -1,24 +1,24 @@
 ---
-title: "DLCV-TP-10 | Let's see..."
+title: "DLCV-TP-01 | YOLO!"
 date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
 
-draft: true
+draft: false
 math: true 
 highlight: true
 hightlight_languages: ["python","bash"]
 
 authors: ["Claire Labit-Bonis"]
 
-# hero: featured.png
+hero: featured.png
 
 tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: "10 | Let's see..."
-    identifier: dlcv-practical-sessions-03
-    parent: dlcv-practical-sessions
-    weight: 30
+    name: "01 | YOLO!"
+    identifier: dlcv-practical-sessions-02
+    parent: dlcv-2022-2023-practical
+    weight: 20
 ---

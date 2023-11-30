@@ -19,7 +19,7 @@ menu:
   sidebar:
     name: "10 | Voyons..."
     identifier: dlcv-practical-sessions-03
-    parent: dlcv-practical-sessions
+    parent: dlcv-2022-2023-practical
     weight: 30
 ---
 **oui, je compte en binaire. On sait s'amuser par ici.*
