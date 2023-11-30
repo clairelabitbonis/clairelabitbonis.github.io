@@ -21,7 +21,7 @@ menu:
     parent: dlcv-2023-2024-practical
     weight: 10
 ---
-{{< alert type="danger" >}}
+{{< alert type="warning" >}}
 :man_dancing: Eeeeet zééé bartiiii pour la deuxième édition du cours de Deep Learning en 5-SDBD. L'année dernière a été un franc succès, cette année ce sera pareil, mais en mieux. Navrée de vous dire que l'année prochaine ce sera encore bien meilleur ; je vous conseillerais même de redoubler pour en être témoins... :call_me_hand:
 {{< /alert >}}
 

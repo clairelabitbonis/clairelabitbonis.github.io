@@ -4,7 +4,7 @@ date: 2022-12-14T10:00:00+09:00
 description: ""
 summary: ""
 
-draft: false
+draft: true
 math: true 
 highlight: true
 hightlight_languages: ["python","bash"]
