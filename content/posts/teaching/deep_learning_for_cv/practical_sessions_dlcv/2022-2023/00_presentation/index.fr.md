@@ -22,6 +22,10 @@ menu:
     weight: 10
 ---
 
+{{< alert type="danger" >}}
+Vous êtes sur la version 2022-2023 du TP. Je la laisse en guise d'archive, pour garder trace de l'Histoire, c'est important. Le détecteur de vos prédécesseurs ne sera ainsi jamais oublié :heart:.
+{{< /alert >}}
+
 ## Objectifs pédagogiques
 
 L'objectif de ces séances de travaux pratiques est de toucher à toutes les étapes de l'ingénierie du *deep learning*, à savoir :

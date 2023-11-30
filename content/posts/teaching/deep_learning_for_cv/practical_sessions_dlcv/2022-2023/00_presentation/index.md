@@ -22,6 +22,9 @@ menu:
     weight: 10
 ---
 
+{{< alert type="danger" >}}
+You reached the practical session content of 2022-2023. I leave it here as a witness of the past, so your predecessors work shall never be forgotten :heart:.
+{{< /alert >}}
 
 ## Educational objectives
 
