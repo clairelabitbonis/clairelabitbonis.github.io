@@ -1,6 +1,6 @@
 ---
 title: "DLCV 2ème édition | Présentation"
-date: 2022-12-14T10:00:00+09:00
+date: 2023-11-30T10:00:00+09:00
 description: ""
 summary: ""
 
@@ -21,7 +21,7 @@ menu:
     parent: dlcv-2023-2024-practical
     weight: 10
 ---
-{{< alert type="warning" >}}
+{{< alert type="success" >}}
 :man_dancing: Eeeeet zééé bartiiii pour la deuxième édition du cours de Deep Learning en 5-SDBD. L'année dernière a été un franc succès, cette année ce sera pareil, mais en mieux. Navrée de vous dire que l'année prochaine ce sera encore bien meilleur ; je vous conseillerais même de redoubler pour en être témoins... :call_me_hand:
 {{< /alert >}}
 
