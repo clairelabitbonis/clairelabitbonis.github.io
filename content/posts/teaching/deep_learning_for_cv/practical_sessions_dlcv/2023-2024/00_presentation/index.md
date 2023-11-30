@@ -17,8 +17,8 @@ tags: ["Teaching"]
 menu:
   sidebar:
     name: "00 | Presentation"
-    identifier: dlcv-practical-sessions-00
-    parent: dlcv-2022-2023-practical
+    identifier: dlcv-practical-sessions-2023-2024-00
+    parent: dlcv-2023-2024-practical
     weight: 10
 ---
 

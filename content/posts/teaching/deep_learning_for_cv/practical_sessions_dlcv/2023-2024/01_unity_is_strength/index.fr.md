@@ -18,7 +18,7 @@ tags: ["Teaching"]
 menu:
   sidebar:
     name: "01 | L'union fait la force"
-    identifier: dlcv-practical-sessions-01
-    parent: dlcv-2022-2023-practical
+    identifier: dlcv-practical-sessions-2023-2024-01
+    parent: dlcv-2023-2024-practical
     weight: 10
 ---
