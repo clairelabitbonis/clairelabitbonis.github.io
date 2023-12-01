@@ -4,6 +4,7 @@ date: 2023-11-30T10:00:00+09:00
 description: ""
 summary: ""
 
+draft: true
 math: true 
 highlight: true
 hightlight_languages: ["python","bash"]
