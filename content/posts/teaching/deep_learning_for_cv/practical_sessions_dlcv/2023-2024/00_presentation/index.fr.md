@@ -44,6 +44,7 @@ Pour cela, notre point de départ sera le détecteur d'objets très largement co
 ## Déroulement des séances
 
 **Un·e pour tou·te·s, tou·te·s pour un·e !**
+
 Parce que l'union fait la force, que la joie et la bonne humeur facilitent l'apprentissage -- des humains --, les séances de travaux pratiques se dérouleront dans un contexte à la fois collectif et individuel, pas toujours sur les postes de travail, et toujours dans l'intérêt de la compréhension. Nous aurons tou·te·s un rôle à jouer, à chacune des étapes.
 
 Nous allons entrainer YOLOv8 à détecter plusieurs classes d'objets, à raison d'une classe d'objet par binôme. Le *dataset* que nous allons construire pour cela sera commun aux trois groupes de TPs qui se déroulent en parallèle et/ou en différé selon les problématiques d'emploi du temps, de disponibilité de salle, d'organisation. Bref, trois groupes. Même *dataset*.
@@ -66,12 +67,15 @@ Pour cela, nous passerons par plusieurs étapes :
 
 {{< alert type="success" >}}
 **Un apprentissage dure plusieurs heures.** 
+
 Pour pouvoir comparer toutes ces configurations, il faut soit disposer de plusieurs serveurs GPU puissants qui peuvent faire tourner en parallèle plusieurs configurations, soit disposer de beaucoup de temps et être patient... 
 
 **Un apprentissage consomme de l'énergie.**
+
 Il n'est donc pas envisageable que chaque binôme lance un apprentissage pour chaque jeu de paramètres puis fasse une analyse comparative des résultats. 
 
 **MAIS ! On peut rendre le problème moins complexe.**
+
 Nous vous fournirons un sous-ensemble du *dataset* pour que vous puissiez apprendre à manipuler une base d'apprentissage, de validation et de test. Vous pourrez lancer un mini-apprentissage en local sur CPU pour quelques *epochs*.
 
 Pour l'évaluation des résultats, chaque binôme se positionnera sur une configuration tirée au sort (résolution d'image/taille de réseau/poids figés ou non) et pourra analyser sa configuration et les performances de sa classe d'objets par rapport aux autres configurations et autres classes d'objets.
