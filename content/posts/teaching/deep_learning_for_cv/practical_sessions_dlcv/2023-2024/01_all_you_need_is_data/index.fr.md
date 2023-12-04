@@ -28,7 +28,7 @@ Tout ce dont vous avez besoin pour entrainer un détecteur d'objets est d'avoir 
 {{< /alert >}}
 
 {{< alert type="danger" >}}
-ATTENTION : vous devez avoir déposé vos données et votre *split* `train/val/test.txt` sur le serveur GPU avant la fin de la séance. On lancera l'ensemble des configurations d'apprentissage d'ici la semaine prochaine. Pas de données, pas d'apprentissage. Pas d'apprentissage, pas de TP. Pas de TP, pas de TP (les réfs à Mission Cléopâtre commencent à dater...).
+ATTENTION : vous devez avoir déposé vos données et votre *split* `train/val/test.txt` sur le serveur GPU avant la fin de la séance. On (l'équipe) lancera l'ensemble des configurations d'apprentissage d'ici la semaine prochaine. Pas de données, pas d'apprentissage. Pas d'apprentissage, pas de TP. Pas de TP, pas de TP (les réfs à Mission Cléopâtre commencent à dater...).
 {{< /alert >}}
 
 ## Acquisition
