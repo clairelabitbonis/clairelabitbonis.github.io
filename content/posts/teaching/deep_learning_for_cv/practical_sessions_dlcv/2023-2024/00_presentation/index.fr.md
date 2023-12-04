@@ -122,7 +122,7 @@ Globalement, on aura :
 {{< alert type="success" >}}
 Il y a **des millions de choses** à dire et tout n'est pas applicable à toutes les classes d'objets, toutes les configurations ni tous les binômes. Etre exhaustif vous demanderait une analyse allant de 45 minutes à 2 jours (rien que ça). Soyez synthétiques et pertinents. Ce n'est pas une tâche simple, mais il y a de la matière à votre disposition.
 
- **Pas de contrainte sur le format** : une vidéo d'un PPT qui défile, une superproduction *full* 3D pour concurrencer Avatar 2 (à condition d'avoir aussi un meilleur scénario...). L'important est d'avoir un contenu pertinent, et que ça ne soit pas la corvée du siècle pour vous. Amusez-vous, vendez-nous une analyse de rêve ;
+ **Pas de contrainte sur le format** : une vidéo d'un PPT qui défile, une superproduction *full* 3D pour concurrencer Avatar 2 (à condition d'avoir aussi un meilleur scénario...). L'important est d'avoir un contenu pertinent, et que ça ne soit pas la corvée du siècle pour vous. Amusez-vous, vendez-nous une analyse de rêve.
 {{< /alert >}}
 
 <!--
@@ -228,15 +228,4 @@ Vous pouvez ensuite ajouter une configuration pour le *debug* du fichier `train.
 
 ### Serveur de données pour le *dataset* -->
 
-## Planning des séances
 
-<center>
-
-| Groupe 	|                                       Dates                                      	|             Salles             	|    Intervenant·e   	|
-|:------:	|:--------------------------------------------------------------------------------:	|:-----------------------------:	|:------------------:	|
-|   A1   	| 30/11/2022 \ 12h30 - 15h15 <br /> 07/12/2022 \ 09h30 - 12h15 <br /> 14/12/2022 \ 15h30 - 18h15 	| GEI-111-A <br /> GEI-109-A <br /> GEI-111-A 	| Claire LABIT-BONIS 	|
-|   A2   	| 30/11/2022 \ 12h30 - 15h15 <br /> 07/12/2022 \ 09h30 - 12h15 <br /> 14/12/2022 \ 15h30 - 18h15 	| GEI-111-B <br /> GEI-109-B <br /> GEI-111-B 	| Smail AIT BOUHSAIN 	|
-|   B1   	| 30/11/2022 \ 15h30 - 18h15 <br /> 07/12/2022 \ 15h30 - 18h15 <br /> 14/12/2022 \ 09h30 - 12h15 	| GEI-111-A <br /> GEI-111-A <br /> GEI-109-A 	| Claire LABIT-BONIS 	|
-|   B2   	| 30/11/2022 \ 15h30 - 18h15 <br /> 07/12/2022 \ 15h30 - 18h15 <br /> 14/12/2022 \ 09h30 - 12h15 	| GEI-111-B <br /> GEI-111-B <br /> GEI-109-B 	|    Pierre MARIGO   	|
-
-</center>
