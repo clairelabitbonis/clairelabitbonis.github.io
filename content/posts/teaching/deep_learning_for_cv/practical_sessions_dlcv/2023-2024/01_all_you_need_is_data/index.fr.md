@@ -1,6 +1,6 @@
 ---
 title: "DLCV2 | All you need is data"
-date: 2022-11-04T10:00:00+09:00
+date: 2023-12-04T10:00:00+09:00
 description: ""
 summary: ""
 
@@ -27,7 +27,7 @@ menu:
 Tout ce dont vous avez besoin pour entrainer un détecteur d'objets est d'avoir des données qui représentent ces objets. Et de les nettoyer (les données, pas les objets). Et de les trier. Et de les annoter. Et d'en jeter un peu parce qu'elles sont pas si bien. Et d'en rajouter encore parce qu'il y en a plus assez. Etc. :+1: 
 {{< /alert >}}
 
-# Acquisition
+## Acquisition
 
 Prenez 5 vidéos de 10 secondes dans lesquelles se trouve la classe que vous voulez apprendre à détecter. 
 
@@ -67,7 +67,7 @@ Vous devez avoir une arborescence qui ressemble à ça à la fin :
 
 </center>
 
-# Import des données dans CVAT
+## Import des données dans CVAT
 
 C'est là que le travail commence... Connectez-vous avec vos identifiants INSA au serveur d'annotation [CVAT](https://cvat.ens.insa-toulouse.fr/).
 
@@ -106,5 +106,5 @@ Finissez par sélectionner le format d'annotation `YOLO 1.1` avant de `Submit & 
 
 L'interface de labellisation s'ouvre.
 
-# Labellisation
+## Labellisation
 
