@@ -23,11 +23,17 @@ menu:
     weight: 10
 ---
 
-Tout ce dont vous avez besoin pour entrainer un détecteur d'objets est d'avoir des données qui représentent ces objets. 
+{{< alert type="success" >}}
+Tout ce dont vous avez besoin pour entrainer un détecteur d'objets est d'avoir des données qui représentent ces objets. :+1: 
+{{< /alert >}}
 
 ## Etape 1 : acquisition
 
-Prenez 5 vidéos de 10 secondes dans lesquelles se trouve la classe que vous voulez apprendre à détecter. Faites attention à ce que des objets appartenant aux classes des autres binômes ne se retrouvent pas dans vos séquences, sinon vous devrez les annoter aussi.
+Prenez 5 vidéos de 10 secondes dans lesquelles se trouve la classe que vous voulez apprendre à détecter. 
+
+{{< alert type="danger" >}}
+Faites attention à ce que des objets appartenant aux classes des autres binômes ne se retrouvent pas dans vos séquences, sinon **_vous devrez les annoter aussi._**
+{{< /alert >}}
 
 Créez sur votre session une arborescence de fichiers comme la suivante :
 
