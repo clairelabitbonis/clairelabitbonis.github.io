@@ -144,9 +144,18 @@ Vous obtenez un `.zip` qui contient un fichier `.txt` par image, dans `obj_train
 
 On y est presque. Il ne reste plus qu'à séparer vos séquences en trois sous-ensembles qui serviront à l'apprentissage, à la validation et au test. Vous devez créer trois fichiers : `train.txt`, `val.txt` et `test.txt`. Dans chacun, vous mettrez la liste des chemins d'accès vers les images selon qu'elles doivent aller en base d'apprentissage, de validation ou de test. Par exemple, dans `train.txt` :
 
-    ./velo/tic_tac/4/images/frame_000002.jpg
-    ./velo/tic_tac/4/images/frame_000118.jpg
+    ./velo/tic_et_tac/4/images/frame_000002.jpg
+    ./velo/tic_et_tac/4/images/frame_000118.jpg
     ...
-    ./velo/tic_tac/2/images/frame_000004.jpg
-    ./velo/tic_tac/1/images/frame_000001.jpg
-    ./velo/tic_tac/3/images/frame_000256.jpg
+    ./velo/tic_et_tac/2/images/frame_000004.jpg
+    ./velo/tic_et_tac/1/images/frame_000001.jpg
+    ./velo/tic_et_tac/3/images/frame_000256.jpg
+
+{{< alert type="danger" >}}
+La répartition de vos données entre les différentes bases est une étape cruciale : allez-vous mettre 3 séquences complètes en `train`, une en `val` et une en `test`, au risque d'avoir des exemples en test qui sont trop éloignés de ceux de la base d'apprentissage ? Ou bien allez-vous plutôt mettre les débuts de séquence en `train`, les milieux en `val`, les fins en `test`, mais dans ce cas vous biaiserez complètement l'apprentissage et obtiendrez des performances étrangement un peu trop hautes ? Vous pouvez aussi choisir la méthode bourrine et faire un random total sur la répartition...
+{{< /alert >}}
+
+Une fois votre répartition faite, sauvegardez les trois fichiers à la racine de votre dossier `<noms_binome>`, et copiez le tout avec :
+
+  cd <noms_binome>/..
+  scp <noms_binome> srv-gei-gpu2:/scratch/labi/DLCV/2023-2024/dataset/
