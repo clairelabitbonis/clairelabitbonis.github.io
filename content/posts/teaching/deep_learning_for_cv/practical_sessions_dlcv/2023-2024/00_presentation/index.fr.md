@@ -38,7 +38,7 @@ Pour cela, notre point de départ sera le détecteur d'objets très largement co
 
 > A la fin des TPs, vous saurez comment utiliser YOLOv8, comment l'entrainer sur vos propres données, et comment l'évaluer. 
 
->L'année dernière, on nous a dit "les messages en bleu on croyait que ça servait à rien alors on les a pas lus". Je vais éviter les messages en bleu, donc.
+>L'année dernière, on nous a dit "les messages en bleu on croyait que ça servait à rien alors on les a pas lus". Du coup j'ai essayé d'autres balises, mais elles sont moches. Je vais essayer de limiter les messages bleus.
 
 
 ## Déroulement des séances
@@ -65,21 +65,20 @@ Pour cela, nous passerons par plusieurs étapes :
 
 * :fire: <mark>**étape 5 - analyse des performances**</mark> : une fois tous les apprentissages faits, chaque binôme pourra évaluer les performances de sa propre configuration, analyser les résultats de manière quantitative, *i.e.*, avec des chiffres, et de manière qualitative, *i.e.*, avec une visualisation "à l'oeil" des cas d'erreur et des cas qui fonctionnent. Une évaluation comparative sera également réalisable, puisque tout le monde aura accès à toutes les configurations entrainées.
 
-{{< alert type="success" >}}
-**Un apprentissage dure plusieurs heures.** 
 
-Pour pouvoir comparer toutes ces configurations, il faut soit disposer de plusieurs serveurs GPU puissants qui peuvent faire tourner en parallèle plusieurs configurations, soit disposer de beaucoup de temps et être patient... 
-
-**Un apprentissage consomme de l'énergie.**
-
-Il n'est donc pas envisageable que chaque binôme lance un apprentissage pour chaque jeu de paramètres puis fasse une analyse comparative des résultats. 
-
-**MAIS ! On peut rendre le problème moins complexe.**
-
-Nous vous fournirons un sous-ensemble du *dataset* pour que vous puissiez apprendre à manipuler une base d'apprentissage, de validation et de test. Vous pourrez lancer un mini-apprentissage en local sur CPU pour quelques *epochs*.
-
-Pour l'évaluation des résultats, chaque binôme se positionnera sur une configuration tirée au sort (résolution d'image/taille de réseau/poids figés ou non) et pourra analyser sa configuration et les performances de sa classe d'objets par rapport aux autres configurations et autres classes d'objets.
-{{< /alert >}}
+>**Un apprentissage dure plusieurs heures.** 
+>
+>Pour pouvoir comparer toutes ces configurations, il faut soit disposer de plusieurs serveurs GPU puissants qui peuvent faire tourner en parallèle plusieurs configurations, soit disposer de beaucoup de temps et être patient... 
+>
+>**Un apprentissage consomme de l'énergie.**
+>
+>Il n'est donc pas envisageable que chaque binôme lance un apprentissage pour chaque jeu de paramètres puis fasse une analyse comparative des résultats. 
+>
+>**MAIS ! On peut rendre le problème moins complexe.**
+>
+>Nous vous fournirons un sous-ensemble du *dataset* pour que vous puissiez apprendre à manipuler une base d'apprentissage, de validation et de test. Vous pourrez lancer un mini-apprentissage en local sur CPU pour quelques *epochs*.
+>
+>Pour l'évaluation des résultats, chaque binôme se positionnera sur une configuration tirée au sort (résolution d'image/taille de réseau/poids figés ou non) et pourra analyser sa configuration et les performances de sa classe d'objets par rapport aux autres configurations et autres classes d'objets.
 
 ## Modalités d'évaluation
 
@@ -119,11 +118,9 @@ Globalement, on aura :
   
 *celle tirée au sort en TP -- si elle était trop mauvaise, prenez-en une autre, pas grave, il faut pouvoir en dire quelque chose d'autre que "c'est nul et ça marche pas"... 
 
-{{< alert type="success" >}}
-Il y a **des millions de choses** à dire et tout n'est pas applicable à toutes les classes d'objets, toutes les configurations ni tous les binômes. Etre exhaustif vous demanderait une analyse allant de 45 minutes à 2 jours (rien que ça). Soyez synthétiques et pertinents. Ce n'est pas une tâche simple, mais il y a de la matière à votre disposition.
+>Il y a **des millions de choses** à dire et tout n'est pas applicable à toutes les classes d'objets, toutes les configurations ni tous les binômes. Etre exhaustif vous demanderait une analyse allant de 45 minutes à 2 jours (rien que ça). Soyez synthétiques et pertinents. Ce n'est pas une tâche simple, mais il y a de la matière à votre disposition.
 
- **Pas de contrainte sur le format** : une vidéo d'un PPT qui défile, une superproduction *full* 3D pour concurrencer Avatar 2 (à condition d'avoir aussi un meilleur scénario...). L'important est d'avoir un contenu pertinent, et que ça ne soit pas la corvée du siècle pour vous. Amusez-vous, vendez-nous une analyse de rêve.
-{{< /alert >}}
+>**Pas de contrainte sur le format** : une vidéo d'un PPT qui défile, une superproduction *full* 3D pour concurrencer Avatar 2 (à condition d'avoir aussi un meilleur scénario...). L'important est d'avoir un contenu pertinent, et que ça ne soit pas la corvée du siècle pour vous. Amusez-vous, vendez-nous une analyse de rêve.
 
 <!--
 ### Quêtes annexes
