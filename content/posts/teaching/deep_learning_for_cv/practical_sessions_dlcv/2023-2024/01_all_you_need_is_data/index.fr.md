@@ -105,12 +105,9 @@ Dans la barre d'outils à gauche, pour créer une nouvelle annotation :
 </center>
 
 >**Cheatsheet :**
-
 > * `F` : avance d'une *frame*
 > * `D` : recule d'une *frame*
-
 > * `V` : saute plusieurs *frames* en avant **et fait une interpolation linéaire pour propager les labels intermédiaires**
 > * `C` : saute plusieurs *frames* en arrière **et fait une interpolation linéaire pour propager les labels intermédiaires**
-
 > * `N` : crée une nouvelle annotation du même type que la précédente (`Track rectangle by 2 points` par exemple)
 
