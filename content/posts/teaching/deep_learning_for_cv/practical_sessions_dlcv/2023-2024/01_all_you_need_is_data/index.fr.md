@@ -94,13 +94,17 @@ Ajoutez ensuite (par *drag and drop*) toutes les `frame_XXXXXX.jpg` de la séque
 
 </center>
 
-Finissez par sélectionner le format d'annotation `YOLO 1.1` avant de `Submit & Open`. L'interface de labellisation s'ouvre.
+Finissez par sélectionner le format d'annotation `YOLO 1.1` avant de `Submit & Open`.
 
 <center>
+
+{{< img src="images/cvat_create_task_settings3.png" align="center" title="Nouvelle tâche - Choose YOLO 1.1" >}}
 
 ![Nouvelle tâche - Choose YOLO 1.1](images/cvat_create_task_settings3.png)
 
 </center>
+
+L'interface de labellisation s'ouvre.
 
 # Labellisation
 
