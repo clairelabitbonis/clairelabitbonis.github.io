@@ -154,12 +154,15 @@ On y est presque. Il ne reste plus qu'à séparer vos séquences en trois sous-e
     ./velo/tic_et_tac/3/images/frame_000256.jpg
 
 {{< alert type="danger" >}}
-La répartition de vos données entre les différentes bases est une étape cruciale : allez-vous mettre 3 séquences complètes en `train`, une en `val` et une en `test`, au risque d'avoir des exemples en test qui sont trop éloignés de ceux de la base d'apprentissage ? Ou bien allez-vous plutôt mettre les débuts de séquence en `train`, les milieux en `val`, les fins en `test`, mais dans ce cas vous biaiserez complètement l'apprentissage et obtiendrez des performances étrangement un peu trop hautes ? Vous pouvez aussi choisir la méthode bourrine et faire un random total sur la répartition...
+La répartition de vos données entre les différentes bases est une étape cruciale : 
+* allez-vous mettre 3 séquences complètes en `train`, une en `val` et une en `test`, au risque d'avoir des exemples en test qui sont trop éloignés de ceux de la base d'apprentissage ? 
+* ou bien allez-vous plutôt mettre les débuts de séquence en `train`, les milieux en `val`, les fins en `test`, mais dans ce cas vous biaiserez complètement l'apprentissage et obtiendrez des performances étrangement un peu trop hautes ? 
+* vous pouvez aussi choisir la méthode bourrine et faire un random total sur la répartition...
 {{< /alert >}}
 
 Une fois votre répartition faite, sauvegardez les trois fichiers à la racine de votre dossier `<noms_binome>`, et copiez le tout avec :
 
-  ```bash
+  ```
   cd <noms_du_binome>/..
   scp <noms_du_binome> srv-gei-gpu2:/scratch/labi/DLCV/2023-2024/dataset/<nom_de_classe>/
   ```
