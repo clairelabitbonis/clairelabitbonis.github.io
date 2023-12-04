@@ -163,7 +163,7 @@ La répartition de vos données entre les différentes bases est une étape cruc
 Une fois votre répartition faite, sauvegardez les trois fichiers à la racine de votre dossier `<noms_binome>`, et copiez le tout avec :
 
   ```
-  cd <noms_du_binome>/..
+  cd <nom_de_classe>/..
   scp <noms_du_binome> srv-gei-gpu2:/scratch/labi/DLCV/2023-2024/dataset/<nom_de_classe>/
   ```
 
