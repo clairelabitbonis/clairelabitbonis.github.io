@@ -78,7 +78,7 @@ Pour chaque séquence vidéo, créez une nouvelle tâche :
 
 </center>
 
-Renseignez le nom de la tâche (par exemple `<nom-classe>_<numero-sequence>`), ajoutez un label du nom de la classe que vous annotez :
+Renseignez le nom de la tâche (par exemple `<nom-classe>_<numero-sequence>`) et ajoutez le label de la classe que vous annotez :
 
 <center>
 
@@ -86,25 +86,21 @@ Renseignez le nom de la tâche (par exemple `<nom-classe>_<numero-sequence>`), a
 
 </center>
 
-Ajoutez ensuite (par *drag and drop*) toutes les `frame_XXXXXX.jpg` de la séquence en question.
-
-<center>
-
-![Nouvelle tâche - Add files](images/cvat_create_task_settings2.png)
-
-</center>
-
-Finissez par sélectionner le format d'annotation `YOLO 1.1` avant de `Submit & Open`.
-
-<center>
-
-{{< img src="images/cvat_create_task_settings3.png" style="width:50%;" align="center" title="Nouvelle tâche - Choose YOLO 1.1" >}}
-
-![Nouvelle tâche - Choose YOLO 1.1](images/cvat_create_task_settings3.png)
-
-</center>
+Ajoutez ensuite (par *drag and drop*) toutes les `frame_XXXXXX.jpg` de la séquence en question et finissez par sélectionner le format d'annotation `YOLO 1.1` dans l'`Advanced Configuration`, avant de `Submit & Open`.
 
 L'interface de labellisation s'ouvre.
 
 ## Labellisation
+
+Dans la barre d'outils à gauche, pour créer une nouvelle annotation :
+* sélectionnez `Draw new rectangle`, 
+* la classe que vous voulez annoter, 
+* `By 2 points` (il faudra cliquer les coins haut-gauche et bas-droite pour tracer un rectangle), 
+* et `Track` (la *bounding box* sera propagée aux *frames* suivantes et gardera la même identité. Très pratique si vous ne voulez pas réannoter tous les objets à chaque *frame*...)
+
+<center>
+
+![Labellisation - interface](images/interface_labellisation.png)
+
+</center>
 
