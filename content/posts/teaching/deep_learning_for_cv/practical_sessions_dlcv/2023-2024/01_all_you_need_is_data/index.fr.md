@@ -111,3 +111,8 @@ Dans la barre d'outils à gauche, pour créer une nouvelle annotation :
 > * `C` : saute plusieurs *frames* en arrière **et fait une interpolation linéaire pour propager les labels intermédiaires**
 > * `N` : crée une nouvelle annotation du même type que la précédente (`Track rectangle by 2 points` par exemple)
 
+Les options disponibles pour chaque cible vous permettent de :
+* les rendre visible/invisible (ça ne les supprimes pas, c'est juste pour éviter de se faire gêner par des annotations existantes), 
+* les indiquer comme "sorties du cadre",
+* les marquer "occultées" quand une autre cible passe devant ou que l'objet passe derrière quelque chose (quand il est occulté, quoi),
+* régler l'opacité de la boite, et d'autres attributs d'aspect.
