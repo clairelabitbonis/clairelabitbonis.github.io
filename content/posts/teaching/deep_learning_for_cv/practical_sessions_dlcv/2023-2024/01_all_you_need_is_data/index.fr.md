@@ -27,6 +27,10 @@ menu:
 Tout ce dont vous avez besoin pour entrainer un détecteur d'objets est d'avoir des données qui représentent ces objets. Et de les nettoyer (les données, pas les objets). Et de les trier. Et de les annoter. Et d'en jeter un peu parce qu'elles sont pas si bien. Et d'en rajouter encore parce qu'il y en a plus assez. Etc. :+1: 
 {{< /alert >}}
 
+{{< alert type="danger" >}}
+ATTENTION : vous devez avoir déposé vos données et votre *split* `train/val/test.txt` sur le serveur GPU avant la fin de la séance. On lancera l'ensemble des configurations d'apprentissage d'ici la semaine prochaine. Pas de données, pas d'apprentissage. Pas d'apprentissage, pas de TP. Pas de TP, pas de TP (les réfs à Mission Cléopâtre commencent à dater...).
+{{< /alert >}}
+
 ## Acquisition
 
 Prenez 5 vidéos de 10 secondes dans lesquelles se trouve la classe que vous voulez apprendre à détecter. 
@@ -37,9 +41,7 @@ Posez-vous des questions :
 * est-ce que le contexte change entre les séquences ?
 * etc.
 
-{{< alert type="danger" >}}
 Faites attention à ce que des objets appartenant aux classes des autres binômes ne se retrouvent pas dans vos séquences, sinon **_vous devrez les annoter aussi._**
-{{< /alert >}}
 
 Créez sur votre session une arborescence de fichiers comme la suivante :
 
