@@ -98,7 +98,7 @@ Finissez par sélectionner le format d'annotation `YOLO 1.1` avant de `Submit & 
 
 <center>
 
-{{< img src="images/cvat_create_task_settings3.png" align="center" title="Nouvelle tâche - Choose YOLO 1.1" >}}
+{{< img src="images/cvat_create_task_settings3.png" style="width:50%;" align="center" title="Nouvelle tâche - Choose YOLO 1.1" >}}
 
 ![Nouvelle tâche - Choose YOLO 1.1](images/cvat_create_task_settings3.png)
 
