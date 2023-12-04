@@ -159,9 +159,15 @@ La répartition de vos données entre les différentes bases est une étape cruc
 
 Une fois votre répartition faite, sauvegardez les trois fichiers à la racine de votre dossier `<noms_binome>`, et copiez le tout avec :
 
-    ```bash
-    cd <noms_binome>/..
-    scp <noms_binome> srv-gei-gpu2:/scratch/labi/DLCV/2023-2024/dataset/
-    ```
+  ```bash
+  cd <noms_du_binome>/..
+  scp <noms_du_binome> srv-gei-gpu2:/scratch/labi/DLCV/2023-2024/dataset/<nom_de_classe>/
+  ```
 
-Dernière chose : donnez-nous les droits sur les dossiers que vous créez. En vous connectant en SSH à `srv-gei-gpu2` et en faisant un `chmod -R 777` sur votre dossier dans `/scratch/labi/DLCV/2023-2024/dataset/`, par exemple.
+<center>
+
+![Dossier final](images/split.png)
+
+</center>
+
+Dernière chose : donnez-nous les droits sur les dossiers que vous créez. En vous connectant en SSH à `srv-gei-gpu2` et en faisant un `chmod -R 777` sur votre dossier dans `/scratch/labi/DLCV/2023-2024/dataset/<nom_de_classe>/`, par exemple.
