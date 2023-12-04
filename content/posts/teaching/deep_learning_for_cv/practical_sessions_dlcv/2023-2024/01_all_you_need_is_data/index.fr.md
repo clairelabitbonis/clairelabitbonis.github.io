@@ -116,3 +116,26 @@ Les options disponibles pour chaque cible vous permettent de :
 * les indiquer comme "sorties du cadre",
 * les marquer "occultées" quand une autre cible passe devant ou que l'objet passe derrière quelque chose (quand il est occulté, quoi),
 * régler l'opacité de la boite, et d'autres attributs d'aspect.
+
+## Export du *dataset*
+
+{{< alert type="danger" >}}
+Quand vous aurez fini d'annoter toutes vos séquences, dites-le nous. Nous devons ajouter vos tâches à un projet CVAT global qui contient toutes les classes d'objets, de manière à ce que quand vous exporterez vos labellisations, les numéros de classes soient bons. Sinon, par défaut ils sont tous à zéro. Et YOLO apprendra que la classe `papillons` et la classe `playmobil` sont la même chose puisqu'elles ont toutes les deux le numéro `0`.
+{{< /alert >}}
+
+Une fois qu'on vous donne le feu vert, vous pouvez exporter chacune de vos tâches (`Tasks > Actions > Export task dataset`). Choisissez le format `YOLO 1.1`, ne sauvegardez pas les images, donnez le nom que vous voulez à l'export et validez.
+
+<center>
+
+![Export](images/export.png)
+![Export - fichiers texte](images/export_txt.png)
+
+</center>
+
+Vous obtenez un `.zip` qui contient un fichier `.txt` par image, dans `obj_train_data`. Vous pouvez copier ces fichiers dans le dossier `labels` de la séquence que vous venez d'exporter :
+
+<center>
+
+![Export - copie labels](images/export_images_labels.png)
+
+</center>
