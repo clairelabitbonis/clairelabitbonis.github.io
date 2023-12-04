@@ -27,7 +27,7 @@ menu:
 Tout ce dont vous avez besoin pour entrainer un détecteur d'objets est d'avoir des données qui représentent ces objets. Et de les nettoyer (les données, pas les objets). Et de les trier. Et de les annoter. Et d'en jeter un peu parce qu'elles sont pas si bien. Et d'en rajouter encore parce qu'il y en a plus assez. Etc. :+1: 
 {{< /alert >}}
 
-# Etape 1 : acquisition
+# Acquisition
 
 Prenez 5 vidéos de 10 secondes dans lesquelles se trouve la classe que vous voulez apprendre à détecter. 
 
@@ -67,11 +67,9 @@ Vous devez avoir une arborescence qui ressemble à ça à la fin :
 
 </center>
 
-# Etape 2 : annotation
+# Import des données dans CVAT
 
-C'est là que le travail commence...
-
-Connectez-vous avec vos identifiants INSA au serveur d'annotation [CVAT](https://cvat.ens.insa-toulouse.fr/).
+C'est là que le travail commence... Connectez-vous avec vos identifiants INSA au serveur d'annotation [CVAT](https://cvat.ens.insa-toulouse.fr/).
 
 Pour chaque séquence vidéo, créez une nouvelle tâche :
 <center>
@@ -80,12 +78,29 @@ Pour chaque séquence vidéo, créez une nouvelle tâche :
 
 </center>
 
-
+Renseignez le nom de la tâche (par exemple `<nom-classe>_<numero-sequence>`), ajoutez un label du nom de la classe que vous annotez :
 
 <center>
 
 ![Nouvelle tâche - Settings](images/cvat_create_task_settings.png)
+
+</center>
+
+Ajoutez ensuite (par *drag and drop*) toutes les `frame_XXXXXX.jpg` de la séquence en question.
+
+<center>
+
 ![Nouvelle tâche - Add files](images/cvat_create_task_settings2.png)
+
+</center>
+
+Finissez par sélectionner le format d'annotation `YOLO 1.1` avant de `Submit & Open`. L'interface de labellisation s'ouvre.
+
+<center>
+
 ![Nouvelle tâche - Choose YOLO 1.1](images/cvat_create_task_settings3.png)
 
 </center>
+
+# Labellisation
+
