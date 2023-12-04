@@ -1,6 +1,6 @@
 ---
 title: "DLCV 2ème édition | Présentation"
-date: 2023-11-30T10:00:00+09:00
+date: 2023-12-05T10:00:00+09:00
 description: ""
 summary: ""
 

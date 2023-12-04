@@ -1,6 +1,6 @@
 ---
 title: "DLCV2 | All you need is data"
-date: 2023-12-04T10:00:00+09:00
+date: 2023-12-05T10:00:00+09:00
 description: ""
 summary: ""
 
