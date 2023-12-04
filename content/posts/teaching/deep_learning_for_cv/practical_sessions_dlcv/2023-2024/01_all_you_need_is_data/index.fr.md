@@ -112,7 +112,7 @@ Dans la barre d'outils à gauche, pour créer une nouvelle annotation :
 > * `N` : crée une nouvelle annotation du même type que la précédente (`Track rectangle by 2 points` par exemple)
 
 Les options disponibles pour chaque cible vous permettent de :
-* les rendre visible/invisible (ça ne les supprimes pas, c'est juste pour éviter de se faire gêner par des annotations existantes), 
+* les rendre visible/invisible (ça ne les supprime pas, c'est juste pour éviter de se faire gêner par des annotations existantes), 
 * les indiquer comme "sorties du cadre",
 * les marquer "occultées" quand une autre cible passe devant ou que l'objet passe derrière quelque chose (quand il est occulté, quoi),
 * régler l'opacité de la boite, et d'autres attributs d'aspect.
@@ -136,6 +136,17 @@ Vous obtenez un `.zip` qui contient un fichier `.txt` par image, dans `obj_train
 
 <center>
 
-![Export - copie labels](images/export_images_labels.png)
+![Export - copie labels](images/arborescence_images_labels.png)
 
 </center>
+
+## Séparation train/val/test
+
+On y est presque. Il ne reste plus qu'à séparer vos séquences en trois sous-ensembles qui serviront à l'apprentissage, à la validation et au test. Vous devez créer trois fichiers : `train.txt`, `val.txt` et `test.txt`. Dans chacun, vous mettrez la liste des chemins d'accès vers les images selon qu'elles doivent aller en base d'apprentissage, de validation ou de test. Par exemple, dans `train.txt` :
+
+    ./velo/tic_tac/4/images/frame_000002.jpg
+    ./velo/tic_tac/4/images/frame_000118.jpg
+    ...
+    ./velo/tic_tac/2/images/frame_000004.jpg
+    ./velo/tic_tac/1/images/frame_000001.jpg
+    ./velo/tic_tac/3/images/frame_000256.jpg
