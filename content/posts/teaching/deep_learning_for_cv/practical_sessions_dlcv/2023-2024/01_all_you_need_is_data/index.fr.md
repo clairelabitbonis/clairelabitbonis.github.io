@@ -173,4 +173,4 @@ Une fois votre répartition faite, sauvegardez les trois fichiers à la racine d
 
 </center>
 
-Dernière chose : donnez-nous les droits sur les dossiers que vous créez. En vous connectant en SSH à `srv-gei-gpu2` et en faisant un `chmod -R 777` sur votre dossier dans `/scratch/labi/DLCV/2023-2024/dataset/<nom_de_classe>/`, par exemple.
+<!-- Dernière chose : donnez-nous les droits sur les dossiers que vous créez. En vous connectant en SSH à `srv-gei-gpu2` et en faisant un `chmod -R 777` sur votre dossier dans `/scratch/labi/DLCV/2023-2024/dataset/<nom_de_classe>/`, par exemple. -->
