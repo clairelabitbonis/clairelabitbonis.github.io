@@ -160,6 +160,8 @@ La répartition de vos données entre les différentes bases est une étape cruc
 * vous pouvez aussi choisir la méthode bourrine et faire un random total sur la répartition...
 {{< /alert >}}
 
+## Copie sur le serveur GPU 2
+
 Une fois votre répartition faite, sauvegardez les trois fichiers à la racine de votre dossier `<noms_binome>`, et copiez le tout avec :
 
   ```
