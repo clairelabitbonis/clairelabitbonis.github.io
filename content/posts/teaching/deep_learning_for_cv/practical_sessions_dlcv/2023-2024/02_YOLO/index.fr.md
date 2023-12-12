@@ -1,6 +1,6 @@
 ---
 title: "DLCV2 | Le Bingo de YOLO !"
-date: 2022-11-04T10:00:00+09:00
+date: 2023-12-12T10:00:00+09:00
 description: ""
 summary: ""
 
@@ -151,10 +151,9 @@ Quand vous exécutez un modèle sur une image, vous pouvez visualiser les *featu
 
 ![Feature maps](images/stage21_C2f_features.png)
 
-## Annexes
-### Configuration du *workspace*
+## Configuration du *workspace*
 
-#### Si vous êtes sur vos machines personnelles :penguin:
+###### Si vous êtes sur vos machines personnelles :penguin:
 
 C'est très simple et vous avez tous les droits, parce que c'est vous le.a patron.ne :
 
@@ -168,7 +167,7 @@ pip install tensorboard
 
 Et hop, c'est plié (normalement, parce qu'il y a toujours des erreurs auxquelles on s'attend pas).
 
-#### Si vous êtes sur les machines de l'INSA :snail:
+###### Si vous êtes sur les machines de l'INSA :snail:
 
 Il faut installer l'environnement virtuel qui va bien pour vous donner les droits d'installation des différentes librairies Python :
 
@@ -191,7 +190,7 @@ Mise à jour des fichiers: 100% (767/767), fait.
 
 Une fois dans VSCode, ouvrez le dossier `ultralytics` et avec la palette de commande `Ctrl+Shift+P` choisissez l'environnement virtuel que vous venez de créer (`Python: Sélectionner l'interpréteur` > `Python 3.11 (.env)`).
 
-#### Si vous êtes sur vos machines personnelles mais que vous voulez travailler sur les machines de l'INSA :exploding_head:
+###### Si vous êtes sur vos machines personnelles mais que vous voulez travailler sur les machines de l'INSA :exploding_head:
 
 Vous pouvez le faire grâce à l'extension `Ctrl+Shift+X` de VSCode qui s'appelle `Remote-SSH`, et en ouvrant depuis votre VSCode local une connexion avec `srv-ens-calcul.insa-toulouse.fr`. Il faut que le VPN soit activé, *of course*. La configuration SSH ressemble à ça :
 
@@ -200,6 +199,6 @@ Host srv-ens-calcul
   Hostname srv-ens-calcul.insa-toulouse.fr
   User <votre_username_INSA>
 ```
-#### Si vous êtes sur les machines de l'INSA et que vous voulez accéder à distance à vos machines personnelles :clown_face:
+###### Si vous êtes sur les machines de l'INSA et que vous voulez accéder à distance à vos machines personnelles :clown_face:
 
 C'est la même idée dans l'autre sens, mais faut pas abuser.
