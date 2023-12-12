@@ -116,11 +116,18 @@ Pour réaliser cette quête, la toile de l'Internet est votre amie, avec notamme
 ### Training COCO128
 Pour pouvoir voir YOLO en action, vous allez lancer un apprentissage sur vos machines, sur CPU. Et afin d'éviter de voir vos PC s'envoler vers l'infini et au-delà, on va le faire sur un tout petit *dataset* : COCO 128, qui est une extraction du *dataset* COCO  [Common Objects in Context](https://cocodataset.org/#home).
 
-Toujours, la [doc d'Ultralytics](https://docs.ultralytics.com/modes/train/#key-features-of-train-mode) vous indique comment faire. Vous pouvez aussi voir comment est écrit le fichier du *dataset*, il est dans `ultralytics/cfg/datasets/coco128.yaml`. Vous serez ravis d'apprendre que le *dataset* COCO permet d'entrainer YOLO à détecter des brocolis.
+Toujours, la [doc d'Ultralytics](https://docs.ultralytics.com/modes/train/#key-features-of-train-mode) vous indique comment faire.
+Dans un premier temps, tentez un apprentissage sur 3 *epochs* pour voir ce qu'il se passe quand un apprentissage est terminé. 
+Tous les éléments liés à l'apprentissage que vous venez de lancer auront été enregistrés dans le dossier `runs/...` quelque chose. Allez voir ce qu'il s'y passe. Allez voir les métriques qu'il sauvegarde, les images qu'il produit dans ce dossier.
+
+Vous pouvez aussi voir comment est écrit le fichier du *dataset*, il est dans `ultralytics/cfg/datasets/coco128.yaml`. Vous serez ravis d'apprendre que le *dataset* COCO permet d'entrainer YOLO à détecter des brocolis.
 
 Quand vous lancez votre script de `train`, vous pouvez ensuite le monitorer avec Tensorboard. Pour cela, ouvrez un autre terminal et entrez `tensorboard --logdir=runs` pour indiquer qu'il faut monitorer le dossier dans lequel YOLO stocke les apprentissages. Il vous ouvre un monitoring sur [https://localhost:6006](https://localhost:6006) par défaut.
 
-Tous les éléments liés à l'apprentissage que vous venez de lancer auront été enregistrés dans le dossier `runs/...` quelque chose. Allez voir ce qu'il s'y passe.
+> **En mode debug**:
+>
+> Si vous mettez un point d'arrêt dans la fonction `_do_train()` du fichier `ultralytics/engine/trainer.py`, vous serez au coeur de la boucle d'apprentissage. A la ligne (environ) 336, vous pouvez voir le contenu du *batch*, vous voyez aussi à ce moment-là le modèle s'exécuter sur le *batch* et renvoyer la *loss* associée.
+![Train](images/train.png)
 
 ### Feature visualization
 Quand vous exécutez un modèle sur une image, vous pouvez visualiser les *feature maps* produites par chaque couche en passant l'option `visualize=True` lors de l'inférence. Toutes les *feature maps* et leurs images sont sauvegardées dans un dossier `runs/detect/predict...`. Allez voir à quoi ça ressemble. C'est "intéressant", même s'il y a bien longtemps que j'ai arrêté d'essayer d'interpréter des *feature maps*.
