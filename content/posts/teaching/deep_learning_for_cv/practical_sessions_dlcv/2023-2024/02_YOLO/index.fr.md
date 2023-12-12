@@ -106,12 +106,19 @@ Les contraintes logicielles sont :
 Pour cette première version et comme les apprentissages sur le *dataset* de cette année ne sont pas encore faits, vous utiliserez YOLO avec des poids pré-entrainés sur COCO. 
 
 Pour réaliser cette quête, la toile de l'Internet est votre amie, avec notamment :
-* [Google](https://www.google.fr);
 * la [doc d'Ultralytics](https://docs.ultralytics.com);
-* ChatGPT : :angry: bouuuh ChatGPT. [Même s'il est très fort](https://chat.openai.com/share/4c573574-bfad-4b17-a918-9db9fc16f0e1). (On appelle ça la _dissonance cognitive_) :
-![Dissonance cognitive](images/dissonance_cognitive.png))
+* [Google](https://www.google.fr);
+* ChatGPT : :angry: bouuuh ChatGPT, en plus il connait même pas YOLOv8 parce que c'est trop récent, laissez tomber. [Même s'il est très fort](https://chat.openai.com/share/4c573574-bfad-4b17-a918-9db9fc16f0e1). On appelle ça la _dissonance cognitive_ :
+
+![Dissonance cognitive](images/dissonance_cognitive.png)
 
 ## Quêtes secondaires
+### Training COCO128
+Pour pouvoir voir YOLO en action, vous allez pouvoir lancer un apprentissage sur vos machines. Et afin d'éviter de voir vos PC s'envoler vers l'infini et au-delà, on va le faire sur un tout petit *dataset* : COCO 128, qui est une extraction du *dataset* COCO  [Common Objects in Context](https://cocodataset.org/#home).
+
+Toujours, la [doc d'Ultralytics](https://docs.ultralytics.com/modes/train/#key-features-of-train-mode) vous indique comment faire. Vous pouvez voir comment est écrit le fichier du *dataset*, il est dans `ultralytics/cfg/datasets/coco128.yaml`. Vous serez ravis d'apprendre que le *dataset* COCO permet d'entrainer YOLO à détecter des brocolis.
+
+Quand vous lancez votre script de `train`, vous pouvez ensuite le monitorer avec Tensorboard. Pour cela, ouvrez un autre terminal et entrez `tensorboard --logdir=runs` pour indiquer qu'il faut monitorer le dossier dans lequel YOLO stocke les apprentissages. Il vous ouvre un monitoring sur [https://localhost:6006](https://localhost:6006) par défaut.
 
 ## Annexes
 ### Configuration du *workspace*
