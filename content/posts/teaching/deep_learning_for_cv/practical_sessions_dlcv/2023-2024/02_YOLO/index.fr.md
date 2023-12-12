@@ -190,12 +190,17 @@ Mise à jour des fichiers: 100% (767/767), fait.
 (.env) (base) labi@srv-tp06:~/Bureau/ultralytics$ pip install tensorboard
 ```
 
-Une fois dans VSCode, ouvrez le dossier `ultralytics` et avec la palette de commande (`Ctrl + Shift + P`) choisissez l'environnement virtuel que vous venez de créer (`Python: Sélectionner l'interpréteur` > `Python 3.11 (.env)`).
+Une fois dans VSCode, ouvrez le dossier `ultralytics` et avec la palette de commande `Ctrl+Shift+P` choisissez l'environnement virtuel que vous venez de créer (`Python: Sélectionner l'interpréteur` > `Python 3.11 (.env)`).
 
 #### Si vous êtes sur vos machines personnelles mais que vous voulez être sur les machines de l'INSA en même temps :exploding_head
 
-Vous pouvez le faire grâce à l'extension (`Ctrl + Shift + X`) de VSCode qui s'appelle `Remote-SSH`, et en ouvrant depuis votre VSCode local une connexion avec `srv-ens-calcul.insa-toulouse.fr`. Il faut que le VPN soit activé, *of course*.
+Vous pouvez le faire grâce à l'extension `Ctrl+Shift+X` de VSCode qui s'appelle `Remote-SSH`, et en ouvrant depuis votre VSCode local une connexion avec `srv-ens-calcul.insa-toulouse.fr`. Il faut que le VPN soit activé, *of course*. La configuration SSH ressemble à ça :
 
-#### Si vous êtes sur les machines de l'INSA et que vous voulez accéder à distance à vos machines personnelles
+```
+Host srv-ens-calcul
+  Hostname srv-ens-calcul.insa-toulouse.fr
+  User <votre_username_INSA>
+```
+#### Si vous êtes sur les machines de l'INSA et que vous voulez accéder à distance à vos machines personnelles :robot:
 
 Faut pas abuser.
