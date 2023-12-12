@@ -192,7 +192,7 @@ Mise à jour des fichiers: 100% (767/767), fait.
 
 Une fois dans VSCode, ouvrez le dossier `ultralytics` et avec la palette de commande `Ctrl+Shift+P` choisissez l'environnement virtuel que vous venez de créer (`Python: Sélectionner l'interpréteur` > `Python 3.11 (.env)`).
 
-#### Si vous êtes sur vos machines personnelles mais que vous voulez être sur les machines de l'INSA en même temps :exploding_head
+#### Si vous êtes sur vos machines personnelles mais que vous voulez être sur les machines de l'INSA en même temps :exploding_head:
 
 Vous pouvez le faire grâce à l'extension `Ctrl+Shift+X` de VSCode qui s'appelle `Remote-SSH`, et en ouvrant depuis votre VSCode local une connexion avec `srv-ens-calcul.insa-toulouse.fr`. Il faut que le VPN soit activé, *of course*. La configuration SSH ressemble à ça :
 
