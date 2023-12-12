@@ -124,10 +124,14 @@ Vous pouvez aussi voir comment est écrit le fichier du *dataset*, il est dans `
 
 Quand vous lancez votre script de `train`, vous pouvez ensuite le monitorer avec Tensorboard. Pour cela, ouvrez un autre terminal et entrez `tensorboard --logdir=runs` pour indiquer qu'il faut monitorer le dossier dans lequel YOLO stocke les apprentissages. Il vous ouvre un monitoring sur [https://localhost:6006](https://localhost:6006) par défaut.
 
-> **En mode debug**:
+> **En mode debug, si vous mettez un point d'arrêt**:
 >
-> Si vous mettez un point d'arrêt dans la fonction `_do_train()` du fichier `ultralytics/engine/trainer.py`, vous serez au coeur de la boucle d'apprentissage. A la ligne (environ) 336, vous pouvez voir le contenu du *batch*, vous voyez aussi à ce moment-là le modèle s'exécuter sur le *batch* et renvoyer la *loss* associée.
-![Train](images/train.png)
+> * dans la fonction `_do_train()` du fichier `ultralytics/engine/trainer.py`, vous serez au coeur de la boucle d'apprentissage. A la ligne (environ) 336, vous pouvez voir le contenu du *batch*, vous voyez aussi à ce moment-là le modèle s'exécuter sur le *batch* et renvoyer la *loss* associée.
+> ![Train](images/train.png)
+> 
+> * dans la fonction `__init__()` de la classe `DetectionModel` dans `ultralytics/nn/tasks.py`, vous êtes dans la création du réseau de détection. Regardez les autres fonctions (`_predict_augment` qui fait la *data augmentation* au moment de l'apprentissage, ou encore la classe `BaseDataset` dans `ultralytics/data/base.py` qui construit le *dataloader* pour faire les *batches*).
+>
+> Le *debug*, c'est la vie. N'hésitez pas à mettre des points d'arrêt sur les traces de l'apprentissage pour comprendre ce qui s'y joue. 
 
 ### Feature visualization
 Quand vous exécutez un modèle sur une image, vous pouvez visualiser les *feature maps* produites par chaque couche en passant l'option `visualize=True` lors de l'inférence. Toutes les *feature maps* et leurs images sont sauvegardées dans un dossier `runs/detect/predict...`. Allez voir à quoi ça ressemble. C'est "intéressant", même s'il y a bien longtemps que j'ai arrêté d'essayer d'interpréter des *feature maps*.
