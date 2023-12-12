@@ -106,9 +106,9 @@ Les contraintes logicielles sont :
 Pour cette première version et comme les apprentissages sur le *dataset* de cette année ne sont pas encore faits, vous utiliserez YOLO avec des poids pré-entrainés sur COCO. 
 
 Pour réaliser cette quête, la toile de l'Internet est votre amie, avec notamment :
-* Google : https://www.google.fr/;
-* la doc d'Ultralytics : https://docs.ultralytics.com/ ;
-* ChatGPT : :angry: bouuuh ChatGPT. (Même s'il est très fort)[https://chat.openai.com/share/4c573574-bfad-4b17-a918-9db9fc16f0e1].
+* [Google](https://www.google.fr);
+* la [doc d'Ultralytics](https://docs.ultralytics.com);
+* ChatGPT : :angry: bouuuh ChatGPT. [Même s'il est très fort](https://chat.openai.com/share/4c573574-bfad-4b17-a918-9db9fc16f0e1).
 
 ## Quêtes secondaires
 
