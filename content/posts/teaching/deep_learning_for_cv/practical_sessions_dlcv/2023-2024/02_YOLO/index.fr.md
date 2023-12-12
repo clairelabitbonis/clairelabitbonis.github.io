@@ -41,13 +41,13 @@ C'est comme une grille de bingo à remplir. Plus vous en validez, mieux c'est.
 On va le diviser en deux : une quête principale, et des quêtes annexes (des *gamers* par ici ?). La quête principale est l'objectif à atteindre pour terminer correctement le TP, les quêtes annexes sont à faire s'il vous reste du temps.
 
 {{< alert type="warning" >}}
-Attention, "Labellisation :sad:" et "split, split, split !" sont **nécessaires** pour que je puisse lancer les apprentissages pour la semaine prochaine. Considérez-les comme la quête principale. Si vous avez le temps, réalisez les quêtes annexes : "3,2,1, développez!", "Training COCO", "Feature visualization". 
+Attention, "Labellisation :frowning_face:" et "L'apprentissage dont vous êtes le héros" sont **nécessaires** pour que je puisse lancer les apprentissages pour la semaine prochaine. Considérez-les comme la quête principale. Si vous avez le temps, réalisez les quêtes annexes : "3,2,1, développez!", "Training COCO", "Feature visualization". 
 {{< /alert >}}
 
 Les quêtes annexes sont optionnelles, mais considérées comme des bonus pris en compte lors de l'évaluation :wink: 
 
 ## Quête principale
-### Labellisation :sad:
+### Labellisation :frowning_face:
 
 La semaine dernière dans CVAT, vous avez tous annoté votre classe d'objets. Nous devons pouvoir récupérer toutes vos données d'ici la fin de séance, sinon vos images ne seviront pas à l'entrainement (ce serait dommage). 
 
