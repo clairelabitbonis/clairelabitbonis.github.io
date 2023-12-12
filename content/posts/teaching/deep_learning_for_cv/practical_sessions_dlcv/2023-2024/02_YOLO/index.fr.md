@@ -99,7 +99,7 @@ Quand vous avez vos trois fichiers, vous me les envoyez par mail (clairelabitbon
 
 ### 3, 2, 1, développez !
 
-On arrive enfin à YOLO, depuis le temps qu'on en parle. La première étape consiste à configurer votre *workspace* : allez voir l'annexe "Configuration du *workspace*" (elle porte bien son nom). Une fois que c'est fait, voilà les exigences à respecter :
+On arrive enfin à YOLO, depuis le temps qu'on en parle. La première étape consiste à configurer votre *workspace* : allez voir l'annexe [Configuration du *workspace*](https://clairelabitbonis.github.io/posts/teaching/deep_learning_for_cv/practical_sessions_dlcv/2023-2024/02_yolo/#configuration-du-workspace) (elle porte bien son nom). Une fois que c'est fait, voilà les exigences à respecter :
 * l'application doit détecter des objets dans un flux vidéo ;
 * l'application doit afficher les boites englobantes de détection sur les images traitées ;
 * l'application doit afficher l'analyse en temps réel, c'est-à-dire afficher les détections dès que l'analyse est faite ;
@@ -153,3 +153,38 @@ Quand vous exécutez un modèle sur une image, vous pouvez visualiser les *featu
 
 ## Annexes
 ### Configuration du *workspace*
+
+**Si vous êtes sur vos machines personnelles**, c'est très simple et vous avez tous les droits, parce que c'est vous le.a patron.ne.
+
+Il faut juste faire :
+
+```bash
+cd <ou_vous_voulez_mettre_yolo>
+git clone --recursive https://github.com/ultralytics/ultralytics.git
+cd ultralytics
+pip install -r requirements.txt
+pip install tensorboard
+```
+
+Et hop, c'est plié (normalement, parce qu'il y a toujours des erreurs auxquelles on s'attend pas).
+
+**Si vous êtes sur les machines de l'INSA**, il faut faire installer l'environnement virtuel qui va bien pour vous donner les droits d'installation des différentes librairies Python :
+
+```bash
+(base) labi@srv-tp06:~/Bureau$ git clone --recursive https://github.com/ultralytics/ultralytics.git
+Clonage dans 'ultralytics'...
+remote: Enumerating objects: 20767, done.
+remote: Counting objects: 100% (24/24), done.
+remote: Compressing objects: 100% (22/22), done.
+remote: Total 20767 (delta 4), reused 6 (delta 1), pack-reused 20743
+Réception d'objets: 100% (20767/20767), 11.09 Mio | 10.19 Mio/s, fait.
+Résolution des deltas: 100% (14636/14636), fait.
+Mise à jour des fichiers: 100% (767/767), fait.
+(base) labi@srv-tp06:~/Bureau$ cd ultralytics/
+(base) labi@srv-tp06:~/Bureau/ultralytics$ python -m venv .env
+(base) labi@srv-tp06:~/Bureau/ultralytics$ source .env/bin/activate
+(.env) (base) labi@srv-tp06:~/Bureau/ultralytics$ pip install -e .
+(.env) (base) labi@srv-tp06:~/Bureau/ultralytics$ pip install tensorboard
+```
+
+Une fois dans VSCode, ouvrez le dossier `ultralytics` et avec la palette de commande (`Ctrl + Shift + P`) choisissez l'environnement virtuel que vous venez de créer (`Python: Sélectionner l'interpréteur` > `Python 3.11 (.env)`).
