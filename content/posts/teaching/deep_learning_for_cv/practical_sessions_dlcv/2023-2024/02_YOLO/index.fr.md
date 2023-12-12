@@ -158,7 +158,7 @@ Quand vous exécutez un modèle sur une image, vous pouvez visualiser les *featu
 
 Il faut juste faire :
 
-```bash
+```
 cd <ou_vous_voulez_mettre_yolo>
 git clone --recursive https://github.com/ultralytics/ultralytics.git
 cd ultralytics
@@ -170,7 +170,7 @@ Et hop, c'est plié (normalement, parce qu'il y a toujours des erreurs auxquelle
 
 **Si vous êtes sur les machines de l'INSA**, il faut faire installer l'environnement virtuel qui va bien pour vous donner les droits d'installation des différentes librairies Python :
 
-```bash
+```
 (base) labi@srv-tp06:~/Bureau$ git clone --recursive https://github.com/ultralytics/ultralytics.git
 Clonage dans 'ultralytics'...
 remote: Enumerating objects: 20767, done.
@@ -188,3 +188,5 @@ Mise à jour des fichiers: 100% (767/767), fait.
 ```
 
 Une fois dans VSCode, ouvrez le dossier `ultralytics` et avec la palette de commande (`Ctrl + Shift + P`) choisissez l'environnement virtuel que vous venez de créer (`Python: Sélectionner l'interpréteur` > `Python 3.11 (.env)`).
+
+**Si vous êtes sur vos machines personnelles mais que vous voulez être sur les machines de l'INSA en même temps :exploding_head:**, vous pouvez le faire grâce à l'extension (`Ctrl + Shift + X`) de VSCode qui s'appelle `Remote-SSH`, et en ouvrant depuis votre VSCode local une connexion avec `srv-ens-calcul.insa-toulouse.fr`. Il faut que le VPN soit activé, *of course*.
