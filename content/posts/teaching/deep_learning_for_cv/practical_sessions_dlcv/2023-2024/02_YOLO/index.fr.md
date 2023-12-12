@@ -38,7 +38,7 @@ Bonjour, bonjour ! Aujourd'hui, plusieurs objectifs :
 
 C'est comme une grille de bingo à remplir. Plus vous en validez, mieux c'est.
 
-On va le diviser en deux : une quête principale, et des quêtes secondaires (des *gamers* par ici ?). La quête principale est l'objectif à atteindre pour terminer la séance de TP d'aujourd'hui (si vous ne les avez pas, je ne pourrai pas utiliser vos données pour lancer les apprentissages :cry:), les quêtes secondaires sont à faire s'il vous reste du temps.
+On va le diviser en deux : une quête principale, et des quêtes secondaires (des *gamers* par ici ?). La quête principale est l'objectif à atteindre pour terminer la séance de TP d'aujourd'hui (si vous ne les avez pas, je ne pourrai pas utiliser vos données pour lancer les apprentissages. Et moi je serai vraiment très triste de ne pas pouvoir détecter vos moustaches et vos signes de JuL :cry:), les quêtes secondaires sont à faire s'il vous reste du temps.
 
 {{< alert type="warning" >}}
 Attention, "Labellisation :frowning_face:" et "L'apprentissage dont vous êtes le héros" sont **nécessaires** pour que je puisse lancer les apprentissages pour la semaine prochaine. Considérez-les comme la quête principale. Si vous avez le temps, réalisez les quêtes annexes : "3,2,1, développez!", "Training COCO", "Feature visualization". 
