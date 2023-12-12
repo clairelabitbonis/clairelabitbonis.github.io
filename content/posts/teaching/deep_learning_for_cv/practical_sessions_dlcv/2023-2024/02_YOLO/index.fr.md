@@ -172,7 +172,7 @@ Et hop, c'est plié (normalement, parce qu'il y a toujours des erreurs auxquelle
 
 ##### Si vous êtes sur les machines de l'INSA :snail:
 
-J'espère que ça marchera mieux pour vous que pour moi, j'ai fait planter ma session (via `montp.insa`, certes, mais quand même).
+J'espère que ça marchera mieux pour vous que pour moi, j'ai fait planter ma session (*via* `montp.insa`, certes, mais quand même).
 
 Il faut installer l'environnement virtuel qui va bien pour vous donner les droits d'installation des différentes librairies Python :
 
