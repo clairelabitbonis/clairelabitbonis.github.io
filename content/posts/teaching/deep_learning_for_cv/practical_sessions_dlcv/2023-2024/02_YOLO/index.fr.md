@@ -38,7 +38,7 @@ Bonjour, bonjour ! Aujourd'hui, plusieurs objectifs :
 
 C'est comme une grille de bingo à remplir. Plus vous en validez, mieux c'est.
 
-On va le diviser en deux : une quête principale, et des quêtes annexes (des *gamers* par ici ?). La quête principale est l'objectif à atteindre pour terminer correctement le TP, les quêtes annexes sont à faire s'il vous reste du temps.
+On va le diviser en deux : une quête principale, et des quêtes secondaires (des *gamers* par ici ?). La quête principale est l'objectif à atteindre pour terminer la séance de TP d'aujourd'hui (si vous ne les avez pas, je ne pourrai pas utiliser vos données pour lancer les apprentissages :cry:), les quêtes secondaires sont à faire s'il vous reste du temps.
 
 {{< alert type="warning" >}}
 Attention, "Labellisation :frowning_face:" et "L'apprentissage dont vous êtes le héros" sont **nécessaires** pour que je puisse lancer les apprentissages pour la semaine prochaine. Considérez-les comme la quête principale. Si vous avez le temps, réalisez les quêtes annexes : "3,2,1, développez!", "Training COCO", "Feature visualization". 
@@ -60,13 +60,13 @@ Je vous demande donc à tous et toutes de vérifier vos labels avant de les vali
 :warning: Par ailleurs, changement de stratégie ; nous (les encadrant.e.s) nous chargerons nous-mêmes d'exporter les tâches et d'organiser le *dataset* sur le serveur GPU. La semaine dernière, certaines erreurs bizarres ont popé lors de la copie sur le serveur, alors on va s'éviter du tracas inutile en séance.
 {{< /alert >}}
 
-Quand votre labellisation est terminée, venez la valider.
+**Quand votre labellisation est terminée, venez la valider.**
 
 ### L'apprentissage dont vous êtes le héros
 
 Pour celles et ceux qui n'ont pas divisé leur *dataset* en trois fichiers textes `train.txt`, `val.txt` et `test.txt` (cf. TP précédent), c'est l'heure ! 
 
-Vous devez créer trois fichiers : `train.txt`, `val.txt` et `test.txt`. Dans chacun, vous mettrez la liste des chemins d'accès vers les images selon qu'elles doivent aller en base d'apprentissage, de validation ou de test. Par exemple, dans `train.txt` :
+Vous devez créer trois fichiers : `train.txt`, `val.txt` et `test.txt`. Dans chacun, vous mettrez la liste des chemins d'accès vers les **_images_** (pas les labels) selon qu'elles doivent aller en base d'apprentissage, de validation ou de test. Par exemple, dans `train.txt` :
 
     ./velo/tic_et_tac/4/images/frame_000002.jpg
     ./velo/tic_et_tac/4/images/frame_000118.jpg
@@ -85,6 +85,15 @@ La répartition de vos données entre les différentes bases est une étape cruc
 **Spoiler alert :** la première option a tendance à légèrement *overfitter*...
 
 ![Overfitting](images/overfitting.png)
+
+{{< alert type="success" >}}
+**Ma philosophie...**
+
+Personnellement, quand je vois que je commence à passer plus de temps à écrire un script pour faire une tâche automatiquement qu'à la faire de manière manuelle et pas du tout intelligente... Je préfère la faire de manière manuelle et pas du tout intelligente. Par exemple, en [listant dans un fichier tous les chemins d'accès](https://stackoverflow.com/questions/1767384/how-can-i-get-a-recursive-full-path-listing-one-line-per-file) et en découpant le fichier à la main dans un éditeur de texte. Par exemple, mais on peut trouver plus bête encore, je pense.
+
+Maintenant, si vous êtes des pros de Python, bash, que sais-je, faites-vous plaisir. Il faut juste ne pas y passer toute la séance :wink:
+{{< /alert >}}
+
 
 Quand vous avez vos trois fichiers, vous me les envoyez par mail (clairelabitbonis@gmail.com), avec le nom de chacun des membres du binôme, et votre classe labellisée.
 
