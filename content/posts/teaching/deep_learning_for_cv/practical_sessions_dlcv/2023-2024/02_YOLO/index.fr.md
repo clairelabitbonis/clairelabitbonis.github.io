@@ -49,7 +49,7 @@ Les quêtes annexes sont optionnelles, mais considérées comme des bonus pris e
 ## Quête principale
 ### Labellisez :frowning_face:
 
-La semaine dernière dans CVAT, vous avez tou.te.s annoté votre classe d'objets. Nous devons pouvoir récupérer toutes vos données d'ici la fin de séance, sinon vos images ne seviront pas à l'entrainement (ce serait dommage). 
+La semaine dernière dans CVAT, vous avez tou.te.s annoté votre classe d'objets. Nous devons pouvoir récupérer toutes vos données d'ici la fin de séance, sinon vos images ne seviront pas à l'entrainement (ce serait dommage). Je me suis juste trompée et j'ai rajouté la classe `gobelet` en plus d'`ecocup`, mais ça ne changera rien pour vous, je dois juste faire une bidouille pour rattraper ça. 
 
 ![Dataset](images/dataset_cvat.png)
 
