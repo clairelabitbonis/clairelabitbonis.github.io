@@ -49,7 +49,7 @@ Les quêtes annexes sont optionnelles, mais considérées comme des bonus pris e
 ## Quête principale
 ### Labellisation :frowning_face:
 
-La semaine dernière dans CVAT, vous avez tous annoté votre classe d'objets. Nous devons pouvoir récupérer toutes vos données d'ici la fin de séance, sinon vos images ne seviront pas à l'entrainement (ce serait dommage). 
+La semaine dernière dans CVAT, vous avez tou.te.s annoté votre classe d'objets. Nous devons pouvoir récupérer toutes vos données d'ici la fin de séance, sinon vos images ne seviront pas à l'entrainement (ce serait dommage). 
 
 ![Dataset](images/dataset_cvat.png)
 
@@ -64,54 +64,27 @@ Quand votre labellisation est terminée, venez la valider.
 
 ### L'apprentissage dont vous êtes le héros
 
-Pour celles et ceux qui n'ont pas divisé leur *dataset* en trois fichiers textes `train.txt`, `val.txt` et `test.txt` (cf. TP précédent), c'est l'heure ! Je vous suggère 
+Pour celles et ceux qui n'ont pas divisé leur *dataset* en trois fichiers textes `train.txt`, `val.txt` et `test.txt` (cf. TP précédent), c'est l'heure ! 
 
+Vous devez créer trois fichiers : `train.txt`, `val.txt` et `test.txt`. Dans chacun, vous mettrez la liste des chemins d'accès vers les images selon qu'elles doivent aller en base d'apprentissage, de validation ou de test. Par exemple, dans `train.txt` :
 
+    ./velo/tic_et_tac/4/images/frame_000002.jpg
+    ./velo/tic_et_tac/4/images/frame_000118.jpg
+    ...
+    ./velo/tic_et_tac/2/images/frame_000004.jpg
+    ./velo/tic_et_tac/1/images/frame_000001.jpg
+    ./velo/tic_et_tac/3/images/frame_000256.jpg
 
+{{< alert type="danger" >}}
+La répartition de vos données entre les différentes bases est une étape cruciale : 
+* allez-vous mettre 3 séquences complètes en `train`, une en `val` et une en `test`, au risque d'avoir des exemples en test qui sont trop éloignés de ceux de la base d'apprentissage ?
+* ou bien allez-vous plutôt mettre les débuts de séquence en `train`, les milieux en `val`, les fins en `test`, mais dans ce cas vous biaiserez l'apprentissage et obtiendrez des performances étrangement un peu trop hautes ? 
+* vous pouvez aussi choisir la méthode bourrine et faire un random total sur la répartition...
+{{< /alert >}}
 
-La semaine dernière dans CVAT, vous avez tous annoté votre classe d'objet indépendamment des autres binômes. Dans vos fichiers de labels, votre numéro de classe est donc `0`, quelle que soit votre classe. Or pour entrainer un détecteur multi-classes, chaque classe doit porter un indice différent.
+Quand vous avez vos trois fichiers, vous me les envoyez par mail (clairelabitbonis@gmail.com), avec le nom de chacun des membres du binôme, et votre classe labellisée.
 
-> Dans la vraie vie, on crée un projet dans CVAT qui contient toutes les classes d'objets, on ajoute des tâches au projet, on labellise les *jobs*, et à l'export toutes les annotations portent les bons numéros de classes. Mais **(1)** la configuration de CVAT a été *légèrement* chaotique, donc pas de projet, donc pas les bons numéros, et **(2)** de toutes façons, le quotidien de l'ingé *deep learning* n'est fait que de moulinettes et de scripts Python en tout genre, ça tombe bien !
-
-Votre mission est donc de vous placer dans votre dossier, et de remplacer dans chacun des fichiers de label `frame_xxxxxx.txt` le numéro de classe par celui qui vous correspond, d'après le mappage suivant :
-
-```python
-  0: claire
-  1: pierre
-  2: bague
-  3: chaise
-  4: ecouteurs
-  5: gourdes
-  6: lunettes
-  7: montre
-  8: voiture
-  9: chauve
-  10: lentilles
-  11: ordinateur
-  12: sac
-  13: stylo
-  14: velo
-```
-
-> **Exemple** avec le fichier `frame_00256.txt` de la classe `lunettes` :
->
-> Avant : ![Avant moulinette](images/label_a_changer.png)
-> 
-> Après : ![Après moulinette](images/gourde_label.png)
-
-A vous de trouver la meilleure manière de le faire : à la main (ça peut marcher, mais vous y serez encore la semaine prochaine), avec un script *bash*, un script Python, en utilisant des librairies comme `glob` pour parcourir les dossiers, etc.
-
-
-### *Split, split, split!*
-Avant de lancer l'apprentissage, il faut séparer la base en trois sous-ensembles : apprentissage, validation, et test. 
-
-Les fichiers `train.txt`, `val.txt` et `test.txt` doivent contenir les chemins vers les images correspondantes :
-
-![train.txt](images/train_split.png)
-
-A vous de jouer : toujours dans votre dossier (au même niveau que les dossiers 1/2/3/4/5), construisez ces trois fichiers (à l'aide d'une commande `shell`, d'un script ou autre). La répartition entre les trois *sets* est de l'ordre de 65% / 25% / 10%.
-
-### Train
+### Training COCO
 
 Une fois qu'on aura les trois sous-ensembles pour l'ensemble des classes, on pourra les regrouper dans trois fichiers principaux `train.txt`, `val.txt` et `test.txt` pour tout le *dataset*. Puis on sera en mesure de lancer l'apprentissage correspondant à la configuration que vous avez tirée au sort. 
 
