@@ -1,5 +1,5 @@
 ---
-title: "DLCV-TP-01 | Le Bingo de YOLO !"
+title: "DLCV2 | Le Bingo de YOLO !"
 date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
@@ -17,7 +17,7 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: "01 | YOLO !"
+    name: "02 | YOLO !"
     identifier: dlcv-practical-sessions-2023-2024-02
     parent: dlcv-2023-2024-practical
     weight: 20
@@ -62,7 +62,11 @@ Je vous demande donc à tous et toutes de vérifier vos labels avant de les vali
 
 Quand votre labellisation est terminée, venez la valider.
 
-### Split, split, split!
+### L'apprentissage dont vous êtes le héros
+
+Pour celles et ceux qui n'ont pas divisé leur *dataset* en trois fichiers textes `train.txt`, `val.txt` et `test.txt` (cf. TP précédent), c'est l'heure ! Je vous suggère 
+
+
 
 
 La semaine dernière dans CVAT, vous avez tous annoté votre classe d'objet indépendamment des autres binômes. Dans vos fichiers de labels, votre numéro de classe est donc `0`, quelle que soit votre classe. Or pour entrainer un détecteur multi-classes, chaque classe doit porter un indice différent.
