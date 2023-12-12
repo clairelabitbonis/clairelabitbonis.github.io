@@ -131,6 +131,10 @@ Quand vous lancez votre script de `train`, vous pouvez ensuite le monitorer avec
 > 
 > * dans la fonction `__init__()` de la classe `DetectionModel` dans `ultralytics/nn/tasks.py`, vous êtes dans la création du réseau de détection. Regardez les autres fonctions (`_predict_augment` qui fait la *data augmentation* au moment de l'apprentissage, ou encore la classe `BaseDataset` dans `ultralytics/data/base.py` qui construit le *dataloader* pour faire les *batches*).
 >
+> * dans un module en particulier (une convolution dans `ultralytics/nn/modules/conv.py`, la tête `Detect` dans `ultralytics/nn/modules/head.py`), vous pouvez aussi voir l'exécution interne de ces couches au moment où elles sont appelées.
+>
+> * dans la fonction `forward()` de la `BboxLoss`, dans `ultralytics/utils/loss.py`, vous aurez le détail du calcul de la fonction d'erreur de la détection prédite en fonction du label.
+>
 > Le *debug*, c'est la vie. N'hésitez pas à mettre des points d'arrêt sur les traces de l'apprentissage pour comprendre ce qui s'y joue. 
 
 ### Feature visualization
