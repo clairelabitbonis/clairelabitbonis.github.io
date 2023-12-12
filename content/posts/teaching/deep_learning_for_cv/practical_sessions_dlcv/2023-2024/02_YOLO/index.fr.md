@@ -118,6 +118,10 @@ Pour réaliser cette quête, la toile de l'Internet est votre amie, avec notamme
 
 
 ### La légende des fourmis Hercul_*i*_ennes
+
+Quelle consommation énergétique pour la légende des fourmis ? On appelle ça la _dissonance cognitive_.
+![Dissonance cognitive](images/dissonance_cognitive.png)
+
 #### You
 
 Écris moi le scénario d'une série sur des petites fourmis qui mangent de l'herbe pour se donner des forces et porter encore plus de poids
