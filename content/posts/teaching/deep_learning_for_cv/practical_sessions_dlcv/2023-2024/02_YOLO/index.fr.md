@@ -82,11 +82,16 @@ La répartition de vos données entre les différentes bases est une étape cruc
 * vous pouvez aussi choisir la méthode bourrine et faire un random total sur la répartition...
 {{< /alert >}}
 
+**Spoiler alert :* la première option a tendance à *overfitter*...
+
+![Overfitting](images/overfitting.png)
+
 Quand vous avez vos trois fichiers, vous me les envoyez par mail (clairelabitbonis@gmail.com), avec le nom de chacun des membres du binôme, et votre classe labellisée.
 
 ### 3, 2, 1, développez !
 
-On arrive enfin à YOLO, depuis le temps qu'on en parle.
+On arrive enfin à YOLO, depuis le temps qu'on en parle. La première étape consiste à configurer votre *workspace*.
+
 
 ## Quêtes annexes
 
