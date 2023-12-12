@@ -4,7 +4,7 @@ date: 2022-11-04T10:00:00+09:00
 description: ""
 summary: ""
 
-draft: true
+draft: false
 math: true 
 highlight: true
 hightlight_languages: ["python","bash"]
@@ -22,39 +22,48 @@ menu:
     parent: dlcv-2023-2024-practical
     weight: 20
 ---
-
 <center>
 
-![Le Bingo de YOLO](images/le_bingo_de_yolo.png)
+![Le Bingo de YOLO](images/le_bingo_de_yolo_v2.png)
 
 </center>
 
 ## Présentation
 
-L'objectif du TP du jour est d'utiliser le *dataset* construit la semaine dernière pour entrainer YOLOv5 à détecter les classes d'objets annotées.
-Voyez-le comme une grille de Bingo à remplir. Plus vous en validez, mieux c'est. 
+Bonjour, bonjour ! Aujourd'hui, plusieurs objectifs :
+* finir le *dataset* ;
+* faire le *split* train/val/test ;
+* développer une application de détection et visualisation dans un flux vidéo ;
+* manipuler un apprentissage de YOLOv8.
+
+C'est comme une grille de bingo à remplir. Plus vous en validez, mieux c'est.
+
+On va le diviser en deux : une quête principale, et des quêtes annexes (des *gamers* par ici ?). La quête principale est l'objectif à atteindre pour terminer correctement le TP, les quêtes annexes sont à faire s'il vous reste du temps.
 
 {{< alert type="warning" >}}
-Attention, "la moulinette des labels" et "split, split, split" sont **nécessaires** pour lancer l'apprentissage en fin de séance. Considérez-les comme la quête principale. Si vous avez le temps, réalisez les quêtes annexes : "seeing data augmentation", "et la valeur du poids est...", "detect with coco.pt" et "où est Charlie ?". 
+Attention, "Labellisation :sad:" et "split, split, split !" sont **nécessaires** pour que je puisse lancer les apprentissages pour la semaine prochaine. Considérez-les comme la quête principale. Si vous avez le temps, réalisez les quêtes annexes : "3,2,1, développez!", "Training COCO", "Feature visualization". 
 {{< /alert >}}
 
 Les quêtes annexes sont optionnelles, mais considérées comme des bonus pris en compte lors de l'évaluation :wink: 
 
-### Arborescence du *dataset*
-Après réorganisation du *dataset* à la suite des TPs de la semaine dernière, l'arborescence est comme suit : 
-
-![Arborescence du dataset](images/arborescence.png)
-
-> Connectez-vous en SSH au serveur GPU, faites une copie vers votre *home* du dossier de votre binôme et fermez la connexion SSH. Les dossiers personnels étant synchronisés, vous avez accès au dossier nouvellement copié dans votre espace personnel. Vous travaillerez dans ce dossier pour réaliser les traitements (ça évitera une mauvaise manip' qui écrase tout sur le serveur...).
-
 ## Quête principale
-### La moulinette des labels
+### Labellisation :sad:
 
-<!-- {{< alert type="danger" >}}
-***/!\ DANGER /!\\*** 
+La semaine dernière dans CVAT, vous avez tous annoté votre classe d'objets. Nous devons pouvoir récupérer toutes vos données d'ici la fin de séance, sinon vos images ne seviront pas à l'entrainement (ce serait dommage). 
 
-Vous allez travailler dans les dossiers du *dataset* directement. Ne vous trompez pas, n'écrasez pas vos fichiers de labels ou ceux de vos camarades, ce serait dommage, il faudrait tout ré-annoter... :angel:
-{{< /alert >}} -->
+![Dataset](images/dataset_cvat.png)
+
+{{< alert type="warning" >}}
+Attention, en regardant certaines séquences, je me suis rendue compte que beaucoup d'annotations s'arrêtaient en cours de vidéo, que certaines qui étaient occultées étaient quand même labellisées comme visibles, etc. 
+Je vous demande donc à tous et toutes de vérifier vos labels avant de les valider pour de bon.
+
+:warning: Par ailleurs, changement de stratégie ; nous (les encadrant.e.s) nous chargerons nous-mêmes d'exporter les tâches et d'organiser le *dataset* sur le serveur GPU. La semaine dernière, certaines erreurs bizarres ont popé lors de la copie sur le serveur, alors on va s'éviter du tracas inutile en séance.
+{{< /alert >}}
+
+Quand votre labellisation est terminée, venez la valider.
+
+### Split, split, split!
+
 
 La semaine dernière dans CVAT, vous avez tous annoté votre classe d'objet indépendamment des autres binômes. Dans vos fichiers de labels, votre numéro de classe est donc `0`, quelle que soit votre classe. Or pour entrainer un détecteur multi-classes, chaque classe doit porter un indice différent.
 
