@@ -54,7 +54,7 @@ La semaine dernière dans CVAT, vous avez tou.te.s annoté votre classe d'objets
 ![Dataset](images/dataset_cvat.png)
 
 {{< alert type="warning" >}}
-Attention, en regardant certaines séquences, je me suis rendue compte que beaucoup d'annotations s'arrêtaient en cours de vidéo, que certaines qui étaient occultées étaient quand même labellisées comme visibles, etc. 
+Attention, en regardant certaines séquences, je me suis rendu compte que beaucoup d'annotations s'arrêtaient en cours de vidéo, que certaines qui étaient occultées étaient quand même labellisées comme visibles, etc. 
 Je vous demande donc à tous et toutes de vérifier vos labels avant de les valider pour de bon.
 
 :warning: Par ailleurs, changement de stratégie ; nous (les encadrant.e.s) nous chargerons nous-mêmes d'exporter les tâches et d'organiser le *dataset* sur le serveur GPU. La semaine dernière, certaines erreurs bizarres ont popé lors de la copie sur le serveur, alors on va s'éviter du tracas inutile en séance.
