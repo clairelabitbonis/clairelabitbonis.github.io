@@ -90,7 +90,7 @@ La répartition de vos données entre les différentes bases est une étape cruc
 **JE N'AI QU'UNE PHILOSOPHIE, si ça vous intéresse...**
 
 
-Personnellement, quand je vois que je commence à passer plus de temps à écrire un script pour faire une tâche automatiquement qu'à la faire de manière manuelle et pas du tout intelligente... Je préfère la faire de manière manuelle et pas du tout intelligente. Par exemple, en [listant dans un fichier tous les chemins d'accès](https://stackoverflow.com/questions/1767384/how-can-i-get-a-recursive-full-path-listing-one-line-per-file) et en découpant le fichier à la main dans un éditeur de texte. Par exemple, mais on peut trouver plus bête encore, je pense.
+Personnellement, quand je vois que je commence à passer plus de temps à écrire un script pour faire une tâche automatiquement qu'à la faire de manière manuelle et pas du tout intelligente... Je préfère la faire de manière manuelle et pas du tout intelligente. Par exemple, en [listant dans un fichier tous les chemins d'accès](https://stackoverflow.com/questions/1767384/how-can-i-get-a-recursive-full-path-listing-one-line-per-file) et en découpant le fichier à la main dans un éditeur de texte. Mais on peut trouver plus bête encore, je pense.
 
 Maintenant, si vous êtes des pros de Python, bash, que sais-je, faites-vous plaisir. Il faut juste ne pas y passer toute la séance :wink:
 {{< /alert >}}
