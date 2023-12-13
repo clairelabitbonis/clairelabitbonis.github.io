@@ -205,6 +205,9 @@ Vous pouvez le faire grâce à l'extension `Ctrl+Shift+X` de VSCode qui s'appell
 Host srv-ens-calcul
   Hostname srv-ens-calcul.insa-toulouse.fr
   User <votre_username_INSA>
+  ForwardAgent yes
+  ForwardX11 yes
+  ForwardX11Trusted yes
 ```
 ##### Si vous êtes sur les machines de l'INSA et que vous voulez accéder à distance à vos machines personnelles :clown_face:
 
