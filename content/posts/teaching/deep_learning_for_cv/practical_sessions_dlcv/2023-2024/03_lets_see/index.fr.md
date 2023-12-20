@@ -17,7 +17,7 @@ tags: ["Teaching"]
 
 menu:
   sidebar:
-    name: "DLCV2 | Tadaaaam !"
+    name: "03 | Tadaaaam !"
     identifier: dlcv-practical-sessions-2023-2024-03
     parent: dlcv-2023-2024-practical
     weight: 30
@@ -27,7 +27,7 @@ menu:
 
 Bonjour, bonjour ! Aujourd'hui, l'objectif est d'évaluer les performances de YOLOv8 sur le *dataset* qu'on a construit ensemble. On ne sera que deux encadrant.e.s pour les trois groupes, alors ça va être sportif. Mais YOLO, on a pas peur.
 
-Comme indiqué dans le sujet de [présentation](https://clairelabitbonis.github.io/posts/teaching/deep_learning_for_cv/practical_sessions_dlcv/2023-2024/00_presentation/), vous devrez rendre début janvier une vidéo d'une dizaine de minutes qui décrit votre travail, et votre analyse des performances de YOLO sur le *dataset*.
+Comme indiqué dans le sujet de [présentation](https://clairelabitbonis.github.io/posts/teaching/deep_learning_for_cv/practical_sessions_dlcv/2023-2024/00_presentation/), vous devrez rendre début janvier une vidéo d'une dizaine de minutes qui décrit votre travail de TP, et votre analyse des performances de YOLO sur le *dataset*.
 
 Pour cela, vous allez aujourd'hui procéder à :
 * une **analyse quantitative** des performances : interpréter des courbes de précision/rappel, des matrices de confusion, des temps de calcul, des tailles de réseau ;
@@ -41,7 +41,7 @@ Il n'y a pas que ces analyses qui sont demandées pour le rendu. Il faut aussi p
 
 Le sujet d'aujourd'hui est divisé en trois parties :
 * [partie 1](#il-est-tres-beau-le-dataset) : un compte-rendu du *dataset* ainsi qu'une présentation des différents entrainements de YOLO, pour que vous puissiez avoir une vue globale des données, et si j'ai eu le temps je les aurai comparées au *dataset* de l'année précédente (on se voit dans seulement quelques heures, alors je pense honnêtement qu'on est laaaaaarge au niveau du temps qu'il me reste pour rédiger des choses...) ;
-* [partie 2](#et-du-coup-ça-marche) : la description des scripts que j'ai écrits pour vous faciliter la vie, parce que je suis sympa ;
+* [partie 2](#et-donc-ça-marche) : la description des scripts que j'ai écrits pour vous faciliter la vie, parce que je suis sympa ;
 * [partie 3](#ce-que-vous-navez-pas-vu) : en vrac, ce que j'ai dû faire depuis la dernière séance pour qu'on ait un joli TP aujourd'hui.
 
 
@@ -81,6 +81,45 @@ On voit aussi que les labels de l'année dernière étaient en majorité vertica
  </center>
 
 
-## Et du coup, ça marche ?
+## Et donc, ça marche ?
 
-### Je suis sympa
+Pour le savoir, vous pourrez utiliser deux scripts (que j'ai codés, donc ils sont certainement buggés, c'est OOOOKKAAAAAY) :
+* [qualitative_dlcv.py](files/qualitative_dlcv.py) : permet de visualiser l'application d'un réseau sur différents types de sources ;
+* [quantitative_dlcv.py](files/quantitative_dlcv.py) : permet de générer des métriques de performances pour une configuration donnée.
+
+En parlant de configurations, cette semaine j'ai pu entrainer plusieurs versions de YOLO (N, S, M, L) qui diffèrent par leur nombre de filtres par couche et autres paramètres qui en font des réseaux plus ou moins gros (vous pouvez aller voir le fichier `ultralytics/cfg/models/v8/yolov8.yaml` pour plus de détails), avec des résolutions d'entrée différentes (de 320 à 1980), et en figeant ou non le *backbone* avant l'apprentissage. Au final, on obtient les configurations suivantes :
+
+
+<center>
+
+<img src="images/configurations.png" alt="Labels" width="60%"/>
+
+</center>
+
+Vous pouvez télécharger le fichier zip qui contient tous les runs correspondant à ces apprentissages. Ce dossier, `runs`, est à placer à la racine d'`ultralytics`. Chaque sous-dossier contient une configuration donnée, accompagnée de ses courbes d'apprentissage, de ses matrices de confusion et de ses poids (dans `weights`). 
+
+### Analyse qualitative
+
+Le script `qualitative_dlcv.py` prend en entrées 4 paramètres : 
+* `weights` qui sera le chemin vers le fichier `.pt` issu de l'apprentissage que vous voulez évaluer ;
+* `source` pour indiquer l'entrée que vous donnerez au réseau. Vous pouvez mettre soit `folder`, `txt_file`, `video` ou `webcam` pour indiquer que vous donnerez un dossier avec des images `.jpg` à l'intérieur, un fichier similaire à `train.txt` avec les chemins vers les images, une vidéo ou une webcam ;
+* `path` nécessaire dans le cas où vous avez mis `video`, `folder` ou `txt_file` ;
+* `display_size` : la taille à laquelle l'image sera retaillée avant d'être passée au réseau et affichée.
+
+Quelques exemples d'appels :
+
+```
+python qualitative_dlcv.py --weights runs/detect/yolov8s_640_freeze/weights/best.pt --source folder --path /scratch/labi/DLCV/2023-2024/dataset --display_size 640
+
+python qualitative_dlcv.py --weights runs/detect/yolov8m_320_nofreeze/weights/best.pt --source video --path video.mp4 --display_size 320
+```
+
+### Analyse quantitative
+
+Pour l'analyse quantitative, vous avez dans tous les sous-dossiers de `runs` les matrices de confusion et courbes en tout genre qui vous permettront d'analyser les performances des configurations entrainées.
+
+Vous pouvez également utiliser le script `quantitative_dlcv.py` qui prend en entrées plusieurs paramètres : 
+* `weights` qui sera le chemin vers le fichier `.pt` issu de l'apprentissage que vous voulez évaluer ;
+* `source` pour indiquer l'entrée que vous donnerez au réseau. Vous pouvez mettre soit `folder`, `txt_file`, `video` ou `webcam` pour indiquer que vous donnerez un dossier avec des images `.jpg` à l'intérieur, un fichier similaire à `train.txt` avec les chemins vers les images, une vidéo ou une webcam ;
+* `path` nécessaire dans le cas où vous avez mis `video`, `folder` ou `txt_file` ;
+* `display_size` : la taille à laquelle l'image sera retaillée avant d'être passée au réseau et affichée.
