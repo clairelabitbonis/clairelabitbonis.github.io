@@ -28,6 +28,10 @@ menu:
 
 </center>
 
+{{< alert type="danger" >}}
+Ce sujet est déjà dépassé : je rédige le sujet de la séance du jour en fonction de ce qui s'est passé à la précédente. Donc il y a des trucs ici qui ne sont plus valides. Allez voir "DLCV2 | Tadaaaam !".
+{{< /alert >}}
+
 ## Présentation
 
 Bonjour, bonjour ! Aujourd'hui, plusieurs objectifs :

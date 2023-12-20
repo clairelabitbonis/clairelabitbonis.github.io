@@ -22,6 +22,9 @@ menu:
     parent: dlcv-2023-2024-practical
     weight: 10
 ---
+{{< alert type="danger" >}}
+Ce sujet est déjà dépassé : je rédige le sujet de la séance du jour en fonction de ce qui s'est passé à la précédente. Donc il y a des trucs ici qui ne sont plus valides.
+{{< /alert >}}
 
 {{< alert type="success" >}}
 Tout ce dont vous avez besoin pour entrainer un détecteur d'objets est d'avoir des données qui représentent ces objets. Et de les nettoyer (les données, pas les objets). Et de les trier. Et de les annoter. Et d'en jeter un peu parce qu'elles sont pas si bien. Et d'en rajouter encore parce qu'il y en a plus assez. Etc. :+1: 
