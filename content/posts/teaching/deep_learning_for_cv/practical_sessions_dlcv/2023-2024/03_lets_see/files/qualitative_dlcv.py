@@ -52,8 +52,9 @@ def run(
         img_idx = 0
 
         ### List all .jpg in the folder
-        filenames = glob.glob(os.path.join(path, "**/*.jpg"), recursive=True)
-        print("Listing image files in " + path + "... " + str(len(filenames)) + "files")
+        filenames = sorted(glob.glob(os.path.join(path, "**/*.jpg"), recursive=True))
+        print("Listing image files in " + path + "... " + str(len(filenames)) + " files")
+        
         
         #### Read the first frame
         if len(filenames) > 0:
@@ -142,7 +143,7 @@ def run(
         
 
         cv2.imshow("frame", frame)
-        key = cv2.waitKey(1)
+        key = cv2.waitKey(0)
         if key == ord('q'): ### Stop if 'q' is pressed
             break
 
@@ -151,7 +152,11 @@ def run(
             ret, frame = video.read()
         elif source == "folder" or source == "txt_file":
             img_idx += 1
-            image_name = os.path.join(full_path, filenames[img_idx])
+            
+            if source == "folder":
+                image_name = filenames[img_idx]
+            elif source == "txt_file":
+                image_name = os.path.join(full_path, filenames[img_idx])
             frame = cv2.imread(image_name)
             if frame is not None:
                 ret = True

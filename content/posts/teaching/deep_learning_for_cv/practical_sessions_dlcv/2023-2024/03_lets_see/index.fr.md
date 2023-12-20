@@ -1,6 +1,6 @@
 ---
 title: "DLCV2 | Tadaaaam !"
-date: 2022-12-14T10:00:00+09:00
+date: 2023-12-21T10:00:00+09:00
 description: ""
 summary: ""
 
@@ -39,10 +39,10 @@ Ces analyses doivent être faites à un niveau **micro** où vous allez vous pr�
 Il n'y a pas que ces analyses qui sont demandées pour le rendu. Il faut aussi parler du *dataset*, de votre propre expérience, etc. Regardez bien le sujet de [présentation](https://clairelabitbonis.github.io/posts/teaching/deep_learning_for_cv/practical_sessions_dlcv/2023-2024/00_presentation/).
 {{< /alert >}}
 
-Le sujet d'aujourd'hui est divisé en trois parties :
+Le sujet d'aujourd'hui est divisé en deux parties :
 * [partie 1](#il-est-tres-beau-le-dataset) : un compte-rendu du *dataset* ainsi qu'une présentation des différents entrainements de YOLO, pour que vous puissiez avoir une vue globale des données, et si j'ai eu le temps je les aurai comparées au *dataset* de l'année précédente (on se voit dans seulement quelques heures, alors je pense honnêtement qu'on est laaaaaarge au niveau du temps qu'il me reste pour rédiger des choses...) ;
-* [partie 2](#et-donc-ça-marche) : la description des scripts que j'ai écrits pour vous faciliter la vie, parce que je suis sympa ;
-* [partie 3](#ce-que-vous-navez-pas-vu) : en vrac, ce que j'ai dû faire depuis la dernière séance pour qu'on ait un joli TP aujourd'hui.
+* [partie 2](#et-donc-ça-marche) : la description des scripts que j'ai écrits pour vous faciliter la vie, parce que je suis sympa.
+
 
 
 ## Il est TRES beau le *dataset*
@@ -83,7 +83,7 @@ On voit aussi que les labels de l'année dernière étaient en majorité vertica
 
 ## Et donc, ça marche ?
 
-Pour le savoir, vous pourrez utiliser deux scripts (que j'ai codés, donc ils sont certainement buggés, c'est OOOOKKAAAAAY) :
+Pour le savoir, vous pourrez utiliser deux scripts (que j'ai codés, donc ils sont certainement buggés, c'est OOOOKKAAAAAY. N'hésitez pas à les modifier pour qu'ils répondent parfaitement à votre besoin !) :
 * [qualitative_dlcv.py](files/qualitative_dlcv.py) : permet de visualiser l'application d'un réseau sur différents types de sources ;
 * [quantitative_dlcv.py](files/quantitative_dlcv.py) : permet de générer des métriques de performances pour une configuration donnée.
 
@@ -118,8 +118,4 @@ python qualitative_dlcv.py --weights runs/detect/yolov8m_320_nofreeze/weights/be
 
 Pour l'analyse quantitative, vous avez dans tous les sous-dossiers de `runs` les matrices de confusion et courbes en tout genre qui vous permettront d'analyser les performances des configurations entrainées.
 
-Vous pouvez également utiliser le script `quantitative_dlcv.py` qui prend en entrées plusieurs paramètres : 
-* `weights` qui sera le chemin vers le fichier `.pt` issu de l'apprentissage que vous voulez évaluer ;
-* `source` pour indiquer l'entrée que vous donnerez au réseau. Vous pouvez mettre soit `folder`, `txt_file`, `video` ou `webcam` pour indiquer que vous donnerez un dossier avec des images `.jpg` à l'intérieur, un fichier similaire à `train.txt` avec les chemins vers les images, une vidéo ou une webcam ;
-* `path` nécessaire dans le cas où vous avez mis `video`, `folder` ou `txt_file` ;
-* `display_size` : la taille à laquelle l'image sera retaillée avant d'être passée au réseau et affichée.
+Vous pouvez également utiliser le script `quantitative_dlcv.py` qui prend en entrées plusieurs paramètres.
