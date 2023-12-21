@@ -1,0 +1,41 @@
+{
+    // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
+    // Pointez pour afficher la description des attributs existants.
+    // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python : Detect on DLCV",
+            "type": "python",
+            "request": "launch",
+            "program": "scripts/qualitative_dlcv.py",
+            "args": [
+                "--weights", "runs/detect/yolov8s_320_nofreeze/weights/best.pt",
+                "--source", "video",
+                "--path", "PXL_20231212_161743566.mp4",
+                "--display_size", "640"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true
+        }
+        ,
+        {
+            "name": "Python : Measure metrics on Video_test",
+            "type": "python",
+            "request": "launch",
+            "program": "scripts/quantitative_dlcv.py",
+            "args": [
+                "--data", "dlcv_videotest.yaml",
+                "--weights", "runs/detect/yolov8s_320_nofreeze/weights/best.pt",
+                "--batch", "4",
+                "--imgsz", "320",
+                "--split", "val",
+                "--plots"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true
+        }
+    ]
+}

@@ -87,7 +87,7 @@ Pour le savoir, vous pourrez utiliser deux scripts (que j'ai codés, donc ils so
 * [qualitative_dlcv.py](files/qualitative_dlcv.py) : permet de visualiser l'application d'un réseau sur différents types de sources ;
 * [quantitative_dlcv.py](files/quantitative_dlcv.py) : permet de générer des métriques de performances pour une configuration donnée.
 
-En parlant de configurations, cette semaine j'ai pu entrainer plusieurs versions de YOLO (N, S, M, L) qui diffèrent par leur nombre de filtres par couche et autres paramètres qui en font des réseaux plus ou moins gros (vous pouvez aller voir le fichier `ultralytics/cfg/models/v8/yolov8.yaml` pour plus de détails), avec des résolutions d'entrée différentes (de 320 à 1980), et en figeant ou non le *backbone* avant l'apprentissage. Au final, on obtient les configurations suivantes :
+En parlant de configurations, cette semaine j'ai pu entrainer [plusieurs versions de YOLO (N, S, M, L)](https://docs.ultralytics.com/models/yolov8/#supported-tasks-and-modes) qui diffèrent par leur nombre de filtres par couche et autres paramètres qui en font des réseaux plus ou moins gros (vous pouvez aller voir le fichier `ultralytics/cfg/models/v8/yolov8.yaml` pour plus de détails), avec des résolutions d'entrée différentes (de 320 à 1980), et en figeant ou non le *backbone* avant l'apprentissage. Au final, on obtient les configurations suivantes :
 
 
 <center>
@@ -99,6 +99,8 @@ En parlant de configurations, cette semaine j'ai pu entrainer plusieurs versions
 Vous pouvez télécharger le [fichier zip](https://drive.google.com/file/d/1phuoYoy2C7jfXZXp0cSHeISskYDgtWRr/view?usp=drive_link) qui contient tous les *runs* correspondant à ces apprentissages. Ce dossier, `runs`, est à placer à la racine d'`ultralytics`. Chaque sous-dossier contient une configuration donnée, accompagnée de ses courbes d'apprentissage, de ses matrices de confusion et de ses poids (dans `weights`). 
 
 Vous pouvez également télécharger le fichier [dlcv_2023-2024.yaml](files/dlcv_2023-2024.yaml) dont vous avez besoin pour lancer l'évaluation quantitative, (paramètre `--data`, que l'on retrouve aussi à l'apprentissage). Ce fichier est à placer dans `ultralytics/cfg/datasets`, à côté des autres configurations de *datasets*.
+
+Si vous voulez exécuter les scripts en mode `debug`, je vous donne le fichier [.json](files/launch.json) qui va bien. Comme ça vous pouvez directement modifier les *args* dans le fichier de configuration. Il est à placer dans le dossier `.vscode`.
 
 ### Analyse qualitative
 
@@ -115,6 +117,8 @@ python qualitative_dlcv.py --weights runs/detect/yolov8s_640_freeze/weights/best
 
 python qualitative_dlcv.py --weights runs/detect/yolov8m_320_nofreeze/weights/best.pt --source video --path video.mp4 --display_size 320
 ```
+
+Si vous voulez avoir accès au *dataset* complet dans `/scratch/labi/DLCV/2023-2024/dataset`, il faut que vous soyez en [Remote-SSH](https://clairelabitbonis.github.io/posts/teaching/deep_learning_for_cv/practical_sessions_dlcv/2023-2024/02_yolo/#si-vous-%C3%AAtes-sur-vos-machines-personnelles-mais-que-vous-voulez-travailler-sur-les-machines-de-linsa-exploding_head) sur le `srv-gei-gpu2`. Si vous restez en local, vous devez avoir un dossier qui contient des images, ou une vidéo, ou un fichier texte avec les chemins vers les images, ou... une webcam.
 
 ### Analyse quantitative
 
