@@ -126,6 +126,18 @@ Pour l'analyse quantitative, vous avez dans tous les sous-dossiers de `runs` les
 
 Vous pouvez également utiliser le script `quantitative_dlcv.py` qui prend en entrées plusieurs paramètres.
 
+Exemple : j'ai une vidéo de test avec ses labels, exportés depuis CVAT, et je veux effectuer une analyse quantitative dessus.
+
+D'abord, l'arborescence des fichiers et le `.txt` associé (ignorez les dossiers "preparation" et "videos_for_cvat", j'ai juste pas eu le temps de les enlever...) :
+
+<center>
+
+<img src="images/arbo_videotest_img.png" alt="Labels" width="30%"/>
+<img src="images/arbo_videotest_labels.png" alt="Labels" width="25.2%"/>
+<img src="images/videotest_txt.png" alt="Labels" width="80%"/>
+
+</center>
+
 ### Pour info
 
 Je vous ai mis un [script d'apprentissage](files/train_dlcv.py) formaté de la même manière, si ça peut vous être utile (a priori pas d'apprentissage aujourd'hui).
