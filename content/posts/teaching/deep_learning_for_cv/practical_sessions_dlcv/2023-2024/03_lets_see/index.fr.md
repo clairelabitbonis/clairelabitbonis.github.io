@@ -138,6 +138,14 @@ D'abord, l'arborescence des fichiers et le `.txt` associé (ignorez les dossiers
 
 </center>
 
+Si vous créez un nouveau `.json` pour tester ce *dataset* en particulier (à placer dans `ultralytics/cfg/datasets`), et que vous exécutez le script avec les bons paramètres, vous aurez une évaluation d'un modèle donné sur ce *dataset*-là :
+
+<center>
+
+<img src="images/quantitative_evaluation.png" alt="Labels" width="100%"/>
+
+</center>
+
 ### Pour info
 
 Je vous ai mis un [script d'apprentissage](files/train_dlcv.py) formaté de la même manière, si ça peut vous être utile (a priori pas d'apprentissage aujourd'hui).
