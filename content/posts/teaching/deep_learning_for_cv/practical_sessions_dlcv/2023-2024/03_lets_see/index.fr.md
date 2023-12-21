@@ -83,7 +83,7 @@ On voit aussi que les labels de l'année dernière étaient en majorité vertica
 
 ## Et donc, ça marche ?
 
-Pour le savoir, vous pourrez utiliser deux scripts (que j'ai codés, donc ils sont certainement buggés, c'est OOOOKKAAAAAY. N'hésitez pas à les modifier pour qu'ils répondent parfaitement à votre besoin !) :
+Pour le savoir, vous pourrez utiliser deux scripts (que j'ai codés, donc ils sont certainement buggés, c'est OOOOKKAAAAAY. N'hésitez pas à les modifier pour qu'ils répondent parfaitement à votre besoin ! J'ai même mis des commentaires...) :
 * [qualitative_dlcv.py](files/qualitative_dlcv.py) : permet de visualiser l'application d'un réseau sur différents types de sources ;
 * [quantitative_dlcv.py](files/quantitative_dlcv.py) : permet de générer des métriques de performances pour une configuration donnée.
 
@@ -96,7 +96,9 @@ En parlant de configurations, cette semaine j'ai pu entrainer plusieurs versions
 
 </center>
 
-Vous pouvez télécharger le [fichier zip](files/runs.zip) qui contient tous les *runs* correspondant à ces apprentissages. Ce dossier, `runs`, est à placer à la racine d'`ultralytics`. Chaque sous-dossier contient une configuration donnée, accompagnée de ses courbes d'apprentissage, de ses matrices de confusion et de ses poids (dans `weights`). 
+Vous pouvez télécharger le [fichier zip](https://drive.google.com/file/d/1phuoYoy2C7jfXZXp0cSHeISskYDgtWRr/view?usp=drive_link) qui contient tous les *runs* correspondant à ces apprentissages. Ce dossier, `runs`, est à placer à la racine d'`ultralytics`. Chaque sous-dossier contient une configuration donnée, accompagnée de ses courbes d'apprentissage, de ses matrices de confusion et de ses poids (dans `weights`). 
+
+Vous pouvez également télécharger le fichier [dlcv_2023-2024.yaml](files/dlcv_2023-2024.yaml) dont vous avez besoin pour lancer l'évaluation quantitative, (paramètre `--data`, que l'on retrouve aussi à l'apprentissage). Ce fichier est à placer dans `ultralytics/cfg/datasets`, à côté des autres configurations de *datasets*.
 
 ### Analyse qualitative
 
@@ -119,3 +121,7 @@ python qualitative_dlcv.py --weights runs/detect/yolov8m_320_nofreeze/weights/be
 Pour l'analyse quantitative, vous avez dans tous les sous-dossiers de `runs` les matrices de confusion et courbes en tout genre qui vous permettront d'analyser les performances des configurations entrainées.
 
 Vous pouvez également utiliser le script `quantitative_dlcv.py` qui prend en entrées plusieurs paramètres.
+
+### Pour info
+
+Je vous ai mis un [script d'apprentissage](files/train_dlcv.py) formaté de la même manière, si ça peut vous être utile (a priori pas d'apprentissage aujourd'hui).
