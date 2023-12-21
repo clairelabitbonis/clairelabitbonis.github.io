@@ -96,7 +96,7 @@ En parlant de configurations, cette semaine j'ai pu entrainer plusieurs versions
 
 </center>
 
-Vous pouvez télécharger le fichier zip qui contient tous les runs correspondant à ces apprentissages. Ce dossier, `runs`, est à placer à la racine d'`ultralytics`. Chaque sous-dossier contient une configuration donnée, accompagnée de ses courbes d'apprentissage, de ses matrices de confusion et de ses poids (dans `weights`). 
+Vous pouvez télécharger le [fichier zip](files/runs.zip) qui contient tous les *runs* correspondant à ces apprentissages. Ce dossier, `runs`, est à placer à la racine d'`ultralytics`. Chaque sous-dossier contient une configuration donnée, accompagnée de ses courbes d'apprentissage, de ses matrices de confusion et de ses poids (dans `weights`). 
 
 ### Analyse qualitative
 
