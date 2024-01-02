@@ -32,10 +32,10 @@ Par souci de clarté, je récapitule tout ici (modalités d'évaluation, exécut
 
 Bonjour, bonjour ! Une nouvelle année commence, et quoi de mieux pour commencer l'année qu'un peu d'analyse qualitative et quantitative de YOLO sur [notre super *dataset*](https://clairelabitbonis.github.io/posts/teaching/deep_learning_for_cv/practical_sessions_dlcv/2023-2024/03_lets_see/#il-est-tres-beau-le-dataset) ? 
 
-L'évaluation de la matière *deep learning* sera basée sur une capsule vidéo d'environ 10 minutes par binôme. 
+L'évaluation de la matière *deep learning* sera basée sur une capsule vidéo d'environ 10 minutes par binôme<sup>1</sup>. 
 
 {{< footnote >}}
-ça veut dire que 9 minutes c'est OK, 11 minutes c'est OK, mais 3 minutes c'est trop court et 45 minutes c'est trop long. Et ça veut aussi dire que les deux membres du binôme doivent être perceptibles dans la vidéo (qu'on puisse vous voir ou vous entendre, selon si vous vous filmez ou non).
+1. ça veut dire que 9 minutes c'est OK, 11 minutes c'est OK, mais 3 minutes c'est trop court et 45 minutes c'est trop long. Et ça veut aussi dire que les deux membres du binôme doivent être perceptibles dans la vidéo *i.e.,* qu'on puisse vous voir ou vous entendre, selon si vous vous filmez ou non. Si vous êtes en monôme, je me contenterai de vous écouter, vous (pas besoin de faire parler votre ami imaginaire, même si je suis sûre qu'il s'entendrait bien avec le mien :wink:).
 {{< /footnote >}}
 
 
