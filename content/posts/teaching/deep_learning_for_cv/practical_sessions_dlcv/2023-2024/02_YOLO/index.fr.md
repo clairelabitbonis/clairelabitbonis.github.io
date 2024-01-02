@@ -1,5 +1,5 @@
 ---
-title: "DLCV2 | Le Bingo de YOLO !"
+title: "DLCV2.2 | Le Bingo de YOLO !"
 date: 2023-12-12T10:00:00+09:00
 description: ""
 summary: ""

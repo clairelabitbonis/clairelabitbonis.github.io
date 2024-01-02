@@ -1,6 +1,6 @@
 ---
-title: "DLCV2 | On récapitule tout"
-date: 2023-12-21T10:00:00+09:00
+title: "DLCV2.4 | On récapitule tout"
+date: 2024-01-02T10:00:00+09:00
 description: ""
 summary: ""
 

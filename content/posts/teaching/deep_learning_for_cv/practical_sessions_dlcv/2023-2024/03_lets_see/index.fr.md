@@ -1,5 +1,5 @@
 ---
-title: "DLCV2 | Tadaaaam !"
+title: "DLCV2.3 | Tadaaaam !"
 date: 2023-12-21T10:00:00+09:00
 description: ""
 summary: ""
