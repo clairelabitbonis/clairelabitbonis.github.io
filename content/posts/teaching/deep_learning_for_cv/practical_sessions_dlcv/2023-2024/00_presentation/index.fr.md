@@ -84,10 +84,9 @@ Pour cela, nous passerons par plusieurs étapes :
 
 {{< alert type="danger" >}}
 La **deadline** est fixée au 12 janvier 2024 à 20h. Vous devez déposer [sur Moodle](https://moodle.insa-toulouse.fr/course/view.php?id=1154&section=4) :
-* votre capsule vidéo au format `.mp4` ;
-* un fichier `.pdf` avec vos réponses aux quêtes annexes.
+* votre capsule vidéo au format `.mp4`.
 
-Les deux fichiers additionnés ne doivent pas dépasser 256Mo.
+Le ne doit pas dépasser 256Mo.
 {{< /alert >}}
 
 ### Capsule vidéo

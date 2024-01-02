@@ -8,6 +8,17 @@
   color: #000000;
 }
 
+div.footnote p {
+  position: relative;
+  display: block;
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-left: 2rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #5d5d5d;
+}
+
 
 /*************************************************
  *  Alerts
@@ -59,3 +70,14 @@
     background-color: #fff5f7;
     border-color: #ff3860;
   }
+
+table th,
+td {
+  padding: 1rem;
+}
+
+/* img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+} */
