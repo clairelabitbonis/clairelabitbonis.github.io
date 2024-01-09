@@ -30,7 +30,8 @@ Par souci de clarté, je récapitule tout ici (modalités d'évaluation, exécut
 
 ## 2024 ne fait que commencer... 
 
-### Contraintes
+### Contenu de votre oeuvre
+#### Contraintes de rendu
 Bonjour, bonjour ! Une nouvelle année commence, et quoi de mieux pour commencer l'année qu'un peu d'analyse qualitative et quantitative de YOLO sur [notre super *dataset*](https://clairelabitbonis.github.io/posts/teaching/deep_learning_for_cv/practical_sessions_dlcv/2023-2024/03_lets_see/#il-est-tres-beau-le-dataset) ? 
 
 L'évaluation de la matière *deep learning* sera faite sur une vidéo :
@@ -45,7 +46,7 @@ L'évaluation de la matière *deep learning* sera faite sur une vidéo :
 4. ça veut dire que le 19 janvier à 19:32:12 c'est OK, mais que si la vidéo met 2h à s'*uploader*, c'est pas OK. Et ça veut dire qu'à 20:00:00 le 19 janvier, je n'existe plus.
 {{< /footnote >}}
 
-### Contenu de votre oeuvre
+#### Critères d'évaluation
 
 Votre vidéo devra contenir votre analyse de plusieurs sujets, sous des angles qui peuvent être multiples. Globalement, on aura :
 * les <mark>trois grandes thématiques</mark> vues en cours et en TP qui pourront donner lieu à analyse : 
@@ -67,3 +68,45 @@ Pour résumer ces critères d'évaluation, voilà un joli tableau :
 ![Tableau d'analyse](images/modalites_evaluation.png)
 
 </center>
+
+### Pour vous aider
+
+#### Organisation du *dataset*
+Pour rappel, le *dataset* se situe à l'adresse `/scratch/labi/DLCV/2023-2024/dataset/` sur le `srv-gei-gpu2` de l'INSA, et contient autant de dossiers que de classes d'objets, ainsi que trois fichiers `train.txt`, `val.txt`, et `test.txt` qui contiennent l'ensemble des *splits* que vous avez faits en TP en prévision des apprentissages :
+
+<center>
+
+![Dataset DLCV](images/dlcv_dataset.png)
+
+</center>
+
+Dans chaque sous-dossier de classe, un dossier par binôme contient les dossiers de chacune des séquences annotées. Vous y trouverez également les fichiers `train.txt`, `val.txt`, et `test.txt` ne contenant **que votre** répartition (contrairement aux trois fichiers précédents qui contiennent la totalité du *dataset*) : 
+
+<center>
+
+![Dataset DLCV](images/dlcv_dataset_therock_arborescence_images.png)
+
+![Dataset DLCV](images/dlcv_dataset_therock_arborescence_labels.png)
+
+![Dataset DLCV](images/dlcv_dataset_therock_txt_file.png)
+
+</center>
+
+#### Organisation des apprentissages
+Vous avez à votre disposition sur `srv-gei-gpu2` l'ensemble des apprentissages que j'ai lancés avec différentes versions de YOLO, différentes résolutions, et avec/sans stratégie de *fine tuning*<sup>1</sup> :
+
+<center>
+
+![Dataset DLCV](images/configurations.png)
+
+![Dataset DLCV](images/runs_on_srvgeigpu.png)
+
+</center>
+
+{{< footnote >}}
+1. *fine-tuner* un apprentissage, ça veut dire qu'au lancement on charge le modèle avec des poids pré-entrainés sur un *dataset* (en l'occurrence le *dataset* COCO), et qu'on en gèle une partie (ces poids-là ne seront pas mis à jour pendant l'apprentissage). En général, on gèle le *backbone* et on n'apprend que les poids de la tête de prédiction : on spécialise un réseau pour une nouvelle tâche. Ca permet de gagner du temps en apprentissage, tout en bénéficiant de la connaissance d'apprentissages déjà faits par d'autres.
+{{< /footnote >}}
+
+#### Utilisation des scripts Python
+
+En TP, nous vous avions fourni trois scripts Python pour l'apprentissage, l'analyse quantitative et l'analyse qualitative.
