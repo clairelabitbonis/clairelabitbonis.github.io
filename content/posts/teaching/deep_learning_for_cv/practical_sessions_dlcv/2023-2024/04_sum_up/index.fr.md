@@ -27,10 +27,7 @@ menu:
 Par souci de clarté, je récapitule tout ici (modalités d'évaluation, exécution des codes d'évaluation, etc.). Comme ça, pas besoin d'aller vous perdre dans les différents sujets.
 {{< /alert >}}
 
-
-## 2024 ne fait que commencer... 
-
-### Contenu de votre oeuvre
+### 2024 ne fait que commencer... 
 #### Contraintes de rendu
 Bonjour, bonjour ! Une nouvelle année commence, et quoi de mieux pour commencer l'année qu'un peu d'analyse qualitative et quantitative de YOLO sur [notre super *dataset*](https://clairelabitbonis.github.io/posts/teaching/deep_learning_for_cv/practical_sessions_dlcv/2023-2024/03_lets_see/#il-est-tres-beau-le-dataset) ? 
 
@@ -71,6 +68,11 @@ Pour résumer ces critères d'évaluation, voilà un joli tableau :
 
 ### Pour vous aider
 
+{{< alert type="success" >}}
+Je vous donne ici le détail de l'arborescence du *dataset*, et des apprentissages à votre disposition. Vous pouvez récupérer dans votre *workspace* le dossier *runs* qui contient tous les apprentissages. Vous pouvez également copier les parties du *dataset* qui vous intéressent (votre propre classe d'objet par exemple, ou la vidéo de test que Pierre a labellisée).
+
+{{< /alert >}}
+
 #### Organisation du *dataset*
 Pour rappel, le *dataset* se situe à l'adresse `/scratch/labi/DLCV/2023-2024/dataset/` sur le `srv-gei-gpu2` de l'INSA, et contient autant de dossiers que de classes d'objets, ainsi que trois fichiers `train.txt`, `val.txt`, et `test.txt` qui contiennent l'ensemble des *splits* que vous avez faits en TP en prévision des apprentissages :
 
@@ -107,6 +109,21 @@ Vous avez à votre disposition sur `srv-gei-gpu2` l'ensemble des apprentissages 
 1. *fine-tuner* un apprentissage, ça veut dire qu'au lancement on charge le modèle avec des poids pré-entrainés sur un *dataset* (en l'occurrence le *dataset* COCO), et qu'on en gèle une partie (ces poids-là ne seront pas mis à jour pendant l'apprentissage). En général, on gèle le *backbone* et on n'apprend que les poids de la tête de prédiction : on spécialise un réseau pour une nouvelle tâche. Ca permet de gagner du temps en apprentissage, tout en bénéficiant de la connaissance d'apprentissages déjà faits par d'autres.
 {{< /footnote >}}
 
-#### Utilisation des scripts Python
+#### Comment faire vos analyses ?
 
-En TP, nous vous avions fourni trois scripts Python pour l'apprentissage, l'analyse quantitative et l'analyse qualitative.
+Pour l'analyse qualitative, vous pouvez utiliser le script [qualitative_dlcv.py](files/qualitative_dlcv.py). Je vous conseille de le lancer sur un dossier rempli des images que vous voulez analyser, par exemple de cette manière :
+
+``` 
+python qualitative_dlcv.py --weights runs/detect/<version_de_yolo>/weights/best.pt --source folder --path <dossier_contenant_vos_images> --display_size 640
+```  
+
+Pour l'analyse quantitative, vous pouvez utiliser le script [quantitative_dlcv.py](files/quantitative_dlcv.py). Par exemple, si vous êtes sur GPU, que vous souhaitez vous évaluer sur le *split* val dont le chemin est renseigné dans [<votre_fichier_dataset>.yaml](files/dlcv_2023-2024.yaml), vous pouvez le faire avec cette commande :
+
+``` 
+python quantitative_dlcv.py --data <votre_fichier_dataset>.yaml --device 0 --weights runs/detect/<version_de_yolo>/weights/best.pt --batch 4 --imgsz --split val --plots
+```  
+
+Vous pouvez aussi faire votre analyse quantitative directement avec les graphiques contenus dans tous les sous-dossiers de *runs*.
+
+
+
