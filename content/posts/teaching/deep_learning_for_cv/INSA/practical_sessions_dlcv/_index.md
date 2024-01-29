@@ -5,6 +5,6 @@ menu:
   sidebar:
     name: Practical sessions
     identifier: dlcv-practical-sessions
-    parent: dlcv
+    parent: dlcv-course-insa
     weight: 30
 ---
