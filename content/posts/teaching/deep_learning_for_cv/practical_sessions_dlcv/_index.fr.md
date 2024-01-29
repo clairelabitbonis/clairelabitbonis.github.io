@@ -5,7 +5,7 @@ menu:
   sidebar:
     name: Travaux pratiques
     identifier: dlcv-practical-sessions
-    parent: dlcv-course-insa
+    parent: dlcv
     weight: 30
 ---
 

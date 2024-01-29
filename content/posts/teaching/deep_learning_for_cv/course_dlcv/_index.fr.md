@@ -4,6 +4,6 @@ menu:
   sidebar:
     name: Cours
     identifier: dlcv-course
-    parent: dlcv-course-insa
+    parent: dlcv
     weight: 20
 ---
