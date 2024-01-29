@@ -1,5 +1,6 @@
 ---
 title: "Condensed deep learning"
+draft: false
 menu:
   sidebar:
     name: Condensed
